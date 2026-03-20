@@ -45,13 +45,16 @@ channels, logins = load_data()
 print("[SERVER PYTHON] Iniciado...", flush=True)
 
 while True:
+
     raw = socket.recv()
     msg = msgpack.unpackb(raw, raw=False)
+
 
     response = {}
 
     if msg["type"] == "login":
         user = msg["user"]
+
 
         logins.append({
             "user": user,
@@ -68,7 +71,9 @@ while True:
     elif msg["type"] == "create_channel":
         ch = msg["channel"]
 
+
         if ch in channels:
+
             response = {
                 "status": "error",
                 "message": "canal já existe",
@@ -78,6 +83,7 @@ while True:
             channels.append(ch)
             save_channels(channels)
 
+
             response = {
                 "status": "ok",
                 "message": f"canal '{ch}' criado",
@@ -85,6 +91,7 @@ while True:
             }
 
     elif msg["type"] == "list_channels":
+
         response = {
             "status": "ok",
             "channels": channels,
@@ -92,10 +99,13 @@ while True:
         }
 
     else:
+
         response = {
             "status": "error",
             "message": "tipo inválido",
             "timestamp": time.time()
         }
+
+    print(f"[SERVER] Enviando resposta: {response}", flush=True)
 
     socket.send(msgpack.packb(response))

@@ -25,9 +25,8 @@ while True:
     })
     print("[LOGIN]", resp)
 
-    time.sleep(1)
 
-    channel_name = f"canal_{random.randint(1,5)}"
+    channel_name = f"canal_{random.randint(1,300)}"
 
     resp = send({
         "type": "create_channel",
@@ -37,7 +36,6 @@ while True:
     })
     print("[CREATE CHANNEL]", resp)
 
-    time.sleep(1)
 
     resp = send({
         "type": "list_channels",
@@ -46,4 +44,4 @@ while True:
     })
     print("[LIST CHANNELS]", resp)
 
-    time.sleep(5)
+    time.sleep(0.6)

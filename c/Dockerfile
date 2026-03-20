@@ -1,9 +1,14 @@
-FROM debian:bookworm-slim
+FROM gcc:12
+
+RUN apt-get update && apt-get install -y \
+    libzmq3-dev \
+    libmsgpack-dev
+
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential pkg-config libzmq3-dev libmsgpack-dev libsqlite3-dev sqlite3 ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
-COPY main.c ./
-RUN gcc -O2 -Wall -o bbs main.c $(pkg-config --cflags libzmq sqlite3 msgpack) $(pkg-config --libs libzmq sqlite3 msgpack) -lmsgpackc
-RUN mkdir -p /app/data
-CMD ["/app/bbs"]
+
+COPY client.c server.c ./
+
+RUN gcc client.c -lzmq -lmsgpackc -o client
+RUN gcc server.c -lzmq -lmsgpackc -o server
+
+CMD ["./client"]
