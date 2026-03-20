@@ -1,151 +1,100 @@
-# Sistema de mensagens instantâneas — Python + Java + C
+# Projeto de Sistemas Distribuídos - Parte 1
 
-Projeto da Parte 1 de Sistemas Distribuídos, com **três linguagens** se comunicando ao mesmo tempo:
+## Integrantes
+- Nome 1
+- Nome 2
+- Nome 3
 
-- **Python**: cliente e servidor
-- **Java**: cliente e servidor
-- **C**: cliente e servidor
-- **Broker**: Python com ZeroMQ
+## Sobre o projeto
+Este projeto foi desenvolvido para a Parte 1 da disciplina de Sistemas Distribuídos.
 
-## O que o projeto implementa
+Nesta etapa, implementamos a comunicação inicial entre clientes e servidores, permitindo que os bots consigam:
 
-- login de usuário
+- fazer login no serviço
+- criar canais
+- listar os canais existentes
+
+Além disso, os servidores armazenam os dados em disco para não perder as informações entre execuções.
+
+---
+
+## Linguagens utilizadas
+No projeto foram utilizadas 3 linguagens para implementar clientes e servidores:
+
+- **Python**
+- **Java**
+- **C**
+
+Também foi utilizado um **broker**, responsável por intermediar a comunicação entre clientes e servidores.
+
+---
+
+## Serialização escolhida
+O grupo escolheu utilizar **MessagePack** como formato de serialização.
+
+Essa escolha foi feita porque:
+
+- é um formato **binário**, como pedido no enunciado
+- funciona entre diferentes linguagens
+- é mais simples de usar no projeto
+- permite enviar mapas, strings, listas e números de forma padronizada
+
+Todas as mensagens trocadas entre cliente e servidor possuem:
+
+- **tipo da mensagem**
+- **timestamp do envio**
+- e os outros campos necessários, como usuário ou canal
+
+Exemplos de operações implementadas:
+
+- login
+- criação de canal
 - listagem de canais
-- criação de canais
-- persistência em disco por servidor
-- replicação simples entre servidores de linguagens diferentes
-- execução com `docker compose up --build`
 
-## Regras do enunciado atendidas
+---
 
-- **ZeroMQ** para troca de mensagens
-- **containers** com Docker Compose
-- **timestamp** em todas as mensagens
-- **serialização binária** com **MessagePack**
-- **clientes e servidores mostram no terminal** todas as mensagens enviadas/recebidas
-- **cada servidor mantém seu próprio banco SQLite**
-- **clientes e servidores de linguagens diferentes conversam entre si**
+## Persistência dos dados
+Para não perder os dados entre as sessões, cada servidor salva suas informações em disco.
 
-## Estrutura
+Cada servidor mantém seu **próprio conjunto de dados**, sem compartilhar arquivos com os outros servidores, conforme pedido no enunciado.
 
-```text
-bbs_multilang_project/
-├── broker/
-│   ├── broker.py
-│   └── Dockerfile
-├── python/
-│   ├── client.py
-│   ├── server.py
-│   └── Dockerfile
-├── java/
-│   ├── pom.xml
-│   ├── Dockerfile
-│   └── src/main/java/bbs/
-│       ├── Main.java
-│       ├── Util.java
-│       ├── DB.java
-│       ├── JavaServer.java
-│       └── JavaClient.java
-├── c/
-│   ├── main.c
-│   └── Dockerfile
-├── data/
-│   ├── python/
-│   ├── java/
-│   └── c/
-├── docker-compose.yml
-└── README.md
-```
+Os dados salvos são:
 
-## Arquitetura
+- **logins realizados**, junto com o timestamp
+- **canais criados**
 
-### Requisições de cliente para servidor
+A persistência foi feita em arquivos dentro da pasta `data`, separados por linguagem:
 
-- cliente usa **REQ** para `broker:5555`
-- broker usa **ROUTER/DEALER** para balancear
-- servidor usa **REP** para `broker:5556`
+- `data/python/`
+- `data/java/`
+- `data/c/`
 
-Assim, qualquer cliente pode ser atendido por qualquer servidor, independente da linguagem.
+Foram utilizados arquivos como:
 
-### Replicação entre servidores
+- `channels.txt`
+- `logins.txt`
+- `channels.json`
+- `logins.json`
 
-Cada servidor:
+Os arquivos `.txt` e `.json` são usados apenas para armazenamento em disco.  
+Na comunicação entre cliente e servidor **não é usado JSON**, apenas **MessagePack**.
 
-- publica eventos em um socket **PUB** próprio
-- assina os sockets **SUB** dos outros servidores
+---
 
-Eventos replicados:
+## Estrutura geral do projeto
+O projeto possui:
 
-- `login`
-- `create_channel`
+- clientes em Python, Java e C
+- servidores em Python, Java e C
+- broker
+- Dockerfiles
+- docker-compose.yaml
+- pasta de dados para persistência
 
-## Formato das mensagens
-
-### Requisição
-
-Campos principais:
-
-- `type`
-- `operation`
-- `request_id`
-- `timestamp`
-- `user`
-- `data`
-
-### Resposta
-
-Campos principais:
-
-- `type`
-- `operation`
-- `request_id`
-- `timestamp`
-- `server_id`
-- `status`
-- `data`
-- `error`
-
-### Evento de replicação
-
-Campos principais:
-
-- `event_type`
-- `event_id`
-- `timestamp`
-- `origin_server`
-- `user`
-- `channel` (quando aplicável)
-
-## Persistência
-
-Cada servidor grava seu próprio banco SQLite em disco:
-
-- `logins`
-- `channels`
-- `replication_events`
-
-Pastas persistidas:
-
-- `./data/python`
-- `./data/java`
-- `./data/c`
+---
 
 ## Como executar
-
-Na raiz do projeto:
+Para executar o projeto, basta rodar:
 
 ```bash
 docker compose up --build
-```
-
-## Fluxo esperado na demonstração
-
-- `client_python` faz login e cria `geral`
-- `client_java` faz login e cria `java_room`
-- `client_c` faz login e cria `c_room`
-- os servidores replicam os eventos
-- qualquer servidor pode listar todos os canais já replicados
-
-## Observação importante
-
-A parte em **C** foi implementada para conversar com Python e Java usando o mesmo protocolo MessagePack e SQLite. O ponto mais sensível costuma ser a build de dependências nativas no ambiente Docker. Se alguma imagem falhar no `docker compose up --build`, o ajuste mais provável será somente de pacote/compilação do container C.

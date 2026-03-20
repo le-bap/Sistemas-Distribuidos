@@ -17,13 +17,14 @@ services:
     container_name: server_java
     command: ["java", "-cp", ".:jeromq-0.5.2.jar:msgpack-core-0.9.0.jar", "Server"]
     volumes:
-      - ./data/java:/app/data  
+      - ./data/java:/app/data
     depends_on:
       - broker
 
   server_c:
     build: ./c
     container_name: server_c
+    command: ["./server"]
     volumes:
       - ./data/c:/app/data
     depends_on:
@@ -48,6 +49,7 @@ services:
   client_c:
     build: ./c
     container_name: client_c
+    command: ["./client"]
     depends_on:
       - broker
-      - server_c  
+      - server_c

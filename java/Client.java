@@ -2,6 +2,7 @@ import org.zeromq.ZMQ;
 import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageUnpacker;
+import org.msgpack.value.ValueType;
 
 import java.util.Random;
 
