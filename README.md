@@ -1,9 +1,9 @@
 # Projeto de Sistemas Distribuídos - Parte 1
 
 ## Integrantes
-- Nome 1
-- Nome 2
-- Nome 3
+- Rafaela Altheman de Campos
+- Letizia Lowatzki Baptistella
+- Manuella Filipe Peres
 
 ## Sobre o projeto
 Este projeto foi desenvolvido para a Parte 1 da disciplina de Sistemas Distribuídos.
@@ -14,7 +14,7 @@ Nesta etapa, implementamos a comunicação inicial entre clientes e servidores, 
 - criar canais
 - listar os canais existentes
 
-Além disso, os servidores armazenam os dados em disco para não perder as informações entre execuções.
+Além disso, os servidores armazenam os dados para não perder as informações entre execuções.
 
 ---
 
@@ -34,9 +34,8 @@ O grupo escolheu utilizar **MessagePack** como formato de serialização.
 
 Essa escolha foi feita porque:
 
-- é um formato **binário**, como pedido no enunciado
+- é um formato **binário**
 - funciona entre diferentes linguagens
-- é mais simples de usar no projeto
 - permite enviar mapas, strings, listas e números de forma padronizada
 
 Todas as mensagens trocadas entre cliente e servidor possuem:
