@@ -3,6 +3,7 @@ import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageUnpacker;
 import org.msgpack.value.ValueType;
+import java.io.IOException;
 
 import java.util.Random;
 
@@ -21,14 +22,11 @@ public class Client {
         while (true) {
             System.out.println("\n--- NOVO CICLO ---");
 
-            // LOGIN
             send(socket, packLogin(user));
 
-            // CREATE CHANNEL
             String channel = "canal_" + (rand.nextInt(300) + 1);
             send(socket, packCreate(user, channel));
 
-            // LIST CHANNELS
             send(socket, packList(user));
 
             Thread.sleep(1200);
@@ -96,45 +94,56 @@ public class Client {
         return packer.toByteArray();
     }
 
-    static void unpackAndPrint(byte[] data) throws Exception {
-        MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(data);
+    public static void unpackAndPrint(byte[] response) throws IOException {
+        MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(response);
 
         int mapSize = unpacker.unpackMapHeader();
-        System.out.print("[RESPONSE] { ");
+
+        String status = null;
+        String message = null;
+        Double timestamp = null;
+        StringBuilder channelsStr = new StringBuilder();
 
         for (int i = 0; i < mapSize; i++) {
             String key = unpacker.unpackString();
-            System.out.print(key + ": ");
 
-            ValueType type = unpacker.getNextFormat().getValueType();
+            switch (key) {
+                case "status":
+                    status = unpacker.unpackString();
+                    break;
 
-            if (type == ValueType.STRING) {
-                System.out.print(unpacker.unpackString());
-            }
-            else if (type == ValueType.FLOAT) {
-                System.out.print(unpacker.unpackDouble());
-            }
-            else if (type == ValueType.INTEGER) {
-                System.out.print(unpacker.unpackLong());
-            }
-            else if (type == ValueType.ARRAY) {
-                int size = unpacker.unpackArrayHeader();
-                System.out.print("[ ");
+                case "message":
+                    message = unpacker.unpackString();
+                    break;
 
-                for (int j = 0; j < size; j++) {
-                    System.out.print(unpacker.unpackString() + " ");
-                }
+                case "timestamp":
+                    if (unpacker.getNextFormat().getValueType().isFloatType()) {
+                        timestamp = unpacker.unpackDouble();
+                    } else if (unpacker.getNextFormat().getValueType().isIntegerType()) {
+                        timestamp = (double) unpacker.unpackLong();
+                    }
+                    break;
 
-                System.out.print("]");
-            }
-            else {
-                unpacker.skipValue();
-                System.out.print("?");
-            }
+                case "channels":
+                    int arraySize = unpacker.unpackArrayHeader();
+                    channelsStr.append("[ ");
+                    for (int j = 0; j < arraySize; j++) {
+                        channelsStr.append(unpacker.unpackString()).append(" ");
+                    }
+                    channelsStr.append("]");
+                    break;
 
-            System.out.print(", ");
+                default:
+                    unpacker.skipValue();
+                    break;
+            }
         }
 
+        System.out.print("[RESPONSE] { ");
+        if (status != null) System.out.print("status: " + status + ", ");
+        if (message != null) System.out.print("message: " + message + ", ");
+        if (channelsStr.length() > 0) System.out.print("channels: " + channelsStr + ", ");
+        if (timestamp != null) System.out.print("timestamp: " + timestamp + ", ");
         System.out.println("}");
     }
 }

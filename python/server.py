@@ -43,7 +43,7 @@ print("[SERVER PYTHON] Iniciado...", flush=True)
 
 while True:
     raw = socket.recv()
-    print("[DEBUG PY SERVER] bytes recebidos:", len(raw), flush=True)
+    # print("[DEBUG PY SERVER] bytes recebidos:", len(raw), flush=True)
 
     msg = msgpack.unpackb(raw, raw=False)
     response = {}
@@ -99,5 +99,5 @@ while True:
     print(f"[SERVER] Enviando resposta: {response}", flush=True)
 
     payload = msgpack.packb(response, use_bin_type=True)
-    print("[DEBUG PY SERVER] bytes enviados:", len(payload), flush=True)
+    # print("[DEBUG PY SERVER] bytes enviados:", len(payload), flush=True)
     socket.send(payload)
