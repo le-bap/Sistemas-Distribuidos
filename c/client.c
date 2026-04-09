@@ -1,254 +1,73 @@
-// #include <zmq.h>
-// #include <msgpack.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <string.h>
-// #include <time.h>
-// #include <unistd.h>
-
-// void print_msgpack(msgpack_object obj) {
-//     if (obj.type != MSGPACK_OBJECT_MAP) {
-//         printf("[ERRO] resposta nao eh mapa\n");
-//         return;
-//     }
-
-//     printf("{ ");
-
-//     for (int i = 0; i < obj.via.map.size; i++) {
-//         msgpack_object_kv *kv = &obj.via.map.ptr[i];
-
-//         if (kv->key.type != MSGPACK_OBJECT_STR) {
-//             continue;
-//         }
-
-//         printf("%.*s: ",
-//                (int)kv->key.via.str.size,
-//                kv->key.via.str.ptr);
-
-//         if (kv->val.type == MSGPACK_OBJECT_STR) {
-//             printf("%.*s",
-//                    (int)kv->val.via.str.size,
-//                    kv->val.via.str.ptr);
-//         }
-//         else if (kv->val.type == MSGPACK_OBJECT_ARRAY) {
-//             printf("[ ");
-//             for (int j = 0; j < kv->val.via.array.size; j++) {
-//                 msgpack_object item = kv->val.via.array.ptr[j];
-
-//                 if (item.type == MSGPACK_OBJECT_STR) {
-//                     printf("%.*s ",
-//                            (int)item.via.str.size,
-//                            item.via.str.ptr);
-//                 } else {
-//                     printf("? ");
-//                 }
-//             }
-//             printf("]");
-//         }
-//         else if (kv->val.type == MSGPACK_OBJECT_FLOAT32 ||
-//                  kv->val.type == MSGPACK_OBJECT_FLOAT64) {
-//             printf("%f", kv->val.via.f64);
-//         }
-//         else if (kv->val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
-//             printf("%llu", (unsigned long long)kv->val.via.u64);
-//         }
-//         else if (kv->val.type == MSGPACK_OBJECT_NEGATIVE_INTEGER) {
-//             printf("%lld", (long long)kv->val.via.i64);
-//         }
-//         else if (kv->val.type == MSGPACK_OBJECT_BOOLEAN) {
-//             printf("%s", kv->val.via.boolean ? "true" : "false");
-//         }
-//         else if (kv->val.type == MSGPACK_OBJECT_NIL) {
-//             printf("null");
-//         }
-//         else {
-//             printf("[tipo_nao_tratado]");
-//         }
-
-//         if (i < obj.via.map.size - 1) {
-//             printf(", ");
-//         }
-//     }
-
-//     printf("}\n");
-// }
-
-// void send_request(void *socket, msgpack_sbuffer *sbuf) {
-//     zmq_send(socket, sbuf->data, sbuf->size, 0);
-
-//     char buffer[4096];
-//     int size = zmq_recv(socket, buffer, sizeof(buffer), 0);
-//     if (size <= 0) {
-//         printf("[ERRO] Nenhuma resposta recebida\n");
-//         return;
-//     }
-
-//     msgpack_unpacked msg;
-//     msgpack_unpacked_init(&msg);
-
-//     if (msgpack_unpack_next(&msg, buffer, size, NULL)) {
-//         printf("[CLIENT RECEBEU] ");
-//         print_msgpack(msg.data);
-//     } else {
-//         printf("[ERRO] Falha ao decodificar resposta\n");
-//     }
-
-//     msgpack_unpacked_destroy(&msg);
-// }
-
-// int main() {
-//     void *context = zmq_ctx_new();
-//     void *socket = zmq_socket(context, ZMQ_REQ);
-
-//     zmq_connect(socket, "tcp://broker:5555");
-
-//     srand(time(NULL));
-
-//     char user[32];
-//     sprintf(user, "bot_%d", rand() % 9000 + 1000);
-
-//     printf("[CLIENT C] Iniciando como %s\n", user);
-
-//     while (1) {
-//         printf("\n--- NOVO CICLO ---\n");
-
-//         msgpack_sbuffer sbuf;
-//         msgpack_sbuffer_init(&sbuf);
-//         msgpack_packer pk;
-//         msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
-
-//         msgpack_pack_map(&pk, 3);
-
-//         msgpack_pack_str(&pk, 4);
-//         msgpack_pack_str_body(&pk, "type", 4);
-//         msgpack_pack_str(&pk, 5);
-//         msgpack_pack_str_body(&pk, "login", 5);
-
-//         msgpack_pack_str(&pk, 4);
-//         msgpack_pack_str_body(&pk, "user", 4);
-//         msgpack_pack_str(&pk, strlen(user));
-//         msgpack_pack_str_body(&pk, user, strlen(user));
-
-//         msgpack_pack_str(&pk, 9);
-//         msgpack_pack_str_body(&pk, "timestamp", 9);
-//         msgpack_pack_double(&pk, (double)time(NULL));
-
-//         send_request(socket, &sbuf);
-//         msgpack_sbuffer_destroy(&sbuf);
-
-//         char channel[32];
-//         sprintf(channel, "canal_%d", rand() % 300 + 1);
-
-//         msgpack_sbuffer_init(&sbuf);
-//         msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
-
-//         msgpack_pack_map(&pk, 4);
-
-//         msgpack_pack_str(&pk, 4);
-//         msgpack_pack_str_body(&pk, "type", 4);
-//         msgpack_pack_str(&pk, 14);
-//         msgpack_pack_str_body(&pk, "create_channel", 14);
-
-//         msgpack_pack_str(&pk, 4);
-//         msgpack_pack_str_body(&pk, "user", 4);
-//         msgpack_pack_str(&pk, strlen(user));
-//         msgpack_pack_str_body(&pk, user, strlen(user));
-
-//         msgpack_pack_str(&pk, 7);
-//         msgpack_pack_str_body(&pk, "channel", 7);
-//         msgpack_pack_str(&pk, strlen(channel));
-//         msgpack_pack_str_body(&pk, channel, strlen(channel));
-
-//         msgpack_pack_str(&pk, 9);
-//         msgpack_pack_str_body(&pk, "timestamp", 9);
-//         msgpack_pack_double(&pk, (double)time(NULL));
-
-//         send_request(socket, &sbuf);
-//         msgpack_sbuffer_destroy(&sbuf);
-
-//         msgpack_sbuffer_init(&sbuf);
-//         msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
-
-//         msgpack_pack_map(&pk, 3);
-
-//         msgpack_pack_str(&pk, 4);
-//         msgpack_pack_str_body(&pk, "type", 4);
-//         msgpack_pack_str(&pk, 13);
-//         msgpack_pack_str_body(&pk, "list_channels", 13);
-
-//         msgpack_pack_str(&pk, 4);
-//         msgpack_pack_str_body(&pk, "user", 4);
-//         msgpack_pack_str(&pk, strlen(user));
-//         msgpack_pack_str_body(&pk, user, strlen(user));
-
-//         msgpack_pack_str(&pk, 9);
-//         msgpack_pack_str_body(&pk, "timestamp", 9);
-//         msgpack_pack_double(&pk, (double)time(NULL));
-
-//         send_request(socket, &sbuf);
-//         msgpack_sbuffer_destroy(&sbuf);
-
-//         usleep(700000);
-//     }
-
-//     zmq_close(socket);
-//     zmq_ctx_destroy(context);
-//     return 0;
-// }
-
 #include <zmq.h>
 #include <msgpack.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <unistd.h>
 #include <pthread.h>
 
-#define MAX_CHANNELS 1000
+#define MAX_CANAIS 100
+#define BUFFER 4096
 
-void *sub_socket_global;
-char user[64];
-char *subscribed[MAX_CHANNELS];
-int subscribed_count = 0;
+void *contexto;
+void *req_socket;
+void *sub_socket;
 
-int already_subscribed(const char *channel) {
-    for (int i = 0; i < subscribed_count; i++) {
-        if (strcmp(subscribed[i], channel) == 0) return 1;
+char usuario[64];
+char canais_inscritos[MAX_CANAIS][64];
+int qtd_inscritos = 0;
+
+double agora() {
+    return (double)time(NULL);
+}
+
+int ja_inscrito(char *canal) {
+    for (int i = 0; i < qtd_inscritos; i++) {
+        if (strcmp(canais_inscritos[i], canal) == 0) {
+            return 1;
+        }
     }
     return 0;
 }
 
-double now_ts() {
-    return (double)time(NULL);
+void adicionar_inscricao(char *canal) {
+    if (qtd_inscritos < MAX_CANAIS) {
+        strcpy(canais_inscritos[qtd_inscritos], canal);
+        qtd_inscritos++;
+    }
 }
 
-void pack_str(msgpack_packer *pk, const char *s) {
-    msgpack_pack_str(pk, strlen(s));
-    msgpack_pack_str_body(pk, s, strlen(s));
+void enviar_mensagem(void *socket, msgpack_sbuffer *sbuf) {
+    zmq_send(socket, sbuf->data, sbuf->size, 0);
 }
 
-void *subscriber_loop(void *arg) {
-    (void)arg;
-
+void *receber_publicacoes(void *arg) {
     while (1) {
-        char topic[256] = {0};
-        int size1 = zmq_recv(sub_socket_global, topic, sizeof(topic) - 1, 0);
-        if (size1 <= 0) continue;
-        topic[size1] = '\0';
+        zmq_msg_t topico_msg;
+        zmq_msg_t conteudo_msg;
 
-        char payload[2048];
-        int size2 = zmq_recv(sub_socket_global, payload, sizeof(payload), 0);
-        if (size2 <= 0) continue;
+        zmq_msg_init(&topico_msg);
+        zmq_msg_init(&conteudo_msg);
+
+        zmq_msg_recv(&topico_msg, sub_socket, 0);
+        zmq_msg_recv(&conteudo_msg, sub_socket, 0);
+
+        char canal[64];
+        memset(canal, 0, sizeof(canal));
+        memcpy(canal, zmq_msg_data(&topico_msg), zmq_msg_size(&topico_msg));
+
+        char *dados = (char *)zmq_msg_data(&conteudo_msg);
+        int tamanho = zmq_msg_size(&conteudo_msg);
 
         msgpack_unpacked msg;
         msgpack_unpacked_init(&msg);
 
-        if (msgpack_unpack_next(&msg, payload, size2, NULL)) {
-            char text[512] = "";
-            double sent = 0;
-
+        if (msgpack_unpack_next(&msg, dados, tamanho, NULL)) {
             msgpack_object obj = msg.data;
+
+            char texto[256] = "";
+            double envio = 0;
+
             if (obj.type == MSGPACK_OBJECT_MAP) {
                 for (int i = 0; i < obj.via.map.size; i++) {
                     msgpack_object_kv *kv = &obj.via.map.ptr[i];
@@ -261,43 +80,104 @@ void *subscriber_loop(void *arg) {
                              kv->key.via.str.ptr);
 
                     if (strcmp(key, "message") == 0 && kv->val.type == MSGPACK_OBJECT_STR) {
-                        snprintf(text, sizeof(text), "%.*s",
+                        snprintf(texto, sizeof(texto), "%.*s",
                                  (int)kv->val.via.str.size,
                                  kv->val.via.str.ptr);
-                    } else if (strcmp(key, "published_timestamp") == 0) {
-                        if (kv->val.type == MSGPACK_OBJECT_FLOAT32 || kv->val.type == MSGPACK_OBJECT_FLOAT64)
-                            sent = kv->val.via.f64;
-                        else if (kv->val.type == MSGPACK_OBJECT_POSITIVE_INTEGER)
-                            sent = (double)kv->val.via.u64;
+                    }
+
+                    if (strcmp(key, "published_timestamp") == 0) {
+                        if (kv->val.type == MSGPACK_OBJECT_FLOAT32 || kv->val.type == MSGPACK_OBJECT_FLOAT64) {
+                            envio = kv->val.via.f64;
+                        } else if (kv->val.type == MSGPACK_OBJECT_POSITIVE_INTEGER) {
+                            envio = (double)kv->val.via.u64;
+                        }
                     }
                 }
             }
 
-            printf("[SUB][%s] canal=%s mensagem=%s envio=%.0f recebimento=%.0f\n",
-                   user, topic, text, sent, now_ts());
+            printf("[MENSAGEM RECEBIDA] canal=%s | mensagem=%s | envio=%.0f | recebimento=%.0f\n",
+                   canal, texto, envio, agora());
         }
 
         msgpack_unpacked_destroy(&msg);
+        zmq_msg_close(&topico_msg);
+        zmq_msg_close(&conteudo_msg);
     }
 
     return NULL;
 }
 
-int send_request(void *req, msgpack_sbuffer *sbuf, char *reply, int reply_size) {
-    zmq_send(req, sbuf->data, sbuf->size, 0);
-    return zmq_recv(req, reply, reply_size, 0);
+void fazer_login() {
+    msgpack_sbuffer sbuf;
+    msgpack_sbuffer_init(&sbuf);
+    msgpack_packer pk;
+    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
+
+    msgpack_pack_map(&pk, 3);
+
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "type", 4);
+    msgpack_pack_str(&pk, 5);
+    msgpack_pack_str_body(&pk, "login", 5);
+
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "user", 4);
+    msgpack_pack_str(&pk, strlen(usuario));
+    msgpack_pack_str_body(&pk, usuario, strlen(usuario));
+
+    msgpack_pack_str(&pk, 9);
+    msgpack_pack_str_body(&pk, "timestamp", 9);
+    msgpack_pack_double(&pk, agora());
+
+    enviar_mensagem(req_socket, &sbuf);
+
+    char resposta[BUFFER];
+    zmq_recv(req_socket, resposta, sizeof(resposta), 0);
+
+    printf("[LOGIN] enviado\n");
+
+    msgpack_sbuffer_destroy(&sbuf);
 }
 
-int parse_channels(char *buffer, int size, char channels[][64]) {
+int listar_canais(char canais[][64]) {
+    msgpack_sbuffer sbuf;
+    msgpack_sbuffer_init(&sbuf);
+    msgpack_packer pk;
+    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
+
+    msgpack_pack_map(&pk, 3);
+
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "type", 4);
+    msgpack_pack_str(&pk, 13);
+    msgpack_pack_str_body(&pk, "list_channels", 13);
+
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "user", 4);
+    msgpack_pack_str(&pk, strlen(usuario));
+    msgpack_pack_str_body(&pk, usuario, strlen(usuario));
+
+    msgpack_pack_str(&pk, 9);
+    msgpack_pack_str_body(&pk, "timestamp", 9);
+    msgpack_pack_double(&pk, agora());
+
+    enviar_mensagem(req_socket, &sbuf);
+
+    char resposta[BUFFER];
+    int tamanho = zmq_recv(req_socket, resposta, sizeof(resposta), 0);
+
+    int qtd = 0;
+
     msgpack_unpacked msg;
     msgpack_unpacked_init(&msg);
-    int count = 0;
 
-    if (msgpack_unpack_next(&msg, buffer, size, NULL)) {
+    if (msgpack_unpack_next(&msg, resposta, tamanho, NULL)) {
         msgpack_object obj = msg.data;
+
         if (obj.type == MSGPACK_OBJECT_MAP) {
             for (int i = 0; i < obj.via.map.size; i++) {
                 msgpack_object_kv *kv = &obj.via.map.ptr[i];
+
                 if (kv->key.type != MSGPACK_OBJECT_STR) continue;
 
                 char key[64] = {0};
@@ -306,11 +186,14 @@ int parse_channels(char *buffer, int size, char channels[][64]) {
                          kv->key.via.str.ptr);
 
                 if (strcmp(key, "channels") == 0 && kv->val.type == MSGPACK_OBJECT_ARRAY) {
-                    for (int j = 0; j < kv->val.via.array.size && j < MAX_CHANNELS; j++) {
+                    for (int j = 0; j < kv->val.via.array.size; j++) {
                         msgpack_object item = kv->val.via.array.ptr[j];
-                        snprintf(channels[count++], 64, "%.*s",
-                                 (int)item.via.str.size,
-                                 item.via.str.ptr);
+                        if (item.type == MSGPACK_OBJECT_STR) {
+                            snprintf(canais[qtd], 64, "%.*s",
+                                     (int)item.via.str.size,
+                                     item.via.str.ptr);
+                            qtd++;
+                        }
                     }
                 }
             }
@@ -318,106 +201,163 @@ int parse_channels(char *buffer, int size, char channels[][64]) {
     }
 
     msgpack_unpacked_destroy(&msg);
-    return count;
+    msgpack_sbuffer_destroy(&sbuf);
+
+    return qtd;
 }
 
-void send_simple_map(void *req, const char *type, const char *channel, const char *message, char *reply, int *reply_len) {
+void criar_canal() {
+    char canal[64];
+    sprintf(canal, "canal_%d", 1 + rand() % 999);
+
     msgpack_sbuffer sbuf;
     msgpack_sbuffer_init(&sbuf);
-
     msgpack_packer pk;
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
 
-    int map_size = 3;
-    if (channel) map_size++;
-    if (message) map_size++;
+    msgpack_pack_map(&pk, 4);
 
-    msgpack_pack_map(&pk, map_size);
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "type", 4);
+    msgpack_pack_str(&pk, 14);
+    msgpack_pack_str_body(&pk, "create_channel", 14);
 
-    pack_str(&pk, "type");
-    pack_str(&pk, type);
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "user", 4);
+    msgpack_pack_str(&pk, strlen(usuario));
+    msgpack_pack_str_body(&pk, usuario, strlen(usuario));
 
-    pack_str(&pk, "user");
-    pack_str(&pk, user);
+    msgpack_pack_str(&pk, 7);
+    msgpack_pack_str_body(&pk, "channel", 7);
+    msgpack_pack_str(&pk, strlen(canal));
+    msgpack_pack_str_body(&pk, canal, strlen(canal));
 
-    pack_str(&pk, "timestamp");
-    msgpack_pack_double(&pk, now_ts());
+    msgpack_pack_str(&pk, 9);
+    msgpack_pack_str_body(&pk, "timestamp", 9);
+    msgpack_pack_double(&pk, agora());
 
-    if (channel) {
-        pack_str(&pk, "channel");
-        pack_str(&pk, channel);
+    enviar_mensagem(req_socket, &sbuf);
+
+    char resposta[BUFFER];
+    zmq_recv(req_socket, resposta, sizeof(resposta), 0);
+
+    printf("[CREATE CHANNEL] %s\n", canal);
+
+    msgpack_sbuffer_destroy(&sbuf);
+}
+
+void se_inscrever(char canais[][64], int qtd) {
+    char disponiveis[MAX_CANAIS][64];
+    int qtd_disponiveis = 0;
+
+    for (int i = 0; i < qtd; i++) {
+        if (!ja_inscrito(canais[i])) {
+            strcpy(disponiveis[qtd_disponiveis], canais[i]);
+            qtd_disponiveis++;
+        }
     }
 
-    if (message) {
-        pack_str(&pk, "message");
-        pack_str(&pk, message);
-    }
+    if (qtd_disponiveis == 0) return;
 
-    *reply_len = send_request(req, &sbuf, reply, 4096);
+    int pos = rand() % qtd_disponiveis;
+    char *canal = disponiveis[pos];
+
+    zmq_setsockopt(sub_socket, ZMQ_SUBSCRIBE, canal, strlen(canal));
+    adicionar_inscricao(canal);
+
+    printf("[SUBSCRIBE] %s inscrito em %s\n", usuario, canal);
+}
+
+void publicar_mensagem(char *canal, int numero) {
+    char texto[256];
+    sprintf(texto, "mensagem %d do %s", numero, usuario);
+
+    msgpack_sbuffer sbuf;
+    msgpack_sbuffer_init(&sbuf);
+    msgpack_packer pk;
+    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
+
+    msgpack_pack_map(&pk, 5);
+
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "type", 4);
+    msgpack_pack_str(&pk, 15);
+    msgpack_pack_str_body(&pk, "publish_message", 15);
+
+    msgpack_pack_str(&pk, 4);
+    msgpack_pack_str_body(&pk, "user", 4);
+    msgpack_pack_str(&pk, strlen(usuario));
+    msgpack_pack_str_body(&pk, usuario, strlen(usuario));
+
+    msgpack_pack_str(&pk, 7);
+    msgpack_pack_str_body(&pk, "channel", 7);
+    msgpack_pack_str(&pk, strlen(canal));
+    msgpack_pack_str_body(&pk, canal, strlen(canal));
+
+    msgpack_pack_str(&pk, 7);
+    msgpack_pack_str_body(&pk, "message", 7);
+    msgpack_pack_str(&pk, strlen(texto));
+    msgpack_pack_str_body(&pk, texto, strlen(texto));
+
+    msgpack_pack_str(&pk, 9);
+    msgpack_pack_str_body(&pk, "timestamp", 9);
+    msgpack_pack_double(&pk, agora());
+
+    enviar_mensagem(req_socket, &sbuf);
+
+    char resposta[BUFFER];
+    zmq_recv(req_socket, resposta, sizeof(resposta), 0);
+
+    printf("[PUBLISH] %s -> %s\n", texto, canal);
+
     msgpack_sbuffer_destroy(&sbuf);
 }
 
 int main() {
+    setvbuf(stdout, NULL, _IONBF, 0);
     srand(time(NULL));
-    sprintf(user, "bot_c_%d", rand() % 9000 + 1000);
 
-    void *context = zmq_ctx_new();
+    sprintf(usuario, "bot_c_%d", 1000 + rand() % 9000);
 
-    void *req = zmq_socket(context, ZMQ_REQ);
-    zmq_connect(req, "tcp://broker:5555");
+    contexto = zmq_ctx_new();
+    req_socket = zmq_socket(contexto, ZMQ_REQ);
+    sub_socket = zmq_socket(contexto, ZMQ_SUB);
 
-    sub_socket_global = zmq_socket(context, ZMQ_SUB);
-    zmq_connect(sub_socket_global, "tcp://proxy:5558");
+    zmq_connect(req_socket, "tcp://broker:5555");
+    zmq_connect(sub_socket, "tcp://proxy:5558");
 
-    pthread_t sub_thread;
-    pthread_create(&sub_thread, NULL, subscriber_loop, NULL);
+    pthread_t thread_sub;
+    pthread_create(&thread_sub, NULL, receber_publicacoes, NULL);
 
-    printf("[CLIENT C] Iniciando como %s\n", user);
+    printf("[CLIENT C] Bot iniciado: %s\n", usuario);
 
-    char reply[4096];
-    int reply_len = 0;
-
-    send_simple_map(req, "login", NULL, NULL, reply, &reply_len);
+    fazer_login();
 
     while (1) {
-        char channels[MAX_CHANNELS][64];
+        char canais[MAX_CANAIS][64];
+        int qtd_canais = listar_canais(canais);
 
-        send_simple_map(req, "list_channels", NULL, NULL, reply, &reply_len);
-        int channel_count = parse_channels(reply, reply_len, channels);
-
-        if (channel_count < 5) {
-            char new_channel[64];
-            sprintf(new_channel, "canal_%d", rand() % 999 + 1);
-
-            send_simple_map(req, "create_channel", new_channel, NULL, reply, &reply_len);
-            send_simple_map(req, "list_channels", NULL, NULL, reply, &reply_len);
-            channel_count = parse_channels(reply, reply_len, channels);
+        if (qtd_canais < 5) {
+            criar_canal();
+            qtd_canais = listar_canais(canais);
         }
 
-        while (subscribed_count < 3 && subscribed_count < channel_count) {
-            int idx = rand() % channel_count;
-
-            if (!already_subscribed(channels[idx])) {
-                zmq_setsockopt(sub_socket_global, ZMQ_SUBSCRIBE, channels[idx], strlen(channels[idx]));
-                subscribed[subscribed_count++] = strdup(channels[idx]);
-                printf("[SUBSCRIBE][%s] %s\n", user, channels[idx]);
-            }
+        if (qtd_inscritos < 3) {
+            se_inscrever(canais, qtd_canais);
         }
 
-        if (channel_count == 0) {
+        if (qtd_canais == 0) {
             sleep(1);
             continue;
         }
 
-        char *publish_channel = channels[rand() % channel_count];
+        char *canal_escolhido = canais[rand() % qtd_canais];
 
         for (int i = 0; i < 10; i++) {
-            char text[128];
-            sprintf(text, "mensagem %d do %s", i + 1, user);
-
-            send_simple_map(req, "publish_message", publish_channel, text, reply, &reply_len);
-            printf("[PUBLISH][%s] canal=%s texto=%s\n", user, publish_channel, text);
+            publicar_mensagem(canal_escolhido, i + 1);
             sleep(1);
         }
     }
+
+    return 0;
 }

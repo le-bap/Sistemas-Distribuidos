@@ -1,138 +1,137 @@
-# import zmq
-# import msgpack
-# import time
-# import random
-
-# context = zmq.Context()
-# socket = context.socket(zmq.REQ)
-# socket.connect("tcp://broker:5555")
-
-# def send(msg):
-#     socket.send(msgpack.packb(msg))
-#     return msgpack.unpackb(socket.recv(), raw=False)
-
-# user = f"bot_{random.randint(1000,9999)}"
-
-# print(f"[BOT] Iniciando como {user}")
-
-# while True:
-#     print("\n--- NOVO CICLO ---")
-
-#     resp = send({
-#         "type": "login",
-#         "user": user,
-#         "timestamp": time.time()
-#     })
-#     print("[LOGIN]", resp)
-
-
-#     channel_name = f"canal_{random.randint(1,300)}"
-
-#     resp = send({
-#         "type": "create_channel",
-#         "user": user,
-#         "channel": channel_name,
-#         "timestamp": time.time()
-#     })
-#     print("[CREATE CHANNEL]", resp)
-
-
-#     resp = send({
-#         "type": "list_channels",
-#         "user": user,
-#         "timestamp": time.time()
-#     })
-#     print("[LIST CHANNELS]", resp)
-
-#     time.sleep(0.2)
-import msgpack
 import random
 import threading
 import time
+
+import msgpack
 import zmq
 
 context = zmq.Context()
 
 req_socket = context.socket(zmq.REQ)
-req_socket.connect("tcp://broker:5555")
+req_socket.connect('tcp://broker:5555')
 
 sub_socket = context.socket(zmq.SUB)
-sub_socket.connect("tcp://proxy:5558")
+sub_socket.connect('tcp://proxy:5558')
+
+user = f"bot_py_{random.randint(1000, 9999)}"
+canais_inscritos = []
 
 
-def send(msg):
-    req_socket.send(msgpack.packb(msg, use_bin_type=True))
-    return msgpack.unpackb(req_socket.recv(), raw=False)
-
-
-def now():
+def agora():
     return time.time()
 
 
-user = f"bot_py_{random.randint(1000, 9999)}"
-subscribed = set()
+def enviar_para_servidor(mensagem):
+    req_socket.send(msgpack.packb(mensagem, use_bin_type=True))
+    resposta = req_socket.recv()
+    return msgpack.unpackb(resposta, raw=False)
 
 
-def subscriber_loop():
+def fazer_login():
+    resposta = enviar_para_servidor({
+        'type': 'login',
+        'user': user,
+        'timestamp': agora()
+    })
+    print('[LOGIN]', resposta, flush=True)
+
+
+def listar_canais():
+    resposta = enviar_para_servidor({
+        'type': 'list_channels',
+        'user': user,
+        'timestamp': agora()
+    })
+
+    if resposta.get('status') == 'ok':
+        return resposta.get('channels', [])
+
+    return []
+
+
+def criar_canal():
+    nome_canal = f"canal_{random.randint(1, 999)}"
+
+    resposta = enviar_para_servidor({
+        'type': 'create_channel',
+        'user': user,
+        'channel': nome_canal,
+        'timestamp': agora()
+    })
+
+    print('[CREATE CHANNEL]', resposta, flush=True)
+
+
+def se_inscrever_em_um_canal(canais_disponiveis):
+    canais_nao_inscritos = []
+
+    for canal in canais_disponiveis:
+        if canal not in canais_inscritos:
+            canais_nao_inscritos.append(canal)
+
+    if not canais_nao_inscritos:
+        return
+
+    canal_escolhido = random.choice(canais_nao_inscritos)
+    sub_socket.setsockopt(zmq.SUBSCRIBE, canal_escolhido.encode('utf-8'))
+    canais_inscritos.append(canal_escolhido)
+
+    print(f'[SUBSCRIBE] {user} inscrito em {canal_escolhido}', flush=True)
+
+
+def publicar_mensagem(canal, numero):
+    texto = f"mensagem {numero} do {user}"
+
+    resposta = enviar_para_servidor({
+        'type': 'publish_message',
+        'user': user,
+        'channel': canal,
+        'message': texto,
+        'timestamp': agora()
+    })
+
+    print('[PUBLISH]', resposta, flush=True)
+
+
+def receber_mensagens():
     while True:
-        topic, payload = sub_socket.recv_multipart()
-        data = msgpack.unpackb(payload, raw=False)
-        recv_ts = time.time()
+        topico, conteudo = sub_socket.recv_multipart()
+
+        dados = msgpack.unpackb(conteudo, raw=False)
+        canal = topico.decode('utf-8')
+        mensagem = dados.get('message')
+        envio = dados.get('published_timestamp')
+        recebimento = agora()
+
         print(
-            f"[SUB][{user}] canal={topic.decode()} "
-            f"mensagem={data.get('message')} "
-            f"envio={data.get('published_timestamp')} "
-            f"recebimento={recv_ts}",
-            flush=True,
+            f"[MENSAGEM RECEBIDA] canal={canal} | mensagem={mensagem} | envio={envio} | recebimento={recebimento}",
+            flush=True
         )
 
 
-threading.Thread(target=subscriber_loop, daemon=True).start()
+thread_recebimento = threading.Thread(target=receber_mensagens, daemon=True)
+thread_recebimento.start()
 
-print(f"[BOT PYTHON] Iniciando como {user}", flush=True)
-print("[LOGIN]", send({"type": "login", "user": user, "timestamp": now()}), flush=True)
+print(f'[CLIENTE PYTHON] Bot iniciado: {user}', flush=True)
+
+fazer_login()
 
 while True:
-    channels_resp = send({"type": "list_channels", "user": user, "timestamp": now()})
-    channels = channels_resp.get("channels", [])
+    canais = listar_canais()
 
-    if len(channels) < 5:
-        new_channel = f"canal_{random.randint(1, 999)}"
-        resp = send(
-            {
-                "type": "create_channel",
-                "user": user,
-                "channel": new_channel,
-                "timestamp": now(),
-            }
-        )
-        print("[CREATE CHANNEL]", resp, flush=True)
-        channels = send({"type": "list_channels", "user": user, "timestamp": now()}).get("channels", [])
+    if len(canais) < 5:
+        criar_canal()
+        canais = listar_canais()
 
-    available = [c for c in channels if c not in subscribed]
-    while len(subscribed) < 3 and available:
-        ch = random.choice(available)
-        sub_socket.setsockopt(zmq.SUBSCRIBE, ch.encode("utf-8"))
-        subscribed.add(ch)
-        print(f"[SUBSCRIBE][{user}] {ch}", flush=True)
-        available = [c for c in channels if c not in subscribed]
+    if len(canais_inscritos) < 3:
+        se_inscrever_em_um_canal(canais)
 
-    if not channels:
+    if len(canais) == 0:
         time.sleep(1)
         continue
 
-    chosen = random.choice(channels)
+    canal_escolhido = random.choice(canais)
 
     for i in range(10):
-        text = f"mensagem {i + 1} do {user}"
-        resp = send(
-            {
-                "type": "publish_message",
-                "user": user,
-                "channel": chosen,
-                "message": text,
-                "timestamp": now(),
-            }
-        )
-        print("[PUBLISH]", resp, flush=True)
+        publicar_mensagem(canal_escolhido, i + 1)
         time.sleep(1)

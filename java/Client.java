@@ -1,337 +1,267 @@
-// import org.zeromq.ZMQ;
-// import org.msgpack.core.MessageBufferPacker;
-// import org.msgpack.core.MessagePack;
-// import org.msgpack.core.MessageUnpacker;
-// import org.msgpack.value.ValueType;
-// import java.io.IOException;
-
-// import java.util.Random;
-
-// public class Client {
-//     public static void main(String[] args) throws Exception {
-//         ZMQ.Context context = ZMQ.context(1);
-//         ZMQ.Socket socket = context.socket(ZMQ.REQ);
-
-//         socket.connect("tcp://broker:5555");
-
-//         Random rand = new Random();
-//         String user = "bot_" + (rand.nextInt(9000) + 1000);
-
-//         System.out.println("[CLIENT JAVA] Iniciando como " + user);
-
-//         while (true) {
-//             System.out.println("\n--- NOVO CICLO ---");
-
-//             send(socket, packLogin(user));
-
-//             String channel = "canal_" + (rand.nextInt(300) + 1);
-//             send(socket, packCreate(user, channel));
-
-//             send(socket, packList(user));
-
-//             Thread.sleep(1200);
-//         }
-//     }
-
-//     static void send(ZMQ.Socket socket, byte[] data) throws Exception {
-//         socket.send(data);
-
-//         byte[] reply = socket.recv();
-//         unpackAndPrint(reply);
-//     }
-
-//     static byte[] packLogin(String user) throws Exception {
-//         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
-
-//         packer.packMapHeader(3);
-//         packer.packString("type");
-//         packer.packString("login");
-
-//         packer.packString("user");
-//         packer.packString(user);
-
-//         packer.packString("timestamp");
-//         packer.packDouble(System.currentTimeMillis() / 1000.0);
-
-//         packer.close();
-//         return packer.toByteArray();
-//     }
-
-//     static byte[] packCreate(String user, String channel) throws Exception {
-//         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
-
-//         packer.packMapHeader(4);
-//         packer.packString("type");
-//         packer.packString("create_channel");
-
-//         packer.packString("user");
-//         packer.packString(user);
-
-//         packer.packString("channel");
-//         packer.packString(channel);
-
-//         packer.packString("timestamp");
-//         packer.packDouble(System.currentTimeMillis() / 1000.0);
-
-//         packer.close();
-//         return packer.toByteArray();
-//     }
-
-//     static byte[] packList(String user) throws Exception {
-//         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
-
-//         packer.packMapHeader(3);
-//         packer.packString("type");
-//         packer.packString("list_channels");
-
-//         packer.packString("user");
-//         packer.packString(user);
-
-//         packer.packString("timestamp");
-//         packer.packDouble(System.currentTimeMillis() / 1000.0);
-
-//         packer.close();
-//         return packer.toByteArray();
-//     }
-
-//     public static void unpackAndPrint(byte[] response) throws IOException {
-//         MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(response);
-
-//         int mapSize = unpacker.unpackMapHeader();
-
-//         String status = null;
-//         String message = null;
-//         Double timestamp = null;
-//         StringBuilder channelsStr = new StringBuilder();
-
-//         for (int i = 0; i < mapSize; i++) {
-//             String key = unpacker.unpackString();
-
-//             switch (key) {
-//                 case "status":
-//                     status = unpacker.unpackString();
-//                     break;
-
-//                 case "message":
-//                     message = unpacker.unpackString();
-//                     break;
-
-//                 case "timestamp":
-//                     if (unpacker.getNextFormat().getValueType().isFloatType()) {
-//                         timestamp = unpacker.unpackDouble();
-//                     } else if (unpacker.getNextFormat().getValueType().isIntegerType()) {
-//                         timestamp = (double) unpacker.unpackLong();
-//                     }
-//                     break;
-
-//                 case "channels":
-//                     int arraySize = unpacker.unpackArrayHeader();
-//                     channelsStr.append("[ ");
-//                     for (int j = 0; j < arraySize; j++) {
-//                         channelsStr.append(unpacker.unpackString()).append(" ");
-//                     }
-//                     channelsStr.append("]");
-//                     break;
-
-//                 default:
-//                     unpacker.skipValue();
-//                     break;
-//             }
-//         }
-
-//         System.out.print("[RESPONSE] { ");
-//         if (status != null) System.out.print("status: " + status + ", ");
-//         if (message != null) System.out.print("message: " + message + ", ");
-//         if (channelsStr.length() > 0) System.out.print("channels: " + channelsStr + ", ");
-//         if (timestamp != null) System.out.print("timestamp: " + timestamp + ", ");
-//         System.out.println("}");
-//     }
-// }
-
 import org.msgpack.core.MessageBufferPacker;
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageUnpacker;
 import org.zeromq.ZMQ;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class Client {
     static ZMQ.Context context = ZMQ.context(1);
     static ZMQ.Socket req = context.socket(ZMQ.REQ);
     static ZMQ.Socket sub = context.socket(ZMQ.SUB);
 
-    static String user = "bot_java_" + (1000 + new Random().nextInt(9000));
-    static Set<String> subscribed = new HashSet<>();
     static Random random = new Random();
+    static String user = "bot_java_" + (1000 + random.nextInt(9000));
+    static Set<String> canaisInscritos = new HashSet<>();
 
     public static void main(String[] args) throws Exception {
         req.connect("tcp://broker:5555");
         sub.connect("tcp://proxy:5558");
 
-        Thread subscriber = new Thread(() -> {
+        Thread threadRecebimento = new Thread(() -> {
             while (true) {
-                String topic = sub.recvStr();
-                byte[] payload = sub.recv();
+                String canal = sub.recvStr();
+                byte[] conteudo = sub.recv();
+
                 try {
-                    Map<String, Object> msg = unpackMap(payload);
-                    double recvTs = System.currentTimeMillis() / 1000.0;
+                    MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(conteudo);
+                    int mapSize = unpacker.unpackMapHeader();
+
+                    String mensagem = "";
+                    double envio = 0;
+
+                    for (int i = 0; i < mapSize; i++) {
+                        String key = unpacker.unpackString();
+
+                        if (key.equals("message")) {
+                            mensagem = unpacker.unpackString();
+                        } else if (key.equals("published_timestamp")) {
+                            if (unpacker.getNextFormat().getValueType().isFloatType()) {
+                                envio = unpacker.unpackDouble();
+                            } else {
+                                envio = unpacker.unpackLong();
+                            }
+                        } else {
+                            unpacker.skipValue();
+                        }
+                    }
+
+                    double recebimento = agora();
+
                     System.out.println(
-                            "[SUB][" + user + "] canal=" + topic +
-                            " mensagem=" + msg.get("message") +
-                            " envio=" + msg.get("published_timestamp") +
-                            " recebimento=" + recvTs
+                        "[MENSAGEM RECEBIDA] canal=" + canal +
+                        " | mensagem=" + mensagem +
+                        " | envio=" + envio +
+                        " | recebimento=" + recebimento
                     );
                 } catch (Exception e) {
-                    System.out.println("[SUB][" + user + "] erro ao desempacotar mensagem");
+                    System.out.println("[ERRO SUB] erro ao ler mensagem");
                 }
             }
         });
-        subscriber.setDaemon(true);
-        subscriber.start();
 
-        System.out.println("[CLIENT JAVA] Iniciando como " + user);
-        System.out.println(send(mapOf("type", "login", "user", user, "timestamp", epoch())));
+        threadRecebimento.setDaemon(true);
+        threadRecebimento.start();
+
+        System.out.println("[CLIENT JAVA] Bot iniciado: " + user);
+
+        fazerLogin();
 
         while (true) {
-            Map<String, Object> listResp = send(mapOf(
-                    "type", "list_channels",
-                    "user", user,
-                    "timestamp", epoch()
-            ));
+            List<String> canais = listarCanais();
 
-            List<String> channels = castStringList(listResp.get("channels"));
-
-            if (channels.size() < 5) {
-                String newChannel = "canal_" + (1 + random.nextInt(999));
-                System.out.println(send(mapOf(
-                        "type", "create_channel",
-                        "user", user,
-                        "channel", newChannel,
-                        "timestamp", epoch()
-                )));
-
-                listResp = send(mapOf(
-                        "type", "list_channels",
-                        "user", user,
-                        "timestamp", epoch()
-                ));
-                channels = castStringList(listResp.get("channels"));
+            if (canais.size() < 5) {
+                criarCanal();
+                canais = listarCanais();
             }
 
-            List<String> remaining = new ArrayList<>();
-            for (String c : channels) {
-                if (!subscribed.contains(c)) remaining.add(c);
+            if (canaisInscritos.size() < 3) {
+                seInscreverEmUmCanal(canais);
             }
 
-            while (subscribed.size() < 3 && !remaining.isEmpty()) {
-                String ch = remaining.get(random.nextInt(remaining.size()));
-                sub.subscribe(ch.getBytes());
-                subscribed.add(ch);
-                remaining.remove(ch);
-                System.out.println("[SUBSCRIBE][" + user + "] " + ch);
-            }
-
-            if (channels.isEmpty()) {
+            if (canais.isEmpty()) {
                 Thread.sleep(1000);
                 continue;
             }
 
-            String chosen = channels.get(random.nextInt(channels.size()));
+            String canalEscolhido = canais.get(random.nextInt(canais.size()));
 
             for (int i = 0; i < 10; i++) {
-                String text = "mensagem " + (i + 1) + " do " + user;
-
-                Map<String, Object> resp = send(mapOf(
-                        "type", "publish_message",
-                        "user", user,
-                        "channel", chosen,
-                        "message", text,
-                        "timestamp", epoch()
-                ));
-
-                System.out.println("[PUBLISH] " + resp);
+                publicarMensagem(canalEscolhido, i + 1);
                 Thread.sleep(1000);
             }
         }
     }
 
-    static Map<String, Object> send(Map<String, Object> map) throws IOException {
-        req.send(packMap(map));
-        return unpackMap(req.recv());
-    }
-
-    static byte[] packMap(Map<String, Object> map) throws IOException {
-        MessageBufferPacker p = MessagePack.newDefaultBufferPacker();
-        p.packMapHeader(map.size());
-
-        for (Map.Entry<String, Object> e : map.entrySet()) {
-            p.packString(e.getKey());
-            Object v = e.getValue();
-
-            if (v instanceof String s) p.packString(s);
-            else if (v instanceof Integer n) p.packInt(n);
-            else if (v instanceof Long n) p.packLong(n);
-            else if (v instanceof Double d) p.packDouble(d);
-            else if (v instanceof Float d) p.packFloat(d);
-            else if (v instanceof List<?> list) {
-                p.packArrayHeader(list.size());
-                for (Object item : list) p.packString(String.valueOf(item));
-            } else {
-                p.packString(String.valueOf(v));
-            }
-        }
-
-        p.close();
-        return p.toByteArray();
-    }
-
-    static Map<String, Object> unpackMap(byte[] data) throws IOException {
-        MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(data);
-        int size = unpacker.unpackMapHeader();
-        Map<String, Object> map = new LinkedHashMap<>();
-
-        for (int i = 0; i < size; i++) {
-            String key = unpacker.unpackString();
-            switch (unpacker.getNextFormat().getValueType()) {
-                case STRING -> map.put(key, unpacker.unpackString());
-                case INTEGER -> map.put(key, unpacker.unpackLong());
-                case FLOAT -> map.put(key, unpacker.unpackDouble());
-                case BOOLEAN -> map.put(key, unpacker.unpackBoolean());
-                case ARRAY -> {
-                    int arr = unpacker.unpackArrayHeader();
-                    List<String> list = new ArrayList<>();
-                    for (int j = 0; j < arr; j++) {
-                        list.add(unpacker.unpackString());
-                    }
-                    map.put(key, list);
-                }
-                default -> unpacker.skipValue();
-            }
-        }
-        return map;
-    }
-
-    @SuppressWarnings("unchecked")
-    static List<String> castStringList(Object obj) {
-        List<String> out = new ArrayList<>();
-        if (obj instanceof List<?>) {
-            for (Object item : (List<?>) obj) {
-                out.add(String.valueOf(item));
-            }
-        }
-        return out;
-    }
-
-    static Map<String, Object> mapOf(Object... kvs) {
-        Map<String, Object> map = new LinkedHashMap<>();
-        for (int i = 0; i < kvs.length; i += 2) {
-            map.put(String.valueOf(kvs[i]), kvs[i + 1]);
-        }
-        return map;
-    }
-
-    static double epoch() {
+    static double agora() {
         return System.currentTimeMillis() / 1000.0;
+    }
+
+    static void fazerLogin() throws Exception {
+        byte[] mensagem = empacotarLogin();
+        req.send(mensagem);
+
+        byte[] resposta = req.recv();
+        System.out.println("[LOGIN] " + lerRespostaSimples(resposta));
+    }
+
+    static List<String> listarCanais() throws Exception {
+        byte[] mensagem = empacotarListChannels();
+        req.send(mensagem);
+
+        byte[] resposta = req.recv();
+
+        MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(resposta);
+        int mapSize = unpacker.unpackMapHeader();
+
+        List<String> canais = new ArrayList<>();
+
+        for (int i = 0; i < mapSize; i++) {
+            String key = unpacker.unpackString();
+
+            if (key.equals("channels")) {
+                int tamanho = unpacker.unpackArrayHeader();
+
+                for (int j = 0; j < tamanho; j++) {
+                    canais.add(unpacker.unpackString());
+                }
+            } else {
+                unpacker.skipValue();
+            }
+        }
+
+        return canais;
+    }
+
+    static void criarCanal() throws Exception {
+        String canal = "canal_" + (1 + random.nextInt(999));
+
+        byte[] mensagem = empacotarCreateChannel(canal);
+        req.send(mensagem);
+
+        byte[] resposta = req.recv();
+        System.out.println("[CREATE CHANNEL] " + lerRespostaSimples(resposta));
+    }
+
+    static void seInscreverEmUmCanal(List<String> canaisDisponiveis) {
+        List<String> naoInscritos = new ArrayList<>();
+
+        for (String canal : canaisDisponiveis) {
+            if (!canaisInscritos.contains(canal)) {
+                naoInscritos.add(canal);
+            }
+        }
+
+        if (naoInscritos.isEmpty()) {
+            return;
+        }
+
+        String canalEscolhido = naoInscritos.get(random.nextInt(naoInscritos.size()));
+        sub.subscribe(canalEscolhido.getBytes());
+        canaisInscritos.add(canalEscolhido);
+
+        System.out.println("[SUBSCRIBE] " + user + " inscrito em " + canalEscolhido);
+    }
+
+    static void publicarMensagem(String canal, int numero) throws Exception {
+        String texto = "mensagem " + numero + " do " + user;
+
+        byte[] mensagem = empacotarPublish(canal, texto);
+        req.send(mensagem);
+
+        byte[] resposta = req.recv();
+        System.out.println("[PUBLISH] " + lerRespostaSimples(resposta));
+    }
+
+    static byte[] empacotarLogin() throws Exception {
+        MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
+
+        packer.packMapHeader(3);
+        packer.packString("type");
+        packer.packString("login");
+        packer.packString("user");
+        packer.packString(user);
+        packer.packString("timestamp");
+        packer.packDouble(agora());
+
+        packer.close();
+        return packer.toByteArray();
+    }
+
+    static byte[] empacotarListChannels() throws Exception {
+        MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
+
+        packer.packMapHeader(3);
+        packer.packString("type");
+        packer.packString("list_channels");
+        packer.packString("user");
+        packer.packString(user);
+        packer.packString("timestamp");
+        packer.packDouble(agora());
+
+        packer.close();
+        return packer.toByteArray();
+    }
+
+    static byte[] empacotarCreateChannel(String canal) throws Exception {
+        MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
+
+        packer.packMapHeader(4);
+        packer.packString("type");
+        packer.packString("create_channel");
+        packer.packString("user");
+        packer.packString(user);
+        packer.packString("channel");
+        packer.packString(canal);
+        packer.packString("timestamp");
+        packer.packDouble(agora());
+
+        packer.close();
+        return packer.toByteArray();
+    }
+
+    static byte[] empacotarPublish(String canal, String texto) throws Exception {
+        MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
+
+        packer.packMapHeader(5);
+        packer.packString("type");
+        packer.packString("publish_message");
+        packer.packString("user");
+        packer.packString(user);
+        packer.packString("channel");
+        packer.packString(canal);
+        packer.packString("message");
+        packer.packString(texto);
+        packer.packString("timestamp");
+        packer.packDouble(agora());
+
+        packer.close();
+        return packer.toByteArray();
+    }
+
+    static String lerRespostaSimples(byte[] resposta) throws Exception {
+        MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(resposta);
+        int mapSize = unpacker.unpackMapHeader();
+
+        String status = "";
+        String message = "";
+
+        for (int i = 0; i < mapSize; i++) {
+            String key = unpacker.unpackString();
+
+            if (key.equals("status")) {
+                status = unpacker.unpackString();
+            } else if (key.equals("message")) {
+                message = unpacker.unpackString();
+            } else {
+                unpacker.skipValue();
+            }
+        }
+
+        return "{status=" + status + ", message=" + message + "}";
     }
 }
