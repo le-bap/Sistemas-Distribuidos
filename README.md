@@ -1,4 +1,4 @@
-# Projeto de Sistemas Distribuídos - Parte 1
+# Projeto de Sistemas Distribuídos - Parte 1 e 2
 
 ## Integrantes
 - Rafaela Altheman de Campos
