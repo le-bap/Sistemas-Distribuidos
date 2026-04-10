@@ -6,15 +6,51 @@
 - Manuella Filipe Peres
 
 ## Sobre o projeto
-Este projeto foi desenvolvido para a Parte 1 da disciplina de Sistemas Distribuídos.
+Este projeto foi desenvolvido para a Parte 1 e 2 da disciplina de Sistemas Distribuídos.
 
-Nesta etapa, implementamos a comunicação inicial entre clientes e servidores, permitindo que os bots consigam:
+Nestas etapas, implementamos a comunicação entre clientes e servidores utilizando Req/Res e Pub/Sub.
 
-- fazer login no serviço
-- criar canais
-- listar os canais existentes
+Com a troca de mensagens, é possível:
+
+- fazer login  
+- criar canais  
+- listar canais  
+- publicar mensagens (publish)  
+- se inscrever em canais (subscribe)
 
 Além disso, os servidores armazenam os dados para não perder as informações entre execuções.
+
+---
+## Arquitetura
+
+O sistema usa dois padrões de comunicação:
+
+### Req/Rep
+Usado para:
+- login  
+- criação de canal  
+- listagem de canais  
+- envio de mensagens  
+
+Portas:
+- 5555 (entrada)
+- 5556 (saída)
+
+
+### Pub/Sub
+Usado para:
+- publicação de mensagens nos canais  
+- distribuição de mensagens entre os bots  
+- recebimento de mensagens dos canais inscritos  
+
+Portas:
+- 5557 (XSUB)
+- 5558 (XPUB)
+
+O servidor atua como **publisher**, enviando mensagens para os canais.  
+Os clientes (bots) atuam como **subscribers**, se inscrevendo nos canais e recebendo as mensagens.
+
+Cada canal funciona como um **tópico**, e os clientes recebem apenas mensagens dos canais em que estão inscritos.
 
 ---
 
@@ -25,7 +61,7 @@ No projeto foram utilizadas 3 linguagens para implementar clientes e servidores:
 - **Java**
 - **C**
 
-Também foi utilizado um **broker**, responsável por intermediar a comunicação entre clientes e servidores.
+Também foi utilizado um **broker**, responsável por intermediar a comunicação entre eles.
 
 ---
 
@@ -44,12 +80,6 @@ Todas as mensagens trocadas entre cliente e servidor possuem:
 - **timestamp do envio**
 - e os outros campos necessários, como usuário ou canal
 
-Exemplos de operações implementadas:
-
-- login
-- criação de canal
-- listagem de canais
-
 ---
 
 ## Persistência dos dados
@@ -59,8 +89,9 @@ Cada servidor mantém seu **próprio conjunto de dados**, sem compartilhar arqui
 
 Os dados salvos são:
 
-- **logins realizados**, junto com o timestamp
-- **canais criados**
+- logins realizados,
+- canais criados
+- publicações feitas
 
 A persistência foi feita em arquivos dentro da pasta `data`, separados por linguagem:
 
@@ -68,15 +99,14 @@ A persistência foi feita em arquivos dentro da pasta `data`, separados por ling
 - `data/java/`
 - `data/c/`
 
-Foram utilizados arquivos como:
+Foram utilizados arquivos:
 
-- `channels.txt`
-- `logins.txt`
 - `channels.json`
 - `logins.json`
+- `publications.jsonl`
+- `requests.jsonl`
 
-Os arquivos `.txt` e `.json` são usados apenas para armazenamento em disco.  
-Na comunicação entre cliente e servidor **não é usado JSON**, apenas **MessagePack**.
+para serapação de cada tipo de mensagem.
 
 ---
 
@@ -86,6 +116,7 @@ O projeto possui:
 - clientes em Python, Java e C
 - servidores em Python, Java e C
 - broker
+- proxy
 - Dockerfiles
 - docker-compose.yaml
 - pasta de dados para persistência
