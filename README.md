@@ -106,7 +106,7 @@ Foram utilizados arquivos:
 - `publications.jsonl`
 - `requests.jsonl`
 
-para serapação de cada tipo de mensagem.
+para separação de cada tipo de mensagem.
 
 ---
 
