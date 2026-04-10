@@ -1,58 +1,3 @@
-# services:
-#   broker:
-#     build: ./broker
-#     container_name: broker
-
-#   server_python:
-#     build: ./python
-#     container_name: server_python
-#     command: ["python", "server.py"]
-#     volumes:
-#       - ./data/python:/app/data
-#     depends_on:
-#       - broker
-
-#   server_java:
-#     build: ./java
-#     container_name: server_java
-#     command: ["java", "-cp", ".:jeromq-0.5.2.jar:msgpack-core-0.9.0.jar", "Server"]
-#     volumes:
-#       - ./data/java:/app/data
-#     depends_on:
-#       - broker
-
-#   server_c:
-#     build: ./c
-#     container_name: server_c
-#     command: ["./server"]
-#     volumes:
-#       - ./data/c:/app/data
-#     depends_on:
-#       - broker
-
-#   client_python:
-#     build: ./python
-#     container_name: client_python
-#     command: ["python", "client.py"]
-#     depends_on:
-#       - broker
-#       - server_python
-
-#   client_java:
-#     build: ./java
-#     container_name: client_java
-#     command: ["java", "-cp", ".:jeromq-0.5.2.jar:msgpack-core-0.9.0.jar", "Client"]
-#     depends_on:
-#       - broker
-#       - server_java
-
-#   client_c:
-#     build: ./c
-#     container_name: client_c
-#     command: ["./client"]
-#     depends_on:
-#       - broker
-#       - server_c
 services:
   broker:
     build: ./broker
@@ -70,6 +15,26 @@ services:
     command: ["python", "server.py"]
     volumes:
       - ./data/python:/app/data
+    depends_on:
+      - broker
+      - proxy
+  
+  server_java:
+    build: ./java
+    container_name: server_java
+    command: ["java", "-cp", ".:jeromq-0.5.2.jar:msgpack-core-0.9.0.jar", "Server"]
+    volumes:
+      - ./data/java:/app/data
+    depends_on:
+      - broker
+      - proxy
+
+  server_c:
+    build: ./c
+    container_name: server_c
+    command: ["./server"]
+    volumes:
+      - ./data/c:/app/data
     depends_on:
       - broker
       - proxy

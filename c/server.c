@@ -265,6 +265,9 @@ int main() {
         snprintf(linha_req, sizeof(linha_req),
                  "{\"type\":\"%s\",\"user\":\"%s\",\"received_timestamp\":%.0f}",
                  tipo, usuario, agora());
+
+        printf("[SERVER C] tipo: %s | user: %s | canal: %s | timestamp: %f\n",
+       tipo, usuario, canal, timestamp);
         salvar_linha_jsonl(ARQUIVO_REQUISICOES, linha_req);
 
         if (strcmp(tipo, "login") == 0) {

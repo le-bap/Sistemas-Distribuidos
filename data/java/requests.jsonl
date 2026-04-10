@@ -1,26 +1,79 @@
-{"type":"create_channel","user":"bot_c_5423","received_timestamp":1.775603371174E9,"request":"{type=create_channel, user=bot_c_5423, timestamp=1.775603371E9, channel=canal_569}"}
-{"type":"list_channels","user":"bot_py_2543","received_timestamp":1.775603371322E9,"request":"{type=list_channels, user=bot_py_2543, timestamp=1.7756033713179014E9}"}
-{"type":"login","user":"bot_java_4153","received_timestamp":1.775603371425E9,"request":"{type=login, user=bot_java_4153, timestamp=1.77560337139E9}"}
-{"type":"list_channels","user":"bot_java_4153","received_timestamp":1.775603371466E9,"request":"{type=list_channels, user=bot_java_4153, timestamp=1.775603371458E9}"}
-{"type":"create_channel","user":"bot_c_5423","received_timestamp":1.775603372248E9,"request":"{type=create_channel, user=bot_c_5423, timestamp=1.775603372E9, channel=canal_914}"}
-{"type":"list_channels","user":"bot_py_2543","received_timestamp":1.775603372329E9,"request":"{type=list_channels, user=bot_py_2543, timestamp=1.7756033723285363E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603372334E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 1 do bot_py_2543, timestamp=1.7756033723332512E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603373337E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 2 do bot_py_2543, timestamp=1.7756033733359396E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.77560337434E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 3 do bot_py_2543, timestamp=1.7756033743383777E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603375347E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 4 do bot_py_2543, timestamp=1.7756033753461666E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603376357E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 5 do bot_py_2543, timestamp=1.7756033763560228E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603377359E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 6 do bot_py_2543, timestamp=1.7756033773586311E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603378362E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 7 do bot_py_2543, timestamp=1.7756033783611674E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603379365E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 8 do bot_py_2543, timestamp=1.7756033793646975E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603380368E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 9 do bot_py_2543, timestamp=1.775603380367143E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.77560338137E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_553, message=mensagem 10 do bot_py_2543, timestamp=1.7756033813691087E9}"}
-{"type":"list_channels","user":"bot_java_4153","received_timestamp":1.775603381553E9,"request":"{type=list_channels, user=bot_java_4153, timestamp=1.775603381551E9}"}
-{"type":"create_channel","user":"bot_c_5423","received_timestamp":1.775603382268E9,"request":"{type=create_channel, user=bot_c_5423, timestamp=1.775603382E9, channel=canal_677}"}
-{"type":"list_channels","user":"bot_py_2543","received_timestamp":1.775603382371E9,"request":"{type=list_channels, user=bot_py_2543, timestamp=1.775603382371301E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603382377E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_972, message=mensagem 1 do bot_py_2543, timestamp=1.7756033823760607E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603383379E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_972, message=mensagem 2 do bot_py_2543, timestamp=1.77560338337857E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603384381E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_972, message=mensagem 3 do bot_py_2543, timestamp=1.7756033843805609E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603385385E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_972, message=mensagem 4 do bot_py_2543, timestamp=1.775603385382505E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603386388E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_972, message=mensagem 5 do bot_py_2543, timestamp=1.7756033863883271E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603387391E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_972, message=mensagem 6 do bot_py_2543, timestamp=1.7756033873902197E9}"}
-{"type":"publish_message","user":"bot_py_2543","received_timestamp":1.775603388394E9,"request":"{type=publish_message, user=bot_py_2543, channel=canal_972, message=mensagem 7 do bot_py_2543, timestamp=1.7756033883930006E9}"}
+{"type":"list_channels","user":"bot_java_3899","received_timestamp":1.775786691429E9}
+{"type":"list_channels","user":"bot_java_3899","received_timestamp":1.775786691487E9}
+{"type":"publish_message","user":"bot_c_1775","received_timestamp":1.775786691852E9}
+{"type":"create_channel","user":"bot_java_3899","received_timestamp":1.775786692493E9}
+{"type":"publish_message","user":"bot_java_3899","received_timestamp":1.775786692513E9}
+{"type":"publish_message","user":"bot_c_1775","received_timestamp":1.77578669286E9}
+{"type":"publish_message","user":"bot_py_9712","received_timestamp":1.775786693804E9}
+{"type":"publish_message","user":"bot_java_3899","received_timestamp":1.775786694524E9}
+{"type":"publish_message","user":"bot_c_1775","received_timestamp":1.775786694865E9}
+{"type":"publish_message","user":"bot_py_9712","received_timestamp":1.775786695809E9}
+{"type":"publish_message","user":"bot_java_3899","received_timestamp":1.775786696537E9}
+{"type":"publish_message","user":"bot_c_1775","received_timestamp":1.775786696869E9}
+{"type":"publish_message","user":"bot_py_9712","received_timestamp":1.775786697813E9}
+{"type":"publish_message","user":"bot_java_3899","received_timestamp":1.775786698547E9}
+{"type":"publish_message","user":"bot_c_1775","received_timestamp":1.775786698874E9}
+{"type":"list_channels","user":"bot_c_6315","received_timestamp":1.775786734423E9}
+{"type":"list_channels","user":"bot_py_6045","received_timestamp":1.775786734534E9}
+{"type":"list_channels","user":"bot_c_6315","received_timestamp":1.775786734536E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.77578673455E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786734595E9}
+{"type":"list_channels","user":"bot_java_3704","received_timestamp":1.77578673478E9}
+{"type":"list_channels","user":"bot_java_3704","received_timestamp":1.775786734791E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786735598E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786735818E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786736611E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786737603E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786737826E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786738616E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786739611E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786739835E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786740629E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786741617E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786741847E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786742639E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786743642E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786743857E9}
+{"type":"create_channel","user":"bot_c_6315","received_timestamp":1.775786744651E9}
+{"type":"list_channels","user":"bot_c_6315","received_timestamp":1.775786744655E9}
+{"type":"list_channels","user":"bot_py_6045","received_timestamp":1.775786744665E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786744667E9}
+{"type":"create_channel","user":"bot_java_3704","received_timestamp":1.775786744864E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786744874E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786745678E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786746668E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.77578674688E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786747689E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786748678E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786748888E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786749705E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786750683E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786750894E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.77578675171E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.77578675269E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.7757867529E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786753714E9}
+{"type":"list_channels","user":"bot_c_6315","received_timestamp":1.775786754696E9}
+{"type":"list_channels","user":"bot_c_6315","received_timestamp":1.775786754699E9}
+{"type":"list_channels","user":"bot_py_6045","received_timestamp":1.775786754717E9}
+{"type":"list_channels","user":"bot_py_6045","received_timestamp":1.775786754721E9}
+{"type":"list_channels","user":"bot_java_3704","received_timestamp":1.775786754908E9}
+{"type":"list_channels","user":"bot_java_3704","received_timestamp":1.775786754912E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786755703E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786755923E9}
+{"type":"publish_message","user":"bot_py_6045","received_timestamp":1.775786756726E9}
+{"type":"publish_message","user":"bot_c_6315","received_timestamp":1.775786757709E9}
+{"type":"publish_message","user":"bot_java_3704","received_timestamp":1.775786757935E9}
+{"type":"list_channels","user":"bot_c_4524","received_timestamp":1.775786766942E9}
+{"type":"list_channels","user":"bot_py_6958","received_timestamp":1.775786767092E9}
+{"type":"list_channels","user":"bot_c_4524","received_timestamp":1.775786767093E9}
+{"type":"create_channel","user":"bot_py_6958","received_timestamp":1.775786767103E9}
+{"type":"publish_message","user":"bot_py_6958","received_timestamp":1.775786767134E9}
+{"type":"list_channels","user":"bot_java_6355","received_timestamp":1.77578676729E9}
+{"type":"list_channels","user":"bot_java_6355","received_timestamp":1.775786767301E9}
+{"type":"publish_message","user":"bot_c_4524","received_timestamp":1.775786768105E9}
+{"type":"publish_message","user":"bot_c_2617","received_timestamp":1.775786830999E9}
+{"type":"publish_message","user":"bot_py_2469","received_timestamp":1.775786831084E9}
+{"type":"publish_message","user":"bot_java_3133","received_timestamp":1.775786831401E9}
+{"type":"publish_message","user":"bot_java_3133","received_timestamp":1.775786832406E9}
+{"type":"publish_message","user":"bot_java_3133","received_timestamp":1.775786833411E9}

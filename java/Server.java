@@ -38,6 +38,7 @@ public class Server {
         System.out.println("[SERVER JAVA] Iniciado...");
 
         while (true) {
+
             byte[] mensagemBruta = rep.recv();
 
             MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(mensagemBruta);
@@ -115,6 +116,12 @@ public class Server {
             }
 
             rep.send(resposta);
+            String msgLog = "[SERVER JAVA] tipo=" + tipo + 
+                " | user=" + usuario + 
+                " | canal=" + canal +
+                " | timestamp= " + timestamp;
+
+            System.out.println(msgLog);
         }
     }
 
