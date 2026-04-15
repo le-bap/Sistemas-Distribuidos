@@ -42,5 +42,41 @@
   {
     "user": "bot_py_6000",
     "timestamp": 1775775876.556081
+  },
+  {
+    "user": "bot_java_1424",
+    "timestamp": 1776293668.681
+  },
+  {
+    "user": "bot_c_3001",
+    "timestamp": 1776293807.0
+  },
+  {
+    "user": "bot_java_3070",
+    "timestamp": 1776293807.773
+  },
+  {
+    "user": "bot_java_6242",
+    "timestamp": 1776294517.512
+  },
+  {
+    "user": "bot_py_4066",
+    "timestamp": 1776294983.7098432,
+    "contador": 2
+  },
+  {
+    "user": "bot_java_1093",
+    "timestamp": 1776294983.99,
+    "contador": 3
+  },
+  {
+    "user": "bot_py_8857",
+    "timestamp": 1776295196.1307216,
+    "contador": 2
+  },
+  {
+    "user": "bot_java_1577",
+    "timestamp": 1776295196.594,
+    "contador": 3
   }
 ]

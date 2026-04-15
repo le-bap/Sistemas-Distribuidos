@@ -16,31 +16,50 @@ sub_socket.connect('tcp://proxy:5558')
 user = f"bot_py_{random.randint(1000, 9999)}"
 canais_inscritos = []
 
+cont = 0
+
 
 def agora():
     return time.time()
 
 
+def atualizar_contador(cont_recebido, origem=""):
+    global cont
+    cont = max(cont, cont_recebido) + 1
+
+
 def enviar_para_servidor(mensagem):
+    global cont
+
     req_socket.send(msgpack.packb(mensagem, use_bin_type=True))
-    resposta = req_socket.recv()
-    return msgpack.unpackb(resposta, raw=False)
+    resposta = msgpack.unpackb(req_socket.recv(), raw=False)
+
+    atualizar_contador(resposta.get('contador', 0))
+    return resposta
 
 
 def fazer_login():
+    global cont
+    cont += 1
+
     resposta = enviar_para_servidor({
         'type': 'login',
         'user': user,
-        'timestamp': agora()
+        'timestamp': agora(),
+        'contador': cont
     })
     print('[LOGIN]', resposta, flush=True)
 
 
 def listar_canais():
+    global cont
+    cont += 1
+
     resposta = enviar_para_servidor({
         'type': 'list_channels',
         'user': user,
-        'timestamp': agora()
+        'timestamp': agora(),
+        'contador': cont
     })
 
     if resposta.get('status') == 'ok':
@@ -50,24 +69,26 @@ def listar_canais():
 
 
 def criar_canal():
+    global cont
+    cont += 1
+
     nome_canal = f"canal_{random.randint(1, 999)}"
 
     resposta = enviar_para_servidor({
         'type': 'create_channel',
         'user': user,
         'channel': nome_canal,
-        'timestamp': agora()
+        'timestamp': agora(),
+        'contador': cont
     })
 
     print('[CREATE CHANNEL]', resposta, flush=True)
 
 
 def se_inscrever_em_um_canal(canais_disponiveis):
-    canais_nao_inscritos = []
-
-    for canal in canais_disponiveis:
-        if canal not in canais_inscritos:
-            canais_nao_inscritos.append(canal)
+    canais_nao_inscritos = [
+        c for c in canais_disponiveis if c not in canais_inscritos
+    ]
 
     if not canais_nao_inscritos:
         return
@@ -80,6 +101,9 @@ def se_inscrever_em_um_canal(canais_disponiveis):
 
 
 def publicar_mensagem(canal, numero):
+    global cont
+    cont += 1
+
     texto = f"mensagem {numero} do {user}"
 
     resposta = enviar_para_servidor({
@@ -87,30 +111,36 @@ def publicar_mensagem(canal, numero):
         'user': user,
         'channel': canal,
         'message': texto,
-        'timestamp': agora()
+        'timestamp': agora(),
+        'contador': cont
     })
 
     print('[PUBLISH]', resposta, flush=True)
 
 
 def receber_mensagens():
+    global cont
+
     while True:
         topico, conteudo = sub_socket.recv_multipart()
 
         dados = msgpack.unpackb(conteudo, raw=False)
+
+        atualizar_contador(dados.get('contador', 0))
+
         canal = topico.decode('utf-8')
         mensagem = dados.get('message')
         envio = dados.get('published_timestamp')
         recebimento = agora()
 
         print(
-            f"[MENSAGEM RECEBIDA] canal={canal} | mensagem={mensagem} | envio={envio} | recebimento={recebimento}",
+            f"[MENSAGEM RECEBIDA] canal={canal} | mensagem={mensagem} "
+            f"| envio={envio} | recebimento={recebimento} | contador_local={cont}",
             flush=True
         )
 
 
-thread_recebimento = threading.Thread(target=receber_mensagens, daemon=True)
-thread_recebimento.start()
+threading.Thread(target=receber_mensagens, daemon=True).start()
 
 print(f'[CLIENTE PYTHON] Bot iniciado: {user}', flush=True)
 
@@ -126,7 +156,7 @@ while True:
     if len(canais_inscritos) < 3:
         se_inscrever_em_um_canal(canais)
 
-    if len(canais) == 0:
+    if not canais:
         time.sleep(1)
         continue
 
