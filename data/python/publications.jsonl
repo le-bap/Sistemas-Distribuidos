@@ -34,3 +34,796 @@
 {"channel": "canal_972", "user": "bot_c_2526", "message": "mensagem 3 do bot_c_2526", "contador": 5, "request_timestamp": 1776295198.0, "published_timestamp": 1776295198.023265}
 {"channel": "canal_972", "user": "bot_c_2526", "message": "mensagem 4 do bot_c_2526", "contador": 6, "request_timestamp": 1776295199.0, "published_timestamp": 1776295199.0250814}
 {"channel": "canal_972", "user": "bot_c_2526", "message": "mensagem 5 do bot_c_2526", "contador": 7, "request_timestamp": 1776295200.0, "published_timestamp": 1776295200.026574}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 2 do bot_py_9865", "contador": 9, "request_timestamp": 1776295845.1424255, "published_timestamp": 1776295845.1432915}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 3 do bot_py_9865", "contador": 12, "request_timestamp": 1776295846.1443892, "published_timestamp": 1776295846.1451128}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 4 do bot_py_9865", "contador": 15, "request_timestamp": 1776295847.1460528, "published_timestamp": 1776295847.1468024}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 5 do bot_py_9865", "contador": 18, "request_timestamp": 1776295848.1476905, "published_timestamp": 1776295848.1484}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 6 do bot_py_9865", "contador": 21, "request_timestamp": 1776295849.1500459, "published_timestamp": 1776295849.150759}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 7 do bot_py_9865", "contador": 24, "request_timestamp": 1776295850.1515236, "published_timestamp": 1776295850.1521695}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 8 do bot_py_9865", "contador": 27, "request_timestamp": 1776295851.153344, "published_timestamp": 1776295851.1559494}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 9 do bot_py_9865", "contador": 30, "request_timestamp": 1776295852.1569617, "published_timestamp": 1776295852.157737}
+{"channel": "canal_585", "user": "bot_py_9865", "message": "mensagem 10 do bot_py_9865", "contador": 33, "request_timestamp": 1776295853.1588016, "published_timestamp": 1776295853.159434}
+{"channel": "canal_84", "user": "bot_py_9865", "message": "mensagem 5 do bot_py_9865", "contador": 47, "request_timestamp": 1776295858.1749363, "published_timestamp": 1776295858.1756866}
+{"channel": "canal_84", "user": "bot_py_9865", "message": "mensagem 6 do bot_py_9865", "contador": 50, "request_timestamp": 1776295859.1764123, "published_timestamp": 1776295859.177112}
+{"channel": "canal_84", "user": "bot_py_9865", "message": "mensagem 7 do bot_py_9865", "contador": 53, "request_timestamp": 1776295860.1781447, "published_timestamp": 1776295860.1787734}
+{"channel": "canal_84", "user": "bot_py_9865", "message": "mensagem 8 do bot_py_9865", "contador": 56, "request_timestamp": 1776295861.179582, "published_timestamp": 1776295861.1803653}
+{"channel": "canal_84", "user": "bot_py_9865", "message": "mensagem 9 do bot_py_9865", "contador": 59, "request_timestamp": 1776295862.1814706, "published_timestamp": 1776295862.18247}
+{"channel": "canal_84", "user": "bot_py_9865", "message": "mensagem 10 do bot_py_9865", "contador": 62, "request_timestamp": 1776295863.1848469, "published_timestamp": 1776295863.185537}
+{"channel": "canal_553", "user": "bot_py_9865", "message": "mensagem 2 do bot_py_9865", "contador": 70, "request_timestamp": 1776295865.189058, "published_timestamp": 1776295865.1897435}
+{"channel": "canal_553", "user": "bot_py_9865", "message": "mensagem 3 do bot_py_9865", "contador": 73, "request_timestamp": 1776295866.1905499, "published_timestamp": 1776295866.1914024}
+{"channel": "canal_553", "user": "bot_py_9865", "message": "mensagem 4 do bot_py_9865", "contador": 76, "request_timestamp": 1776295867.192862, "published_timestamp": 1776295867.1941454}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 2 do bot_c_1266", "request_timestamp": 1776895936.0, "published_timestamp": 1776895936.631417}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 3 do bot_c_1266", "request_timestamp": 1776895937.0, "published_timestamp": 1776895937.635001}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 4 do bot_c_1266", "request_timestamp": 1776895938.0, "published_timestamp": 1776895938.636541}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 5 do bot_c_1266", "request_timestamp": 1776895939.0, "published_timestamp": 1776895939.638418}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 6 do bot_c_1266", "request_timestamp": 1776895940.0, "published_timestamp": 1776895940.6398292}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 7 do bot_c_1266", "request_timestamp": 1776895941.0, "published_timestamp": 1776895941.6415071}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 8 do bot_c_1266", "request_timestamp": 1776895942.0, "published_timestamp": 1776895942.6459403}
+{"channel": "canal_681", "user": "bot_c_1266", "message": "mensagem 9 do bot_c_1266", "request_timestamp": 1776895943.0, "published_timestamp": 1776895943.6515627}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 1 do bot_py_5397", "request_timestamp": 1776896079.5063229, "published_timestamp": 1776896079.509549}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 2 do bot_py_5397", "request_timestamp": 1776896080.5112014, "published_timestamp": 1776896080.5118809}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 3 do bot_py_5397", "request_timestamp": 1776896081.5129411, "published_timestamp": 1776896081.5136366}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 4 do bot_py_5397", "request_timestamp": 1776896082.5148025, "published_timestamp": 1776896082.5155041}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 5 do bot_py_5397", "request_timestamp": 1776896083.516432, "published_timestamp": 1776896083.5171537}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 6 do bot_py_5397", "request_timestamp": 1776896084.5181222, "published_timestamp": 1776896084.5187457}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 7 do bot_py_5397", "request_timestamp": 1776896085.519736, "published_timestamp": 1776896085.5204117}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 8 do bot_py_5397", "request_timestamp": 1776896086.5214252, "published_timestamp": 1776896086.522292}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 9 do bot_py_5397", "request_timestamp": 1776896087.5234885, "published_timestamp": 1776896087.5241902}
+{"channel": "canal_403", "user": "bot_py_5397", "message": "mensagem 10 do bot_py_5397", "request_timestamp": 1776896088.5262659, "published_timestamp": 1776896088.5269847}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 1 do bot_py_5397", "request_timestamp": 1776896089.5312417, "published_timestamp": 1776896089.5323105}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 2 do bot_py_5397", "request_timestamp": 1776896090.5331209, "published_timestamp": 1776896090.5338826}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 3 do bot_py_5397", "request_timestamp": 1776896091.535035, "published_timestamp": 1776896091.5357835}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 4 do bot_py_5397", "request_timestamp": 1776896092.5377786, "published_timestamp": 1776896092.5385964}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 5 do bot_py_5397", "request_timestamp": 1776896093.5411959, "published_timestamp": 1776896093.5418804}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 6 do bot_py_5397", "request_timestamp": 1776896094.5428052, "published_timestamp": 1776896094.5435321}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 7 do bot_py_5397", "request_timestamp": 1776896095.545011, "published_timestamp": 1776896095.545826}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 8 do bot_py_5397", "request_timestamp": 1776896096.5467184, "published_timestamp": 1776896096.5475526}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 9 do bot_py_5397", "request_timestamp": 1776896097.5485673, "published_timestamp": 1776896097.5492651}
+{"channel": "canal_579", "user": "bot_py_5397", "message": "mensagem 10 do bot_py_5397", "request_timestamp": 1776896098.5501604, "published_timestamp": 1776896098.55087}
+{"channel": "canal_972", "user": "bot_py_5397", "message": "mensagem 1 do bot_py_5397", "request_timestamp": 1776896099.5546048, "published_timestamp": 1776896099.555105}
+{"channel": "canal_972", "user": "bot_py_5397", "message": "mensagem 2 do bot_py_5397", "request_timestamp": 1776896100.556011, "published_timestamp": 1776896100.556793}
+{"channel": "canal_972", "user": "bot_py_5397", "message": "mensagem 3 do bot_py_5397", "request_timestamp": 1776896101.558191, "published_timestamp": 1776896101.558934}
+{"channel": "canal_972", "user": "bot_py_5397", "message": "mensagem 4 do bot_py_5397", "request_timestamp": 1776896102.559967, "published_timestamp": 1776896102.5606792}
+{"channel": "canal_972", "user": "bot_py_5397", "message": "mensagem 5 do bot_py_5397", "request_timestamp": 1776896103.5635462, "published_timestamp": 1776896103.56477}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 1 do bot_py_8516", "request_timestamp": 1776896772.0886467, "published_timestamp": 1776896772.089219}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 2 do bot_py_8516", "request_timestamp": 1776896773.0899782, "published_timestamp": 1776896773.0907273}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 3 do bot_py_8516", "request_timestamp": 1776896774.0914993, "published_timestamp": 1776896774.0922668}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 4 do bot_py_8516", "request_timestamp": 1776896775.09366, "published_timestamp": 1776896775.0943673}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 5 do bot_py_8516", "request_timestamp": 1776896776.0951712, "published_timestamp": 1776896776.095901}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 6 do bot_py_8516", "request_timestamp": 1776896777.09691, "published_timestamp": 1776896777.0977201}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 7 do bot_py_8516", "request_timestamp": 1776896778.0989003, "published_timestamp": 1776896778.0996156}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 8 do bot_py_8516", "request_timestamp": 1776896779.101105, "published_timestamp": 1776896779.1018825}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 9 do bot_py_8516", "request_timestamp": 1776896780.1042953, "published_timestamp": 1776896780.105049}
+{"channel": "canal_427", "user": "bot_py_8516", "message": "mensagem 10 do bot_py_8516", "request_timestamp": 1776896781.106244, "published_timestamp": 1776896781.107059}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 1 do bot_py_8516", "request_timestamp": 1776896782.115607, "published_timestamp": 1776896782.1167018}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 2 do bot_py_8516", "request_timestamp": 1776896783.1184335, "published_timestamp": 1776896783.1192415}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 3 do bot_py_8516", "request_timestamp": 1776896784.1206188, "published_timestamp": 1776896784.1227887}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 4 do bot_py_8516", "request_timestamp": 1776896785.1234019, "published_timestamp": 1776896785.1263833}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 5 do bot_py_8516", "request_timestamp": 1776896786.1289856, "published_timestamp": 1776896786.1298318}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 6 do bot_py_8516", "request_timestamp": 1776896787.1307223, "published_timestamp": 1776896787.1329691}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 7 do bot_py_8516", "request_timestamp": 1776896788.134869, "published_timestamp": 1776896788.135705}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 8 do bot_py_8516", "request_timestamp": 1776896789.1364791, "published_timestamp": 1776896789.1378431}
+{"channel": "canal_84", "user": "bot_py_8516", "message": "mensagem 9 do bot_py_8516", "request_timestamp": 1776896790.1387973, "published_timestamp": 1776896790.1395853}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 1 do bot_py_9882", "request_timestamp": 1776896940.9720776, "published_timestamp": 1776896940.9729855}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 2 do bot_py_9882", "request_timestamp": 1776896941.9741337, "published_timestamp": 1776896941.9747484}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 3 do bot_py_9882", "request_timestamp": 1776896942.9758067, "published_timestamp": 1776896942.9765217}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 4 do bot_py_9882", "request_timestamp": 1776896943.9776406, "published_timestamp": 1776896943.9782248}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 5 do bot_py_9882", "request_timestamp": 1776896944.9795625, "published_timestamp": 1776896944.9802473}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 6 do bot_py_9882", "request_timestamp": 1776896945.9811492, "published_timestamp": 1776896945.9819188}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 7 do bot_py_9882", "request_timestamp": 1776896946.9838576, "published_timestamp": 1776896946.9846065}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 8 do bot_py_9882", "request_timestamp": 1776896947.9858613, "published_timestamp": 1776896947.9865777}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 9 do bot_py_9882", "request_timestamp": 1776896948.987487, "published_timestamp": 1776896948.9881787}
+{"channel": "canal_896", "user": "bot_py_9882", "message": "mensagem 10 do bot_py_9882", "request_timestamp": 1776896949.9890778, "published_timestamp": 1776896949.9897869}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 1 do bot_py_9882", "request_timestamp": 1776896950.9932628, "published_timestamp": 1776896950.9946969}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 2 do bot_py_9882", "request_timestamp": 1776896951.9954634, "published_timestamp": 1776896951.9961581}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 3 do bot_py_9882", "request_timestamp": 1776896952.9975688, "published_timestamp": 1776896952.9986129}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 4 do bot_py_9882", "request_timestamp": 1776896954.0000756, "published_timestamp": 1776896954.000785}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 5 do bot_py_9882", "request_timestamp": 1776896955.001768, "published_timestamp": 1776896955.002474}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 6 do bot_py_9882", "request_timestamp": 1776896956.0034273, "published_timestamp": 1776896956.004154}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 7 do bot_py_9882", "request_timestamp": 1776896957.0070379, "published_timestamp": 1776896957.0115292}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 8 do bot_py_9882", "request_timestamp": 1776896958.0150158, "published_timestamp": 1776896958.0156634}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 9 do bot_py_9882", "request_timestamp": 1776896959.0165808, "published_timestamp": 1776896959.0172794}
+{"channel": "canal_918", "user": "bot_py_9882", "message": "mensagem 10 do bot_py_9882", "request_timestamp": 1776896960.0186265, "published_timestamp": 1776896960.0192618}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 1 do bot_py_9882", "request_timestamp": 1776896961.0229437, "published_timestamp": 1776896961.0237567}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 2 do bot_py_9882", "request_timestamp": 1776896962.025684, "published_timestamp": 1776896962.0264177}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 3 do bot_py_9882", "request_timestamp": 1776896963.0278032, "published_timestamp": 1776896963.0285892}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 4 do bot_py_9882", "request_timestamp": 1776896964.0298877, "published_timestamp": 1776896964.0306299}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 5 do bot_py_9882", "request_timestamp": 1776896965.0320296, "published_timestamp": 1776896965.0328438}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 6 do bot_py_9882", "request_timestamp": 1776896966.034381, "published_timestamp": 1776896966.035085}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 7 do bot_py_9882", "request_timestamp": 1776896967.0365837, "published_timestamp": 1776896967.0373712}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 8 do bot_py_9882", "request_timestamp": 1776896968.0392587, "published_timestamp": 1776896968.039958}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 9 do bot_py_9882", "request_timestamp": 1776896969.041988, "published_timestamp": 1776896969.0426688}
+{"channel": "canal_964", "user": "bot_py_9882", "message": "mensagem 10 do bot_py_9882", "request_timestamp": 1776896970.0438125, "published_timestamp": 1776896970.0445442}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 1 do bot_py_9882", "request_timestamp": 1776896971.0467105, "published_timestamp": 1776896971.0473318}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 2 do bot_py_9882", "request_timestamp": 1776896972.0483782, "published_timestamp": 1776896972.049093}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 3 do bot_py_9882", "request_timestamp": 1776896973.0498025, "published_timestamp": 1776896973.0505555}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 4 do bot_py_9882", "request_timestamp": 1776896974.0515711, "published_timestamp": 1776896974.0522616}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 5 do bot_py_9882", "request_timestamp": 1776896975.0534825, "published_timestamp": 1776896975.0541584}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 6 do bot_py_9882", "request_timestamp": 1776896976.0549831, "published_timestamp": 1776896976.0557241}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 7 do bot_py_9882", "request_timestamp": 1776896977.0568466, "published_timestamp": 1776896977.0575814}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 8 do bot_py_9882", "request_timestamp": 1776896978.0589488, "published_timestamp": 1776896978.059677}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 9 do bot_py_9882", "request_timestamp": 1776896979.0607262, "published_timestamp": 1776896979.0614274}
+{"channel": "canal_681", "user": "bot_py_9882", "message": "mensagem 10 do bot_py_9882", "request_timestamp": 1776896980.0624933, "published_timestamp": 1776897052.930522}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 1 do bot_py_9882", "request_timestamp": 1776897053.9329867, "published_timestamp": 1776897053.9334147}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 2 do bot_py_9882", "request_timestamp": 1776897054.9342904, "published_timestamp": 1776897054.9350045}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 3 do bot_py_9882", "request_timestamp": 1776897055.935712, "published_timestamp": 1776897055.9364665}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 4 do bot_py_9882", "request_timestamp": 1776897056.9372797, "published_timestamp": 1776897056.9408207}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 5 do bot_py_9882", "request_timestamp": 1776897057.9433806, "published_timestamp": 1776897057.9443333}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 6 do bot_py_9882", "request_timestamp": 1776897058.9457715, "published_timestamp": 1776897058.9481013}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 7 do bot_py_9882", "request_timestamp": 1776897059.9515703, "published_timestamp": 1776897059.9523008}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 8 do bot_py_9882", "request_timestamp": 1776897060.9535408, "published_timestamp": 1776897060.9541578}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 9 do bot_py_9882", "request_timestamp": 1776897061.9549031, "published_timestamp": 1776897061.9555297}
+{"channel": "canal_427", "user": "bot_py_9882", "message": "mensagem 10 do bot_py_9882", "request_timestamp": 1776897062.956227, "published_timestamp": 1776897062.9568548}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 1 do bot_py_9882", "request_timestamp": 1776897063.9618835, "published_timestamp": 1776897063.9638944}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 2 do bot_py_9882", "request_timestamp": 1776897064.9659226, "published_timestamp": 1776897064.9665797}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 3 do bot_py_9882", "request_timestamp": 1776897065.968515, "published_timestamp": 1776897065.9692738}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 4 do bot_py_9882", "request_timestamp": 1776897066.9702978, "published_timestamp": 1776897066.9710207}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 5 do bot_py_9882", "request_timestamp": 1776897067.9717433, "published_timestamp": 1776897067.9724734}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 6 do bot_py_9882", "request_timestamp": 1776897068.9735062, "published_timestamp": 1776897068.974066}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 7 do bot_py_9882", "request_timestamp": 1776897069.9748921, "published_timestamp": 1776897069.9769046}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 8 do bot_py_9882", "request_timestamp": 1776897070.9798143, "published_timestamp": 1776897070.980593}
+{"channel": "canal_553", "user": "bot_py_9882", "message": "mensagem 9 do bot_py_9882", "request_timestamp": 1776897071.9817073, "published_timestamp": 1776897071.982414}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 1 do bot_py_6982", "request_timestamp": 1776897244.5527942, "published_timestamp": 1776897244.553362}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 2 do bot_py_6982", "request_timestamp": 1776897245.5541005, "published_timestamp": 1776897245.5548754}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 3 do bot_py_6982", "request_timestamp": 1776897246.55616, "published_timestamp": 1776897246.5568216}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 4 do bot_py_6982", "request_timestamp": 1776897247.5578055, "published_timestamp": 1776897247.5586338}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 5 do bot_py_6982", "request_timestamp": 1776897248.559418, "published_timestamp": 1776897248.5600646}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 6 do bot_py_6982", "request_timestamp": 1776897249.560993, "published_timestamp": 1776897249.5616977}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 7 do bot_py_6982", "request_timestamp": 1776897250.5640683, "published_timestamp": 1776897250.5648487}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 8 do bot_py_6982", "request_timestamp": 1776897251.566081, "published_timestamp": 1776897251.5667584}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 9 do bot_py_6982", "request_timestamp": 1776897252.5675902, "published_timestamp": 1776897252.5682359}
+{"channel": "canal_444", "user": "bot_py_6982", "message": "mensagem 10 do bot_py_6982", "request_timestamp": 1776897253.5690784, "published_timestamp": 1776897253.5699139}
+{"channel": "canal_11", "user": "bot_py_6982", "message": "mensagem 1 do bot_py_6982", "request_timestamp": 1776897254.5758865, "published_timestamp": 1776897254.57634}
+{"channel": "canal_11", "user": "bot_py_6982", "message": "mensagem 2 do bot_py_6982", "request_timestamp": 1776897255.5772693, "published_timestamp": 1776897255.578162}
+{"channel": "canal_11", "user": "bot_py_6982", "message": "mensagem 3 do bot_py_6982", "request_timestamp": 1776897256.579015, "published_timestamp": 1776897256.5798502}
+{"channel": "canal_11", "user": "bot_py_6982", "message": "mensagem 4 do bot_py_6982", "request_timestamp": 1776897257.5828428, "published_timestamp": 1776897257.5837884}
+{"channel": "canal_11", "user": "bot_py_6982", "message": "mensagem 5 do bot_py_6982", "request_timestamp": 1776897258.5849688, "published_timestamp": 1776897258.5857756}
+{"channel": "canal_11", "user": "bot_py_6982", "message": "mensagem 6 do bot_py_6982", "request_timestamp": 1776897259.5868256, "published_timestamp": 1776897259.5875366}
+{"channel": "canal_11", "user": "bot_py_6982", "message": "mensagem 7 do bot_py_6982", "request_timestamp": 1776897260.5887804, "published_timestamp": 1776897260.5895517}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 1 do bot_py_9088", "request_timestamp": 1776897308.253778, "published_timestamp": 1776897308.2542768}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 2 do bot_py_9088", "request_timestamp": 1776897309.2554798, "published_timestamp": 1776897309.2563505}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 3 do bot_py_9088", "request_timestamp": 1776897310.2575097, "published_timestamp": 1776897310.2582896}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 4 do bot_py_9088", "request_timestamp": 1776897311.2595022, "published_timestamp": 1776897311.2601798}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 5 do bot_py_9088", "request_timestamp": 1776897312.2616904, "published_timestamp": 1776897312.2624054}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 6 do bot_py_9088", "request_timestamp": 1776897313.263335, "published_timestamp": 1776897313.2640834}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 7 do bot_py_9088", "request_timestamp": 1776897314.2659893, "published_timestamp": 1776897314.2666316}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 8 do bot_py_9088", "request_timestamp": 1776897315.2674978, "published_timestamp": 1776897315.2682235}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 9 do bot_py_9088", "request_timestamp": 1776897316.2695792, "published_timestamp": 1776897316.2702947}
+{"channel": "canal_896", "user": "bot_py_9088", "message": "mensagem 10 do bot_py_9088", "request_timestamp": 1776897317.27144, "published_timestamp": 1776897317.2720459}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 1 do bot_py_9088", "request_timestamp": 1776897318.2748644, "published_timestamp": 1776897318.2766197}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 2 do bot_py_9088", "request_timestamp": 1776897319.2776945, "published_timestamp": 1776897319.278506}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 3 do bot_py_9088", "request_timestamp": 1776897320.2794757, "published_timestamp": 1776897320.2801447}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 4 do bot_py_9088", "request_timestamp": 1776897321.2819622, "published_timestamp": 1776897321.2826853}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 5 do bot_py_9088", "request_timestamp": 1776897322.2836003, "published_timestamp": 1776897322.2843714}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 6 do bot_py_9088", "request_timestamp": 1776897323.285665, "published_timestamp": 1776897323.2863097}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 7 do bot_py_9088", "request_timestamp": 1776897324.2881393, "published_timestamp": 1776897324.2889292}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 8 do bot_py_9088", "request_timestamp": 1776897325.2904117, "published_timestamp": 1776897325.2912486}
+{"channel": "canal_403", "user": "bot_py_9088", "message": "mensagem 9 do bot_py_9088", "request_timestamp": 1776897326.292304, "published_timestamp": 1776897326.2931123}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 1 do bot_py_6642", "request_timestamp": 1776897519.1188745, "published_timestamp": 1776897519.1201222}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 2 do bot_py_6642", "request_timestamp": 1776897520.1230183, "published_timestamp": 1776897520.1237712}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 3 do bot_py_6642", "request_timestamp": 1776897521.1248035, "published_timestamp": 1776897521.1254687}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 4 do bot_py_6642", "request_timestamp": 1776897522.1268194, "published_timestamp": 1776897522.1275282}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 5 do bot_py_6642", "request_timestamp": 1776897523.1283798, "published_timestamp": 1776897523.129045}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 6 do bot_py_6642", "request_timestamp": 1776897524.1301973, "published_timestamp": 1776897524.1309268}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 7 do bot_py_6642", "request_timestamp": 1776897525.1318443, "published_timestamp": 1776897525.1325655}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 8 do bot_py_6642", "request_timestamp": 1776897526.134376, "published_timestamp": 1776897526.1350372}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 9 do bot_py_6642", "request_timestamp": 1776897527.1358817, "published_timestamp": 1776897527.1367552}
+{"channel": "canal_432", "user": "bot_py_6642", "message": "mensagem 10 do bot_py_6642", "request_timestamp": 1776897528.1379478, "published_timestamp": 1776897528.1386685}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 1 do bot_py_6642", "request_timestamp": 1776897529.1427531, "published_timestamp": 1776897529.1449215}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 2 do bot_py_6642", "request_timestamp": 1776897530.1461005, "published_timestamp": 1776897530.1467836}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 3 do bot_py_6642", "request_timestamp": 1776897531.1484048, "published_timestamp": 1776897531.1491253}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 4 do bot_py_6642", "request_timestamp": 1776897532.150019, "published_timestamp": 1776897532.1507142}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 5 do bot_py_6642", "request_timestamp": 1776897533.1526256, "published_timestamp": 1776897533.1533163}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 6 do bot_py_6642", "request_timestamp": 1776897534.1543975, "published_timestamp": 1776897534.155138}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 7 do bot_py_6642", "request_timestamp": 1776897535.1571996, "published_timestamp": 1776897535.1579294}
+{"channel": "canal_964", "user": "bot_py_6642", "message": "mensagem 8 do bot_py_6642", "request_timestamp": 1776897536.1589448, "published_timestamp": 1776897536.1596713}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 1 do bot_py_5502", "request_timestamp": 1776897888.010587, "published_timestamp": 1776897888.013835}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 2 do bot_py_5502", "request_timestamp": 1776897889.0168617, "published_timestamp": 1776897889.0197241}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 3 do bot_py_5502", "request_timestamp": 1776897890.0227437, "published_timestamp": 1776897890.0235124}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 4 do bot_py_5502", "request_timestamp": 1776897891.0259018, "published_timestamp": 1776897891.0269313}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 5 do bot_py_5502", "request_timestamp": 1776897892.0290003, "published_timestamp": 1776897892.0298789}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 6 do bot_py_5502", "request_timestamp": 1776897893.0331807, "published_timestamp": 1776897893.0339258}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 7 do bot_py_5502", "request_timestamp": 1776897894.0360136, "published_timestamp": 1776897894.0371697}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 8 do bot_py_5502", "request_timestamp": 1776897895.0387864, "published_timestamp": 1776897895.0395892}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 9 do bot_py_5502", "request_timestamp": 1776897896.043265, "published_timestamp": 1776897896.0440218}
+{"channel": "canal_444", "user": "bot_py_5502", "message": "mensagem 10 do bot_py_5502", "request_timestamp": 1776897897.0452588, "published_timestamp": 1776897897.0461745}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 1 do bot_py_5502", "request_timestamp": 1776897898.0531895, "published_timestamp": 1776897898.054277}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 2 do bot_py_5502", "request_timestamp": 1776897899.0552592, "published_timestamp": 1776897899.0623145}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 3 do bot_py_5502", "request_timestamp": 1776897900.0738142, "published_timestamp": 1776897900.0745413}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 4 do bot_py_5502", "request_timestamp": 1776897901.0754972, "published_timestamp": 1776897901.0762634}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 5 do bot_py_5502", "request_timestamp": 1776897902.0776477, "published_timestamp": 1776897902.078352}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 6 do bot_py_5502", "request_timestamp": 1776897903.079197, "published_timestamp": 1776897903.0809216}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 7 do bot_py_5502", "request_timestamp": 1776897904.0834203, "published_timestamp": 1776897904.0841274}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 8 do bot_py_5502", "request_timestamp": 1776897905.0859685, "published_timestamp": 1776897905.0867395}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 9 do bot_py_5502", "request_timestamp": 1776897906.0882823, "published_timestamp": 1776897906.089033}
+{"channel": "canal_432", "user": "bot_py_5502", "message": "mensagem 10 do bot_py_5502", "request_timestamp": 1776897907.089965, "published_timestamp": 1776897907.0906622}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 1 do bot_py_5502", "request_timestamp": 1776897908.0940518, "published_timestamp": 1776897908.0960658}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 2 do bot_py_5502", "request_timestamp": 1776897909.0987093, "published_timestamp": 1776897909.0997033}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 3 do bot_py_5502", "request_timestamp": 1776897910.1023512, "published_timestamp": 1776897910.103283}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 4 do bot_py_5502", "request_timestamp": 1776897911.1053543, "published_timestamp": 1776897911.1062987}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 5 do bot_py_5502", "request_timestamp": 1776897912.1087584, "published_timestamp": 1776897912.109844}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 6 do bot_py_5502", "request_timestamp": 1776897913.111984, "published_timestamp": 1776897913.1127074}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 7 do bot_py_5502", "request_timestamp": 1776897914.114172, "published_timestamp": 1776897914.115312}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 8 do bot_py_5502", "request_timestamp": 1776897915.116875, "published_timestamp": 1776897915.1177459}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 9 do bot_py_5502", "request_timestamp": 1776897916.1190348, "published_timestamp": 1776897916.120043}
+{"channel": "canal_579", "user": "bot_py_5502", "message": "mensagem 10 do bot_py_5502", "request_timestamp": 1776897917.1222703, "published_timestamp": 1776897917.1230185}
+{"channel": "canal_553", "user": "bot_py_5502", "message": "mensagem 1 do bot_py_5502", "request_timestamp": 1776897918.1262958, "published_timestamp": 1776897918.1268437}
+{"channel": "canal_553", "user": "bot_py_5502", "message": "mensagem 2 do bot_py_5502", "request_timestamp": 1776897919.1277087, "published_timestamp": 1776897919.1283996}
+{"channel": "canal_553", "user": "bot_py_5502", "message": "mensagem 3 do bot_py_5502", "request_timestamp": 1776897920.1295056, "published_timestamp": 1776897920.1302335}
+{"channel": "canal_553", "user": "bot_py_5502", "message": "mensagem 4 do bot_py_5502", "request_timestamp": 1776897921.1325877, "published_timestamp": 1776897921.1333807}
+{"channel": "canal_553", "user": "bot_py_5502", "message": "mensagem 5 do bot_py_5502", "request_timestamp": 1776897922.134398, "published_timestamp": 1776897922.1350994}
+{"channel": "canal_553", "user": "bot_py_5502", "message": "mensagem 6 do bot_py_5502", "request_timestamp": 1776897923.136092, "published_timestamp": 1776897923.1368017}
+{"channel": "canal_553", "user": "bot_py_5502", "message": "mensagem 7 do bot_py_5502", "request_timestamp": 1776897924.1395724, "published_timestamp": 1776897924.1402142}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 1 do bot_py_5967", "request_timestamp": 1776897948.0505898, "published_timestamp": 1776897948.0512016}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 2 do bot_py_5967", "request_timestamp": 1776897949.0526667, "published_timestamp": 1776897949.0533693}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 3 do bot_py_5967", "request_timestamp": 1776897950.0548773, "published_timestamp": 1776897950.057384}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 4 do bot_py_5967", "request_timestamp": 1776897951.0597844, "published_timestamp": 1776897951.0605133}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 5 do bot_py_5967", "request_timestamp": 1776897952.061537, "published_timestamp": 1776897952.0622447}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 6 do bot_py_5967", "request_timestamp": 1776897953.0637882, "published_timestamp": 1776897953.0646317}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 7 do bot_py_5967", "request_timestamp": 1776897954.0664227, "published_timestamp": 1776897954.0677338}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 8 do bot_py_5967", "request_timestamp": 1776897955.0688999, "published_timestamp": 1776897955.0697649}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 9 do bot_py_5967", "request_timestamp": 1776897956.0708556, "published_timestamp": 1776897956.0721815}
+{"channel": "canal_617", "user": "bot_py_5967", "message": "mensagem 10 do bot_py_5967", "request_timestamp": 1776897957.0746975, "published_timestamp": 1776897957.0760098}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 1 do bot_py_5967", "request_timestamp": 1776897958.081407, "published_timestamp": 1776897958.082967}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 2 do bot_py_5967", "request_timestamp": 1776897959.086001, "published_timestamp": 1776897959.08737}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 3 do bot_py_5967", "request_timestamp": 1776897960.089153, "published_timestamp": 1776897960.0899868}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 4 do bot_py_5967", "request_timestamp": 1776897961.0925777, "published_timestamp": 1776897961.0934308}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 5 do bot_py_5967", "request_timestamp": 1776897962.0942512, "published_timestamp": 1776897962.0951629}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 6 do bot_py_5967", "request_timestamp": 1776897963.0971305, "published_timestamp": 1776897963.098311}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 7 do bot_py_5967", "request_timestamp": 1776897964.0998907, "published_timestamp": 1776897964.1005998}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 8 do bot_py_5967", "request_timestamp": 1776897965.1015654, "published_timestamp": 1776897965.10239}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 9 do bot_py_5967", "request_timestamp": 1776897966.1061163, "published_timestamp": 1776897966.1067743}
+{"channel": "canal_11", "user": "bot_py_5967", "message": "mensagem 10 do bot_py_5967", "request_timestamp": 1776897967.107775, "published_timestamp": 1776897967.1085114}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 1 do bot_py_5967", "request_timestamp": 1776897968.1129212, "published_timestamp": 1776897968.1137702}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 2 do bot_py_5967", "request_timestamp": 1776897969.1150258, "published_timestamp": 1776897969.1157982}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 3 do bot_py_5967", "request_timestamp": 1776897970.118492, "published_timestamp": 1776897970.1196406}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 4 do bot_py_5967", "request_timestamp": 1776897971.1210268, "published_timestamp": 1776897971.1218374}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 5 do bot_py_5967", "request_timestamp": 1776897972.128501, "published_timestamp": 1776897972.1294355}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 6 do bot_py_5967", "request_timestamp": 1776897973.131168, "published_timestamp": 1776897973.1318662}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 7 do bot_py_5967", "request_timestamp": 1776897974.132809, "published_timestamp": 1776897974.1337147}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 8 do bot_py_5967", "request_timestamp": 1776897975.136653, "published_timestamp": 1776897975.13803}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 9 do bot_py_5967", "request_timestamp": 1776897976.1398659, "published_timestamp": 1776897976.1409864}
+{"channel": "canal_86", "user": "bot_py_5967", "message": "mensagem 10 do bot_py_5967", "request_timestamp": 1776897977.145609, "published_timestamp": 1776897977.147627}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 1 do bot_py_5967", "request_timestamp": 1776897978.1508858, "published_timestamp": 1776897978.1513944}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 2 do bot_py_5967", "request_timestamp": 1776897979.1532435, "published_timestamp": 1776897979.1545613}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 3 do bot_py_5967", "request_timestamp": 1776897980.1563704, "published_timestamp": 1776897980.156982}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 4 do bot_py_5967", "request_timestamp": 1776897981.1596553, "published_timestamp": 1776897981.1612463}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 5 do bot_py_5967", "request_timestamp": 1776897982.163837, "published_timestamp": 1776897982.1660318}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 6 do bot_py_5967", "request_timestamp": 1776897983.1718051, "published_timestamp": 1776897983.1743138}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 7 do bot_py_5967", "request_timestamp": 1776897984.1754909, "published_timestamp": 1776897984.1762931}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 8 do bot_py_5967", "request_timestamp": 1776897985.1783447, "published_timestamp": 1776897985.1804318}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 9 do bot_py_5967", "request_timestamp": 1776897986.1863635, "published_timestamp": 1776897986.1884303}
+{"channel": "canal_579", "user": "bot_py_5967", "message": "mensagem 10 do bot_py_5967", "request_timestamp": 1776897987.1907108, "published_timestamp": 1776897987.1917214}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 1 do bot_py_5967", "request_timestamp": 1776897988.194317, "published_timestamp": 1776897988.195329}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 2 do bot_py_5967", "request_timestamp": 1776897989.1962304, "published_timestamp": 1776897989.1969368}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 3 do bot_py_5967", "request_timestamp": 1776897990.198073, "published_timestamp": 1776897990.1987863}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 4 do bot_py_5967", "request_timestamp": 1776897991.201066, "published_timestamp": 1776897991.2039685}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 5 do bot_py_5967", "request_timestamp": 1776897992.2104988, "published_timestamp": 1776897992.2113144}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 6 do bot_py_5967", "request_timestamp": 1776897993.213274, "published_timestamp": 1776897993.214053}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 7 do bot_py_5967", "request_timestamp": 1776897994.2159169, "published_timestamp": 1776897994.2167048}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 8 do bot_py_5967", "request_timestamp": 1776897995.2177167, "published_timestamp": 1776897995.2186546}
+{"channel": "canal_918", "user": "bot_py_5967", "message": "mensagem 9 do bot_py_5967", "request_timestamp": 1776897996.223362, "published_timestamp": 1776897996.2246382}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898140.2321658, "published_timestamp": 1776898140.2332723}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898141.2364798, "published_timestamp": 1776898141.237158}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898142.2396429, "published_timestamp": 1776898142.2472885}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898143.2505329, "published_timestamp": 1776898143.2522967}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898144.2564387, "published_timestamp": 1776898144.2571383}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 6 do bot_py_4869", "request_timestamp": 1776898145.258264, "published_timestamp": 1776898145.2590542}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 7 do bot_py_4869", "request_timestamp": 1776898146.2607524, "published_timestamp": 1776898146.2614975}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 8 do bot_py_4869", "request_timestamp": 1776898147.2626047, "published_timestamp": 1776898147.2633355}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 9 do bot_py_4869", "request_timestamp": 1776898148.2648752, "published_timestamp": 1776898148.2675319}
+{"channel": "canal_432", "user": "bot_py_4869", "message": "mensagem 10 do bot_py_4869", "request_timestamp": 1776898149.2681775, "published_timestamp": 1776898149.2689376}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898150.2726371, "published_timestamp": 1776898150.2746384}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898151.2757013, "published_timestamp": 1776898151.2765036}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898152.2777085, "published_timestamp": 1776898152.278416}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898153.2796028, "published_timestamp": 1776898153.2804382}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898154.2816713, "published_timestamp": 1776898154.283061}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 6 do bot_py_4869", "request_timestamp": 1776898155.2839935, "published_timestamp": 1776898155.284838}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 7 do bot_py_4869", "request_timestamp": 1776898156.2863402, "published_timestamp": 1776898156.2873197}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 8 do bot_py_4869", "request_timestamp": 1776898157.2892678, "published_timestamp": 1776898157.2899806}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 9 do bot_py_4869", "request_timestamp": 1776898158.2918773, "published_timestamp": 1776898158.2959466}
+{"channel": "canal_585", "user": "bot_py_4869", "message": "mensagem 10 do bot_py_4869", "request_timestamp": 1776898159.2976696, "published_timestamp": 1776898159.298321}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898160.3010952, "published_timestamp": 1776898160.3019545}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898161.3040156, "published_timestamp": 1776898161.3049104}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898162.307177, "published_timestamp": 1776898162.3080258}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898163.310602, "published_timestamp": 1776898163.3113027}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898164.3121386, "published_timestamp": 1776898164.312808}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 6 do bot_py_4869", "request_timestamp": 1776898165.3143046, "published_timestamp": 1776898165.315094}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 7 do bot_py_4869", "request_timestamp": 1776898166.3159838, "published_timestamp": 1776898166.3195302}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 8 do bot_py_4869", "request_timestamp": 1776898167.3205593, "published_timestamp": 1776898167.3217793}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 9 do bot_py_4869", "request_timestamp": 1776898168.3253996, "published_timestamp": 1776898168.3262236}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 10 do bot_py_4869", "request_timestamp": 1776898169.329595, "published_timestamp": 1776898169.330253}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898170.3327608, "published_timestamp": 1776898170.3337111}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898171.335256, "published_timestamp": 1776898171.3361733}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898172.3378103, "published_timestamp": 1776898172.3384948}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898173.3406682, "published_timestamp": 1776898173.3426502}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898174.3432765, "published_timestamp": 1776898174.3439856}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 6 do bot_py_4869", "request_timestamp": 1776898175.3456469, "published_timestamp": 1776898175.3468142}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 7 do bot_py_4869", "request_timestamp": 1776898176.3479002, "published_timestamp": 1776898176.3485582}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 8 do bot_py_4869", "request_timestamp": 1776898177.349325, "published_timestamp": 1776898177.35004}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 9 do bot_py_4869", "request_timestamp": 1776898178.3518052, "published_timestamp": 1776898178.3528216}
+{"channel": "canal_553", "user": "bot_py_4869", "message": "mensagem 10 do bot_py_4869", "request_timestamp": 1776898179.355321, "published_timestamp": 1776898179.3559637}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898180.3581002, "published_timestamp": 1776898180.359145}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898181.3604949, "published_timestamp": 1776898181.3611674}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898182.3623059, "published_timestamp": 1776898182.3629506}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898183.363911, "published_timestamp": 1776898183.364634}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898184.36575, "published_timestamp": 1776898184.366487}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 6 do bot_py_4869", "request_timestamp": 1776898185.367264, "published_timestamp": 1776898185.3685188}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 7 do bot_py_4869", "request_timestamp": 1776898186.36971, "published_timestamp": 1776898186.370322}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 8 do bot_py_4869", "request_timestamp": 1776898187.3714144, "published_timestamp": 1776898187.3720415}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 9 do bot_py_4869", "request_timestamp": 1776898188.3733652, "published_timestamp": 1776898188.3741212}
+{"channel": "canal_972", "user": "bot_py_4869", "message": "mensagem 10 do bot_py_4869", "request_timestamp": 1776898189.3758135, "published_timestamp": 1776898189.376474}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898190.3785915, "published_timestamp": 1776898190.3793986}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898191.3804789, "published_timestamp": 1776898191.3811736}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898192.3822713, "published_timestamp": 1776898192.3829272}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898193.384114, "published_timestamp": 1776898193.3849049}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898194.386143, "published_timestamp": 1776898194.386896}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 6 do bot_py_4869", "request_timestamp": 1776898195.3879092, "published_timestamp": 1776898195.38857}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 7 do bot_py_4869", "request_timestamp": 1776898196.389558, "published_timestamp": 1776898196.390195}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 8 do bot_py_4869", "request_timestamp": 1776898197.3910322, "published_timestamp": 1776898197.3917358}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 9 do bot_py_4869", "request_timestamp": 1776898198.3926163, "published_timestamp": 1776898198.393247}
+{"channel": "canal_896", "user": "bot_py_4869", "message": "mensagem 10 do bot_py_4869", "request_timestamp": 1776898199.394003, "published_timestamp": 1776898199.3947694}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898200.3970754, "published_timestamp": 1776898200.3976939}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898201.3985252, "published_timestamp": 1776898201.3991897}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898202.4002938, "published_timestamp": 1776898202.401035}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898203.4020567, "published_timestamp": 1776898203.4027343}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898204.4036455, "published_timestamp": 1776898204.4043853}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 6 do bot_py_4869", "request_timestamp": 1776898205.4052517, "published_timestamp": 1776898205.4059217}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 7 do bot_py_4869", "request_timestamp": 1776898206.406951, "published_timestamp": 1776898206.4082992}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 8 do bot_py_4869", "request_timestamp": 1776898207.4104798, "published_timestamp": 1776898207.4111288}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 9 do bot_py_4869", "request_timestamp": 1776898208.4119666, "published_timestamp": 1776898208.413132}
+{"channel": "canal_681", "user": "bot_py_4869", "message": "mensagem 10 do bot_py_4869", "request_timestamp": 1776898209.4141784, "published_timestamp": 1776898209.4148934}
+{"channel": "canal_964", "user": "bot_py_4869", "message": "mensagem 1 do bot_py_4869", "request_timestamp": 1776898210.4181771, "published_timestamp": 1776898210.418565}
+{"channel": "canal_964", "user": "bot_py_4869", "message": "mensagem 2 do bot_py_4869", "request_timestamp": 1776898211.421737, "published_timestamp": 1776898211.4224901}
+{"channel": "canal_964", "user": "bot_py_4869", "message": "mensagem 3 do bot_py_4869", "request_timestamp": 1776898212.4243178, "published_timestamp": 1776898212.4250345}
+{"channel": "canal_964", "user": "bot_py_4869", "message": "mensagem 4 do bot_py_4869", "request_timestamp": 1776898213.427025, "published_timestamp": 1776898213.4276907}
+{"channel": "canal_964", "user": "bot_py_4869", "message": "mensagem 5 do bot_py_4869", "request_timestamp": 1776898214.429953, "published_timestamp": 1776898214.4305973}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898565.8763435, "published_timestamp": 1776898565.8774881, "contador": 6}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898566.8818417, "published_timestamp": 1776898566.8825796, "contador": 9}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898567.88357, "published_timestamp": 1776898567.8843744, "contador": 12}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898568.8865151, "published_timestamp": 1776898568.8872948, "contador": 15}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898569.889679, "published_timestamp": 1776898569.8905287, "contador": 18}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898570.891569, "published_timestamp": 1776898570.892413, "contador": 21}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898571.8954787, "published_timestamp": 1776898571.8963752, "contador": 24}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898572.8985524, "published_timestamp": 1776898572.89951, "contador": 27}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898573.900955, "published_timestamp": 1776898573.9013593, "contador": 30}
+{"channel": "canal_3", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898574.9029548, "published_timestamp": 1776898574.9032872, "contador": 33}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898575.9070683, "published_timestamp": 1776898575.9077055, "contador": 38}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898576.909158, "published_timestamp": 1776898576.9096987, "contador": 41}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898577.911396, "published_timestamp": 1776898577.9117694, "contador": 44}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898578.9159608, "published_timestamp": 1776898578.9193773, "contador": 47}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898579.922851, "published_timestamp": 1776898579.923429, "contador": 50}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898580.925416, "published_timestamp": 1776898580.925864, "contador": 53}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898581.927929, "published_timestamp": 1776898581.9283147, "contador": 56}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898582.9306126, "published_timestamp": 1776898582.9310923, "contador": 59}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898583.9323113, "published_timestamp": 1776898583.9330056, "contador": 62}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898584.9348743, "published_timestamp": 1776898584.9363852, "contador": 65}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898585.941286, "published_timestamp": 1776898585.9419854, "contador": 70}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898586.9443789, "published_timestamp": 1776898586.9449162, "contador": 73}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898587.9465408, "published_timestamp": 1776898587.9477932, "contador": 76}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898588.9494636, "published_timestamp": 1776898588.9501722, "contador": 79}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898589.951619, "published_timestamp": 1776898589.9526367, "contador": 82}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898590.9554584, "published_timestamp": 1776898590.9571247, "contador": 85}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898591.9582589, "published_timestamp": 1776898591.9580252, "contador": 88}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898592.9606366, "published_timestamp": 1776898592.9611146, "contador": 91}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898593.9637399, "published_timestamp": 1776898593.9654572, "contador": 94}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898594.9677143, "published_timestamp": 1776898594.9674304, "contador": 97}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898595.9713566, "published_timestamp": 1776898595.9733193, "contador": 102}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898596.9758217, "published_timestamp": 1776898596.9758375, "contador": 105}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898597.9788141, "published_timestamp": 1776898597.9786909, "contador": 108}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898598.9807432, "published_timestamp": 1776898598.98042, "contador": 111}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898599.982834, "published_timestamp": 1776898599.982758, "contador": 114}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898600.9853067, "published_timestamp": 1776898600.9855092, "contador": 117}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898601.9876683, "published_timestamp": 1776898601.987747, "contador": 120}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898602.9903784, "published_timestamp": 1776898602.990368, "contador": 123}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898603.9933774, "published_timestamp": 1776898603.9933295, "contador": 126}
+{"channel": "canal_918", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898604.9954994, "published_timestamp": 1776898604.9980192, "contador": 129}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898606.002787, "published_timestamp": 1776898606.0030038, "contador": 134}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898607.0057073, "published_timestamp": 1776898607.0056784, "contador": 137}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898608.0077493, "published_timestamp": 1776898608.0078447, "contador": 140}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898609.0097928, "published_timestamp": 1776898609.0096838, "contador": 143}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898610.0126815, "published_timestamp": 1776898610.0147967, "contador": 146}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898611.0165977, "published_timestamp": 1776898611.0179079, "contador": 149}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898612.020583, "published_timestamp": 1776898612.0212915, "contador": 152}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898613.0226355, "published_timestamp": 1776898613.023064, "contador": 155}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898614.024602, "published_timestamp": 1776898614.0256019, "contador": 158}
+{"channel": "canal_896", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898615.028508, "published_timestamp": 1776898615.0289867, "contador": 161}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898616.0334802, "published_timestamp": 1776898616.0337098, "contador": 166}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898617.0350723, "published_timestamp": 1776898617.0353894, "contador": 169}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898618.0367048, "published_timestamp": 1776898618.0375922, "contador": 172}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898619.0390325, "published_timestamp": 1776898619.0422716, "contador": 175}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898620.0449846, "published_timestamp": 1776898620.045269, "contador": 178}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898621.0475888, "published_timestamp": 1776898621.0480487, "contador": 181}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898622.0508058, "published_timestamp": 1776898622.0511677, "contador": 184}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898623.0532408, "published_timestamp": 1776898623.0545423, "contador": 187}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898624.0563705, "published_timestamp": 1776898624.056955, "contador": 190}
+{"channel": "canal_11", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898625.060313, "published_timestamp": 1776898625.0610898, "contador": 193}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898626.0660956, "published_timestamp": 1776898626.066297, "contador": 198}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898627.0678, "published_timestamp": 1776898627.0682333, "contador": 201}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898628.06997, "published_timestamp": 1776898628.071238, "contador": 204}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898629.0761487, "published_timestamp": 1776898629.0764918, "contador": 207}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898630.0789886, "published_timestamp": 1776898630.079958, "contador": 210}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898631.0818455, "published_timestamp": 1776898631.082739, "contador": 213}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898632.0864162, "published_timestamp": 1776898632.0867407, "contador": 216}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898633.0888648, "published_timestamp": 1776898633.0897577, "contador": 219}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898634.0914688, "published_timestamp": 1776898634.0920322, "contador": 222}
+{"channel": "canal_432", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898635.093475, "published_timestamp": 1776898635.0940282, "contador": 225}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898636.0977223, "published_timestamp": 1776898636.0980406, "contador": 230}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898637.0998077, "published_timestamp": 1776898637.1004639, "contador": 233}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898638.1019745, "published_timestamp": 1776898638.1029117, "contador": 236}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898639.1043994, "published_timestamp": 1776898639.1052606, "contador": 239}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898640.106986, "published_timestamp": 1776898640.107535, "contador": 242}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898641.109488, "published_timestamp": 1776898641.109952, "contador": 245}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898642.111885, "published_timestamp": 1776898642.1125555, "contador": 248}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898643.1141942, "published_timestamp": 1776898643.1146445, "contador": 251}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898644.1161144, "published_timestamp": 1776898644.1166894, "contador": 254}
+{"channel": "canal_585", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898645.1190658, "published_timestamp": 1776898645.119944, "contador": 257}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898646.1234653, "published_timestamp": 1776898646.1246123, "contador": 262}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898647.1257749, "published_timestamp": 1776898647.126301, "contador": 265}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898648.1286323, "published_timestamp": 1776898648.1301541, "contador": 268}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898649.132117, "published_timestamp": 1776898649.1331742, "contador": 271}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898650.1344914, "published_timestamp": 1776898650.1361506, "contador": 274}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898651.137581, "published_timestamp": 1776898651.1379812, "contador": 277}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898652.1392276, "published_timestamp": 1776898652.1405892, "contador": 280}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898653.1423366, "published_timestamp": 1776898653.1427526, "contador": 283}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898654.14448, "published_timestamp": 1776898654.1448665, "contador": 286}
+{"channel": "canal_964", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898655.1475952, "published_timestamp": 1776898655.1483538, "contador": 289}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898656.1525648, "published_timestamp": 1776898656.1537046, "contador": 294}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898657.155313, "published_timestamp": 1776898657.1558213, "contador": 297}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898658.157336, "published_timestamp": 1776898658.1579168, "contador": 300}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898659.159433, "published_timestamp": 1776898659.1601639, "contador": 303}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898660.1614108, "published_timestamp": 1776898660.1622887, "contador": 306}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898661.163431, "published_timestamp": 1776898661.1641333, "contador": 309}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898662.1669052, "published_timestamp": 1776898662.167326, "contador": 312}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898663.1689084, "published_timestamp": 1776898663.1693807, "contador": 315}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898664.1710594, "published_timestamp": 1776898664.171468, "contador": 318}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898665.1740532, "published_timestamp": 1776898665.1741714, "contador": 321}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898666.1780877, "published_timestamp": 1776898666.1791155, "contador": 326}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898667.180621, "published_timestamp": 1776898667.1806266, "contador": 329}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898668.1832876, "published_timestamp": 1776898668.1835506, "contador": 332}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898669.1858737, "published_timestamp": 1776898669.1858325, "contador": 335}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898670.1895988, "published_timestamp": 1776898670.1896014, "contador": 338}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898671.192109, "published_timestamp": 1776898671.1920452, "contador": 341}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898672.194071, "published_timestamp": 1776898672.1942258, "contador": 344}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898673.1964025, "published_timestamp": 1776898673.197376, "contador": 347}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898674.1988356, "published_timestamp": 1776898674.1994486, "contador": 350}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898675.2019727, "published_timestamp": 1776898675.2028165, "contador": 353}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898676.2055411, "published_timestamp": 1776898676.2064342, "contador": 358}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898677.2097893, "published_timestamp": 1776898677.210264, "contador": 361}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898678.213684, "published_timestamp": 1776898678.2140408, "contador": 364}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898679.2157164, "published_timestamp": 1776898679.2161624, "contador": 367}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898680.2181315, "published_timestamp": 1776898680.2194836, "contador": 370}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898681.221017, "published_timestamp": 1776898681.22118, "contador": 373}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898682.223598, "published_timestamp": 1776898682.2239432, "contador": 376}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898683.2259614, "published_timestamp": 1776898683.2265937, "contador": 379}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898684.2281923, "published_timestamp": 1776898684.2290382, "contador": 382}
+{"channel": "canal_579", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898685.2308655, "published_timestamp": 1776898685.2315865, "contador": 385}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898686.2365313, "published_timestamp": 1776898686.2365797, "contador": 390}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898687.2397842, "published_timestamp": 1776898687.2402742, "contador": 393}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898688.2422147, "published_timestamp": 1776898688.2426405, "contador": 396}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898689.2446022, "published_timestamp": 1776898689.2449336, "contador": 399}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898690.2463422, "published_timestamp": 1776898690.248548, "contador": 402}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898691.2517724, "published_timestamp": 1776898691.2521322, "contador": 405}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898692.254479, "published_timestamp": 1776898692.2546167, "contador": 408}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898693.257771, "published_timestamp": 1776898693.2582586, "contador": 411}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898694.2613757, "published_timestamp": 1776898694.2616858, "contador": 414}
+{"channel": "canal_681", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898695.2634256, "published_timestamp": 1776898695.2649314, "contador": 417}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898696.2701921, "published_timestamp": 1776898696.270295, "contador": 422}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898697.273358, "published_timestamp": 1776898697.273851, "contador": 425}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898698.2761216, "published_timestamp": 1776898698.2763507, "contador": 428}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898699.278705, "published_timestamp": 1776898699.2788339, "contador": 431}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898700.281219, "published_timestamp": 1776898700.281638, "contador": 434}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898701.2848647, "published_timestamp": 1776898701.2851117, "contador": 437}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898702.2871704, "published_timestamp": 1776898702.287397, "contador": 440}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898703.290026, "published_timestamp": 1776898703.2902489, "contador": 443}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898704.2926993, "published_timestamp": 1776898704.292868, "contador": 446}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898705.2952468, "published_timestamp": 1776898705.2957637, "contador": 449}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898706.3027606, "published_timestamp": 1776898706.3026776, "contador": 454}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898707.3054144, "published_timestamp": 1776898707.3053637, "contador": 457}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898708.3078847, "published_timestamp": 1776898708.3080971, "contador": 460}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898709.3111098, "published_timestamp": 1776898709.3112776, "contador": 463}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898710.3136387, "published_timestamp": 1776898710.3146765, "contador": 466}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898711.3188465, "published_timestamp": 1776898711.3193233, "contador": 469}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898712.321274, "published_timestamp": 1776898712.3216875, "contador": 472}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898713.3231268, "published_timestamp": 1776898713.323675, "contador": 475}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898714.3253257, "published_timestamp": 1776898714.3285518, "contador": 478}
+{"channel": "canal_427", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898715.330695, "published_timestamp": 1776898715.3309002, "contador": 481}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898716.3344007, "published_timestamp": 1776898716.3353295, "contador": 486}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898717.336621, "published_timestamp": 1776898717.3369143, "contador": 489}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898718.3399432, "published_timestamp": 1776898718.340182, "contador": 492}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898719.3418865, "published_timestamp": 1776898719.342396, "contador": 495}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898720.3434274, "published_timestamp": 1776898720.3444884, "contador": 498}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898721.346422, "published_timestamp": 1776898721.347123, "contador": 501}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898722.3483596, "published_timestamp": 1776898722.348858, "contador": 504}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898723.3509288, "published_timestamp": 1776898723.3514779, "contador": 507}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898724.3527808, "published_timestamp": 1776898724.3536148, "contador": 510}
+{"channel": "canal_444", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898725.3548841, "published_timestamp": 1776898725.355954, "contador": 513}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898726.359604, "published_timestamp": 1776898726.360261, "contador": 518}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898727.3615332, "published_timestamp": 1776898727.3619852, "contador": 521}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898728.3631008, "published_timestamp": 1776898728.36387, "contador": 524}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898729.3665972, "published_timestamp": 1776898729.3669536, "contador": 527}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898730.3691401, "published_timestamp": 1776898730.3702428, "contador": 530}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898731.3716595, "published_timestamp": 1776898731.371883, "contador": 533}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898732.3732502, "published_timestamp": 1776898732.373473, "contador": 536}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898733.375439, "published_timestamp": 1776898733.3764615, "contador": 539}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898734.3774734, "published_timestamp": 1776898734.3780317, "contador": 542}
+{"channel": "canal_608", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898735.3794322, "published_timestamp": 1776898735.3798704, "contador": 545}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898736.3851838, "published_timestamp": 1776898736.3852136, "contador": 550}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898737.389692, "published_timestamp": 1776898737.3889253, "contador": 553}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898738.3926353, "published_timestamp": 1776898738.3911216, "contador": 556}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898739.3949158, "published_timestamp": 1776898739.3940573, "contador": 559}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898740.3970833, "published_timestamp": 1776898740.395604, "contador": 562}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898741.399245, "published_timestamp": 1776898741.3979373, "contador": 565}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898742.4014366, "published_timestamp": 1776898742.399923, "contador": 568}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898743.4039013, "published_timestamp": 1776898743.4024906, "contador": 571}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898744.4060395, "published_timestamp": 1776898744.4070587, "contador": 574}
+{"channel": "canal_617", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898745.410754, "published_timestamp": 1776898745.4091122, "contador": 577}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898746.4164739, "published_timestamp": 1776898746.416948, "contador": 582}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898747.4188108, "published_timestamp": 1776898747.4190857, "contador": 585}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898748.4211376, "published_timestamp": 1776898748.422411, "contador": 588}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898749.4242795, "published_timestamp": 1776898749.4245064, "contador": 591}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898750.4265106, "published_timestamp": 1776898750.427096, "contador": 594}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898751.4293752, "published_timestamp": 1776898751.429826, "contador": 597}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898752.43214, "published_timestamp": 1776898752.4323092, "contador": 600}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898753.4340165, "published_timestamp": 1776898753.4342203, "contador": 603}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898754.436203, "published_timestamp": 1776898754.436456, "contador": 606}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898755.4382346, "published_timestamp": 1776898755.4384725, "contador": 609}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898756.4422705, "published_timestamp": 1776898756.4431713, "contador": 614}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898757.4457018, "published_timestamp": 1776898757.4458284, "contador": 617}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898758.4475937, "published_timestamp": 1776898758.4478822, "contador": 620}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898759.450571, "published_timestamp": 1776898759.451113, "contador": 623}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898760.453231, "published_timestamp": 1776898760.4540567, "contador": 626}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898761.458469, "published_timestamp": 1776898761.4588594, "contador": 629}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898762.4611402, "published_timestamp": 1776898762.4615517, "contador": 632}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898763.4633815, "published_timestamp": 1776898763.4642382, "contador": 635}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898764.4661198, "published_timestamp": 1776898764.466335, "contador": 638}
+{"channel": "canal_86", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898765.4683352, "published_timestamp": 1776898765.4691079, "contador": 641}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898766.4745338, "published_timestamp": 1776898766.4748034, "contador": 646}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898767.4765565, "published_timestamp": 1776898767.4768023, "contador": 649}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 3 do bot_py_6734", "request_timestamp": 1776898768.478642, "published_timestamp": 1776898768.4792378, "contador": 652}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 4 do bot_py_6734", "request_timestamp": 1776898769.4808652, "published_timestamp": 1776898769.481181, "contador": 655}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 5 do bot_py_6734", "request_timestamp": 1776898770.4835308, "published_timestamp": 1776898770.4855945, "contador": 658}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 6 do bot_py_6734", "request_timestamp": 1776898771.488474, "published_timestamp": 1776898771.488483, "contador": 661}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 7 do bot_py_6734", "request_timestamp": 1776898772.4900613, "published_timestamp": 1776898772.4902105, "contador": 664}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 8 do bot_py_6734", "request_timestamp": 1776898773.491703, "published_timestamp": 1776898773.4919999, "contador": 667}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 9 do bot_py_6734", "request_timestamp": 1776898774.498483, "published_timestamp": 1776898774.4994683, "contador": 670}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 10 do bot_py_6734", "request_timestamp": 1776898775.5020592, "published_timestamp": 1776898775.5033157, "contador": 673}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 1 do bot_py_6734", "request_timestamp": 1776898776.5083997, "published_timestamp": 1776898776.509762, "contador": 678}
+{"channel": "canal_84", "user": "bot_py_6734", "message": "mensagem 2 do bot_py_6734", "request_timestamp": 1776898777.5140216, "published_timestamp": 1776898777.514841, "contador": 681}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898792.297845, "published_timestamp": 1776898792.2999344, "contador": 6}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898793.3016999, "published_timestamp": 1776898793.302496, "contador": 9}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898794.3038998, "published_timestamp": 1776898794.304791, "contador": 12}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898795.3057148, "published_timestamp": 1776898795.3065522, "contador": 15}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898796.308484, "published_timestamp": 1776898796.3104417, "contador": 18}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898797.3122554, "published_timestamp": 1776898797.3130314, "contador": 21}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898798.3142395, "published_timestamp": 1776898798.3150506, "contador": 24}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898799.3170059, "published_timestamp": 1776898799.3177414, "contador": 27}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898800.3187978, "published_timestamp": 1776898800.3194206, "contador": 30}
+{"channel": "canal_585", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898801.3222632, "published_timestamp": 1776898801.322807, "contador": 33}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898802.329814, "published_timestamp": 1776898802.3323433, "contador": 38}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898803.3342364, "published_timestamp": 1776898803.33557, "contador": 41}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898804.3369093, "published_timestamp": 1776898804.3374605, "contador": 44}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898805.3390026, "published_timestamp": 1776898805.339422, "contador": 47}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898806.3426993, "published_timestamp": 1776898806.347591, "contador": 50}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898807.3502078, "published_timestamp": 1776898807.3507044, "contador": 53}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898808.352221, "published_timestamp": 1776898808.3528204, "contador": 56}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898809.3547192, "published_timestamp": 1776898809.3549635, "contador": 59}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898810.356548, "published_timestamp": 1776898810.356789, "contador": 62}
+{"channel": "canal_608", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898811.3585565, "published_timestamp": 1776898811.3586679, "contador": 65}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898812.363486, "published_timestamp": 1776898812.3642375, "contador": 70}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898813.366806, "published_timestamp": 1776898813.3670993, "contador": 73}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898814.369301, "published_timestamp": 1776898814.3695953, "contador": 76}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898815.3714294, "published_timestamp": 1776898815.37162, "contador": 79}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898816.3744645, "published_timestamp": 1776898816.3748028, "contador": 82}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898817.3763654, "published_timestamp": 1776898817.3764045, "contador": 85}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898818.3796382, "published_timestamp": 1776898818.3792872, "contador": 88}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898819.3813756, "published_timestamp": 1776898819.3831363, "contador": 91}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898820.3851092, "published_timestamp": 1776898820.3847811, "contador": 94}
+{"channel": "canal_918", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898821.3881445, "published_timestamp": 1776898821.3878477, "contador": 97}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898822.3917994, "published_timestamp": 1776898822.3914185, "contador": 102}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898823.3935976, "published_timestamp": 1776898823.3934386, "contador": 105}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898824.3976343, "published_timestamp": 1776898824.3972645, "contador": 108}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898825.399245, "published_timestamp": 1776898825.3990896, "contador": 111}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898826.4015715, "published_timestamp": 1776898826.4013944, "contador": 114}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898827.4035342, "published_timestamp": 1776898827.4035542, "contador": 117}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898828.4060414, "published_timestamp": 1776898828.4070365, "contador": 120}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898829.408942, "published_timestamp": 1776898829.408859, "contador": 123}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898830.4142535, "published_timestamp": 1776898830.4140885, "contador": 126}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898831.4161353, "published_timestamp": 1776898831.4160018, "contador": 129}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898832.4208431, "published_timestamp": 1776898832.4210281, "contador": 134}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898833.4234238, "published_timestamp": 1776898833.4232783, "contador": 137}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898834.4251328, "published_timestamp": 1776898834.4255874, "contador": 140}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898835.4273844, "published_timestamp": 1776898835.428179, "contador": 143}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898836.430495, "published_timestamp": 1776898836.429827, "contador": 146}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898837.4339755, "published_timestamp": 1776898837.4333484, "contador": 149}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898838.436846, "published_timestamp": 1776898838.4368906, "contador": 152}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898839.439018, "published_timestamp": 1776898839.438295, "contador": 155}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898840.4409091, "published_timestamp": 1776898840.440607, "contador": 158}
+{"channel": "canal_403", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898841.4437666, "published_timestamp": 1776898841.443345, "contador": 161}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898842.4477847, "published_timestamp": 1776898842.4481056, "contador": 166}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898843.4513566, "published_timestamp": 1776898843.4507508, "contador": 169}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898844.4540446, "published_timestamp": 1776898844.4534647, "contador": 172}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898845.456803, "published_timestamp": 1776898845.4573755, "contador": 175}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898846.4590452, "published_timestamp": 1776898846.4598691, "contador": 178}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898847.4613585, "published_timestamp": 1776898847.4620097, "contador": 181}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898848.4632328, "published_timestamp": 1776898848.4638495, "contador": 184}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898849.4654756, "published_timestamp": 1776898849.4659796, "contador": 187}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898850.4681878, "published_timestamp": 1776898850.468637, "contador": 190}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898851.4700298, "published_timestamp": 1776898851.470899, "contador": 193}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898852.4757407, "published_timestamp": 1776898852.4760768, "contador": 198}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898853.479199, "published_timestamp": 1776898853.4794402, "contador": 201}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898854.482016, "published_timestamp": 1776898854.482398, "contador": 204}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898855.4849842, "published_timestamp": 1776898855.4854712, "contador": 207}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898856.4872143, "published_timestamp": 1776898856.48823, "contador": 210}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898857.48934, "published_timestamp": 1776898857.4903893, "contador": 213}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898858.4915605, "published_timestamp": 1776898858.492012, "contador": 216}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898859.4944766, "published_timestamp": 1776898859.4946837, "contador": 219}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898860.496659, "published_timestamp": 1776898860.496961, "contador": 222}
+{"channel": "canal_972", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898861.4998217, "published_timestamp": 1776898861.500401, "contador": 225}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898862.5043187, "published_timestamp": 1776898862.5051303, "contador": 230}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898863.506711, "published_timestamp": 1776898863.5072696, "contador": 233}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898864.5090883, "published_timestamp": 1776898864.5114148, "contador": 236}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898865.5131896, "published_timestamp": 1776898865.5139322, "contador": 239}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898866.5159597, "published_timestamp": 1776898866.5163047, "contador": 242}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898867.5183468, "published_timestamp": 1776898867.5187776, "contador": 245}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898868.520486, "published_timestamp": 1776898868.5220506, "contador": 248}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898869.524371, "published_timestamp": 1776898869.5249972, "contador": 251}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898870.5264242, "published_timestamp": 1776898870.5270736, "contador": 254}
+{"channel": "canal_896", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898871.5294697, "published_timestamp": 1776898871.5303178, "contador": 257}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898872.53413, "published_timestamp": 1776898872.5365357, "contador": 262}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898873.5375679, "published_timestamp": 1776898873.5383737, "contador": 265}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898874.5399776, "published_timestamp": 1776898874.5406702, "contador": 268}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898875.5420134, "published_timestamp": 1776898875.542991, "contador": 271}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898876.5451336, "published_timestamp": 1776898876.5456135, "contador": 274}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898877.5476432, "published_timestamp": 1776898877.5500448, "contador": 277}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898878.5558047, "published_timestamp": 1776898878.5563517, "contador": 280}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898879.5585635, "published_timestamp": 1776898879.5592859, "contador": 283}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898880.5616539, "published_timestamp": 1776898880.562166, "contador": 286}
+{"channel": "canal_86", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898881.5639608, "published_timestamp": 1776898881.5648203, "contador": 289}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898882.5697048, "published_timestamp": 1776898882.5707896, "contador": 294}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898883.572951, "published_timestamp": 1776898883.5734346, "contador": 297}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898884.5749397, "published_timestamp": 1776898884.5766597, "contador": 300}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898885.5786471, "published_timestamp": 1776898885.5797613, "contador": 303}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898886.5815873, "published_timestamp": 1776898886.5825794, "contador": 306}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898887.5841842, "published_timestamp": 1776898887.5847678, "contador": 309}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898888.586493, "published_timestamp": 1776898888.5869172, "contador": 312}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898889.5887299, "published_timestamp": 1776898889.589268, "contador": 315}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898890.5907207, "published_timestamp": 1776898890.5916831, "contador": 318}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898891.593681, "published_timestamp": 1776898891.5939698, "contador": 321}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898892.5972025, "published_timestamp": 1776898892.5973747, "contador": 326}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898893.5989304, "published_timestamp": 1776898893.5993426, "contador": 329}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898894.6016212, "published_timestamp": 1776898894.6021369, "contador": 332}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898895.6041389, "published_timestamp": 1776898895.6046236, "contador": 335}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898896.6059725, "published_timestamp": 1776898896.6070993, "contador": 338}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898897.6090727, "published_timestamp": 1776898897.6095943, "contador": 341}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898898.6127114, "published_timestamp": 1776898898.6131058, "contador": 344}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898899.6145551, "published_timestamp": 1776898899.6154275, "contador": 347}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898900.617347, "published_timestamp": 1776898900.6183314, "contador": 350}
+{"channel": "canal_553", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898901.621158, "published_timestamp": 1776898901.62098, "contador": 353}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898902.6261988, "published_timestamp": 1776898902.626154, "contador": 358}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898903.629128, "published_timestamp": 1776898903.628246, "contador": 361}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898904.6331255, "published_timestamp": 1776898904.634099, "contador": 364}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898905.6398935, "published_timestamp": 1776898905.6392555, "contador": 367}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898906.6422741, "published_timestamp": 1776898906.6415927, "contador": 370}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898907.6449854, "published_timestamp": 1776898907.644265, "contador": 373}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898908.6474366, "published_timestamp": 1776898908.6466303, "contador": 376}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898909.651759, "published_timestamp": 1776898909.6521037, "contador": 379}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898910.655896, "published_timestamp": 1776898910.6555903, "contador": 382}
+{"channel": "canal_964", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898911.6579268, "published_timestamp": 1776898911.6578321, "contador": 385}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898912.6625006, "published_timestamp": 1776898912.6619968, "contador": 390}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898913.6642127, "published_timestamp": 1776898913.664113, "contador": 393}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898914.6666481, "published_timestamp": 1776898914.6675386, "contador": 396}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898915.6703987, "published_timestamp": 1776898915.6706262, "contador": 399}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898916.6729348, "published_timestamp": 1776898916.6726193, "contador": 402}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898917.6749477, "published_timestamp": 1776898917.674614, "contador": 405}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898918.6770127, "published_timestamp": 1776898918.677497, "contador": 408}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898919.679383, "published_timestamp": 1776898919.6811707, "contador": 411}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898920.6843498, "published_timestamp": 1776898920.684571, "contador": 414}
+{"channel": "canal_293", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898921.6865118, "published_timestamp": 1776898921.6871116, "contador": 417}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898922.6900706, "published_timestamp": 1776898922.6900866, "contador": 422}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898923.6911683, "published_timestamp": 1776898923.6917162, "contador": 425}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898924.6935198, "published_timestamp": 1776898924.6937993, "contador": 428}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898925.696155, "published_timestamp": 1776898925.6987002, "contador": 431}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898926.7013404, "published_timestamp": 1776898926.7016103, "contador": 434}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898927.7030094, "published_timestamp": 1776898927.7037966, "contador": 437}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 7 do bot_py_7639", "request_timestamp": 1776898928.7054675, "published_timestamp": 1776898928.7060168, "contador": 440}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 8 do bot_py_7639", "request_timestamp": 1776898929.7069347, "published_timestamp": 1776898929.7080963, "contador": 443}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 9 do bot_py_7639", "request_timestamp": 1776898930.7105825, "published_timestamp": 1776898930.711253, "contador": 446}
+{"channel": "canal_444", "user": "bot_py_7639", "message": "mensagem 10 do bot_py_7639", "request_timestamp": 1776898931.7126882, "published_timestamp": 1776898931.7133813, "contador": 449}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 1 do bot_py_7639", "request_timestamp": 1776898932.7162619, "published_timestamp": 1776898932.7166789, "contador": 454}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 2 do bot_py_7639", "request_timestamp": 1776898933.7177548, "published_timestamp": 1776898933.7185535, "contador": 457}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 3 do bot_py_7639", "request_timestamp": 1776898934.7196684, "published_timestamp": 1776898934.7203727, "contador": 460}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 4 do bot_py_7639", "request_timestamp": 1776898935.7216828, "published_timestamp": 1776898935.722334, "contador": 463}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 5 do bot_py_7639", "request_timestamp": 1776898936.7247076, "published_timestamp": 1776898936.7262156, "contador": 466}
+{"channel": "canal_617", "user": "bot_py_7639", "message": "mensagem 6 do bot_py_7639", "request_timestamp": 1776898937.7293074, "published_timestamp": 1776898937.7317953, "contador": 469}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776898980.8838925, "published_timestamp": 1776898980.8860686, "contador": 6}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776898981.8892825, "published_timestamp": 1776898981.889981, "contador": 9}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776898982.891029, "published_timestamp": 1776898982.8920178, "contador": 12}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776898983.8932593, "published_timestamp": 1776898983.894169, "contador": 15}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776898984.8957918, "published_timestamp": 1776898984.896908, "contador": 18}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776898985.899891, "published_timestamp": 1776898985.9006412, "contador": 21}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776898986.9022768, "published_timestamp": 1776898986.903038, "contador": 24}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776898987.905823, "published_timestamp": 1776898987.9067445, "contador": 27}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776898988.9092882, "published_timestamp": 1776898988.9097898, "contador": 30}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776898989.9122982, "published_timestamp": 1776898989.912972, "contador": 33}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776898990.9166174, "published_timestamp": 1776898990.918226, "contador": 38}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776898991.9193761, "published_timestamp": 1776898991.9199686, "contador": 41}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776898992.9222522, "published_timestamp": 1776898992.9227493, "contador": 44}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776898993.9254239, "published_timestamp": 1776898993.9257057, "contador": 47}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776898994.9273646, "published_timestamp": 1776898994.9282093, "contador": 50}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776898995.9299686, "published_timestamp": 1776898995.930303, "contador": 53}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776898996.9333165, "published_timestamp": 1776898996.9338267, "contador": 56}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776898997.9352896, "published_timestamp": 1776898997.9357755, "contador": 59}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776898998.9379566, "published_timestamp": 1776898998.9386573, "contador": 62}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776898999.9404883, "published_timestamp": 1776898999.941456, "contador": 65}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776899000.9456847, "published_timestamp": 1776899000.9473047, "contador": 70}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776899001.949486, "published_timestamp": 1776899001.9495783, "contador": 73}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776899002.9516346, "published_timestamp": 1776899002.9517531, "contador": 76}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776899003.9546628, "published_timestamp": 1776899003.9547446, "contador": 79}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776899004.958741, "published_timestamp": 1776899004.9613123, "contador": 82}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776899005.966351, "published_timestamp": 1776899005.9665282, "contador": 85}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776899006.9712303, "published_timestamp": 1776899006.9718323, "contador": 88}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776899007.9735203, "published_timestamp": 1776899007.974803, "contador": 91}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776899008.9779346, "published_timestamp": 1776899008.9784787, "contador": 94}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776899009.9816043, "published_timestamp": 1776899009.9824994, "contador": 97}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776899010.9915864, "published_timestamp": 1776899010.9933128, "contador": 102}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776899011.9952204, "published_timestamp": 1776899011.9959636, "contador": 105}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776899012.9976213, "published_timestamp": 1776899012.9980562, "contador": 108}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776899014.0000055, "published_timestamp": 1776899014.0005229, "contador": 111}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776899015.0027206, "published_timestamp": 1776899015.0034466, "contador": 114}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776899016.0054033, "published_timestamp": 1776899016.0060985, "contador": 117}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776899017.0090268, "published_timestamp": 1776899017.0106235, "contador": 120}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776899018.011957, "published_timestamp": 1776899018.014269, "contador": 123}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776899019.0175183, "published_timestamp": 1776899019.0196662, "contador": 126}
+{"channel": "canal_3", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776899020.0218637, "published_timestamp": 1776899020.0223806, "contador": 129}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776899021.0294187, "published_timestamp": 1776899021.0323763, "contador": 134}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776899022.0387602, "published_timestamp": 1776899022.0389078, "contador": 137}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776899023.040812, "published_timestamp": 1776899023.0412455, "contador": 140}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776899024.0433311, "published_timestamp": 1776899024.0438464, "contador": 143}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776899025.046341, "published_timestamp": 1776899025.0467181, "contador": 146}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776899026.049568, "published_timestamp": 1776899026.05036, "contador": 149}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776899027.0519273, "published_timestamp": 1776899027.0523527, "contador": 152}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776899028.0542326, "published_timestamp": 1776899028.0544608, "contador": 155}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776899029.0561457, "published_timestamp": 1776899029.0569007, "contador": 158}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776899030.0595832, "published_timestamp": 1776899030.0601041, "contador": 161}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776899031.065585, "published_timestamp": 1776899031.0655823, "contador": 166}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776899032.06686, "published_timestamp": 1776899032.068186, "contador": 169}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776899033.0710347, "published_timestamp": 1776899033.0715156, "contador": 172}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776899034.073806, "published_timestamp": 1776899034.074021, "contador": 175}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776899035.076492, "published_timestamp": 1776899035.0777073, "contador": 178}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776899036.081148, "published_timestamp": 1776899036.0812395, "contador": 181}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776899037.083491, "published_timestamp": 1776899037.0836153, "contador": 184}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776899038.087618, "published_timestamp": 1776899038.0875902, "contador": 187}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776899039.0890298, "published_timestamp": 1776899039.0891314, "contador": 190}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776899040.0923061, "published_timestamp": 1776899040.0924447, "contador": 193}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776899041.0970163, "published_timestamp": 1776899041.0972607, "contador": 198}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776899042.098969, "published_timestamp": 1776899042.0991669, "contador": 201}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776899043.1021802, "published_timestamp": 1776899043.1025064, "contador": 204}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776899044.1054199, "published_timestamp": 1776899044.106295, "contador": 207}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776899045.1084867, "published_timestamp": 1776899045.1089945, "contador": 210}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776899046.1114018, "published_timestamp": 1776899046.1118796, "contador": 213}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776899047.1152143, "published_timestamp": 1776899047.1175413, "contador": 216}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776899048.1196258, "published_timestamp": 1776899048.1200125, "contador": 219}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776899049.1219275, "published_timestamp": 1776899049.1224322, "contador": 222}
+{"channel": "canal_553", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776899050.1246889, "published_timestamp": 1776899050.125244, "contador": 225}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 1 do bot_py_2547", "request_timestamp": 1776899051.1304998, "published_timestamp": 1776899051.130513, "contador": 230}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 2 do bot_py_2547", "request_timestamp": 1776899052.1323302, "published_timestamp": 1776899052.132872, "contador": 233}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 3 do bot_py_2547", "request_timestamp": 1776899053.1347516, "published_timestamp": 1776899053.135817, "contador": 236}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 4 do bot_py_2547", "request_timestamp": 1776899054.1396809, "published_timestamp": 1776899054.1401913, "contador": 239}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 5 do bot_py_2547", "request_timestamp": 1776899055.1422124, "published_timestamp": 1776899055.1430194, "contador": 242}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 6 do bot_py_2547", "request_timestamp": 1776899056.1462026, "published_timestamp": 1776899056.1467555, "contador": 245}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 7 do bot_py_2547", "request_timestamp": 1776899057.1492627, "published_timestamp": 1776899057.1496646, "contador": 248}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 8 do bot_py_2547", "request_timestamp": 1776899058.1526976, "published_timestamp": 1776899058.1531134, "contador": 251}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 9 do bot_py_2547", "request_timestamp": 1776899059.1547081, "published_timestamp": 1776899059.1551266, "contador": 254}
+{"channel": "canal_427", "user": "bot_py_2547", "message": "mensagem 10 do bot_py_2547", "request_timestamp": 1776899060.1571164, "published_timestamp": 1776899060.1577709, "contador": 257}
+{"channel": "canal_918", "user": "bot_java_5801", "message": "mensagem 2 do bot_java_5801", "request_timestamp": 1776900893.51, "published_timestamp": 1776900893.512586, "contador": 12}
+{"channel": "canal_918", "user": "bot_java_5801", "message": "mensagem 5 do bot_java_5801", "request_timestamp": 1776900896.532, "published_timestamp": 1776900896.5330083, "contador": 15}
+{"channel": "canal_918", "user": "bot_java_5801", "message": "mensagem 8 do bot_java_5801", "request_timestamp": 1776900899.542, "published_timestamp": 1776900899.5421333, "contador": 18}
+{"channel": "canal_608", "user": "bot_java_5801", "message": "mensagem 2 do bot_java_5801", "request_timestamp": 1776900903.574, "published_timestamp": 1776900903.5752206, "contador": 23}
+{"channel": "canal_608", "user": "bot_java_5801", "message": "mensagem 5 do bot_java_5801", "request_timestamp": 1776900906.583, "published_timestamp": 1776900906.5835717, "contador": 26}
+{"channel": "canal_608", "user": "bot_java_5801", "message": "mensagem 8 do bot_java_5801", "request_timestamp": 1776900909.593, "published_timestamp": 1776900909.5970585, "contador": 29}
+{"channel": "canal_964", "user": "bot_java_5801", "message": "mensagem 2 do bot_java_5801", "request_timestamp": 1776900913.621, "published_timestamp": 1776900913.6236835, "contador": 34}
+{"channel": "canal_964", "user": "bot_java_5801", "message": "mensagem 5 do bot_java_5801", "request_timestamp": 1776900916.648, "published_timestamp": 1776900916.648781, "contador": 37}
+{"channel": "canal_964", "user": "bot_java_5801", "message": "mensagem 8 do bot_java_5801", "request_timestamp": 1776900919.657, "published_timestamp": 1776900919.6581106, "contador": 40}
+{"channel": "canal_86", "user": "bot_java_5801", "message": "mensagem 2 do bot_java_5801", "request_timestamp": 1776900923.669, "published_timestamp": 1776900923.6701112, "contador": 45}
+{"channel": "canal_86", "user": "bot_java_5801", "message": "mensagem 5 do bot_java_5801", "request_timestamp": 1776900926.678, "published_timestamp": 1776900926.679198, "contador": 48}
