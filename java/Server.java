@@ -16,10 +16,19 @@ public class Server {
     static List<String> logins = new ArrayList<>();
 
     static final String PASTA_DADOS = "data";
-    static final String ARQUIVO_CANAIS = "data/channels.json";
+    // static final String ARQUIVO_CANAIS = "data/channels.json";
+    // static final String ARQUIVO_LOGINS = "data/logins.json";
+    static final String ARQUIVO_CANAIS = "/app/shared/channels.json";
     static final String ARQUIVO_LOGINS = "data/logins.json";
     static final String ARQUIVO_REQUISICOES = "data/requests.jsonl";
     static final String ARQUIVO_PUBLICACOES = "data/publications.jsonl";
+
+    static final String NOME_SERVIDOR = "server_java";
+
+    static int contadorServidor = 0;
+    static int contadorRequisicoes = 0;
+    static double offsetRelogio = 0.0;
+    static int rankServidor = 0;
 
     public static void main(String[] args) throws Exception {
         new File(PASTA_DADOS).mkdirs();
@@ -35,11 +44,19 @@ public class Server {
         ZMQ.Socket pub = context.socket(ZMQ.PUB);
         pub.connect("tcp://proxy:5557");
 
+        ZMQ.Socket ref = context.socket(ZMQ.REQ);
+        ref.connect("tcp://referencia:5560");
+
         System.out.println("[SERVER JAVA] Iniciado...");
 
-        while (true) {
+        registrarNaReferencia(ref);
 
+        while (true) {
             byte[] mensagemBruta = rep.recv();
+            contadorRequisicoes++;
+
+            carregarCanais();
+            carregarLogins();
 
             MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(mensagemBruta);
             int mapSize = unpacker.unpackMapHeader();
@@ -48,7 +65,8 @@ public class Server {
             String usuario = "";
             String canal = "";
             String texto = "";
-            double timestamp = agora();
+            double timestamp = agoraCorrigido();
+            int contadorRecebido = 0;
 
             for (int i = 0; i < mapSize; i++) {
                 String key = unpacker.unpackString();
@@ -67,13 +85,18 @@ public class Server {
                     } else {
                         timestamp = unpacker.unpackLong();
                     }
+                } else if (key.equals("contador")) {
+                    contadorRecebido = unpacker.unpackInt();
                 } else {
                     unpacker.skipValue();
                 }
             }
 
-            salvarLinhaJson(ARQUIVO_REQUISICOES,
-                "{\"type\":\"" + tipo + "\",\"user\":\"" + usuario + "\",\"received_timestamp\":" + agora() + "}"
+            atualizarContadorRecebido(contadorRecebido);
+
+            salvarLinhaJson(
+                ARQUIVO_REQUISICOES,
+                "{\"type\":\"" + tipo + "\",\"user\":\"" + usuario + "\",\"received_timestamp\":" + agoraCorrigido() + ",\"contador\":" + contadorServidor + "}"
             );
 
             byte[] resposta;
@@ -99,14 +122,16 @@ public class Server {
                 if (!canais.contains(canal)) {
                     resposta = empacotarResposta("error", "canal inexistente");
                 } else {
-                    double publishedTimestamp = agora();
+                    double publishedTimestamp = agoraCorrigido();
+                    int contadorPub = proximoContador();
 
-                    byte[] publicacao = empacotarPublicacao(usuario, canal, texto, timestamp, publishedTimestamp);
+                    byte[] publicacao = empacotarPublicacao(usuario, canal, texto, timestamp, publishedTimestamp, contadorPub);
                     pub.sendMore(canal);
                     pub.send(publicacao);
 
-                    salvarLinhaJson(ARQUIVO_PUBLICACOES,
-                        "{\"channel\":\"" + canal + "\",\"user\":\"" + usuario + "\",\"message\":\"" + texto.replace("\"", "'") + "\",\"request_timestamp\":" + timestamp + ",\"published_timestamp\":" + publishedTimestamp + "}"
+                    salvarLinhaJson(
+                        ARQUIVO_PUBLICACOES,
+                        "{\"channel\":\"" + canal + "\",\"user\":\"" + usuario + "\",\"message\":\"" + texto.replace("\"", "'") + "\",\"request_timestamp\":" + timestamp + ",\"published_timestamp\":" + publishedTimestamp + ",\"contador\":" + contadorPub + "}"
                     );
 
                     resposta = empacotarResposta("ok", "mensagem publicada em '" + canal + "'");
@@ -116,12 +141,16 @@ public class Server {
             }
 
             rep.send(resposta);
-            String msgLog = "[SERVER JAVA] tipo=" + tipo + 
-                " | user=" + usuario + 
-                " | canal=" + canal +
-                " | timestamp= " + timestamp;
 
+            String msgLog = "[SERVER JAVA] tipo=" + tipo +
+                " | user=" + usuario +
+                " | canal=" + canal +
+                " | contador=" + contadorServidor;
             System.out.println(msgLog);
+
+            if (contadorRequisicoes % 10 == 0) {
+                enviarHeartbeat(ref);
+            }
         }
     }
 
@@ -129,7 +158,58 @@ public class Server {
         return System.currentTimeMillis() / 1000.0;
     }
 
+    static double agoraCorrigido() {
+        return agora() + offsetRelogio;
+    }
+
+    static void atualizarContadorRecebido(int contadorRecebido) {
+        contadorServidor = Math.max(contadorServidor, contadorRecebido);
+    }
+
+    static int proximoContador() {
+        contadorServidor++;
+        return contadorServidor;
+    }
+
+    static void registrarNaReferencia(ZMQ.Socket ref) {
+        String json = "{\"type\":\"register\",\"name\":\"" + NOME_SERVIDOR + "\"}";
+        ref.send(json);
+
+        String resposta = ref.recvStr();
+        int idx = resposta.indexOf("\"rank\":");
+        if (idx >= 0) {
+            String resto = resposta.substring(idx + 7).replaceAll("[^0-9]", "");
+            if (!resto.isEmpty()) {
+                rankServidor = Integer.parseInt(resto);
+            }
+        }
+
+        System.out.println("[SERVER JAVA] Meu rank: " + rankServidor);
+    }
+
+    static void enviarHeartbeat(ZMQ.Socket ref) {
+        String json = "{\"type\":\"heartbeat\",\"name\":\"" + NOME_SERVIDOR + "\"}";
+        ref.send(json);
+
+        String resposta = ref.recvStr();
+        int idx = resposta.indexOf("\"timestamp\":");
+        if (idx >= 0) {
+            String resto = resposta.substring(idx + 12).replace("}", "").trim();
+            try {
+                double tempoRef = Double.parseDouble(resto);
+                offsetRelogio = tempoRef - agora();
+                System.out.println("[HEARTBEAT] tempo sincronizado: " + tempoRef);
+            } catch (Exception ignored) {
+            }
+        }
+
+        ref.send("{\"type\":\"list\"}");
+        String lista = ref.recvStr();
+        System.out.println("[SERVIDORES ATIVOS] " + lista);
+    }
+
     static void carregarCanais() {
+        canais.clear();
         try {
             if (Files.exists(Paths.get(ARQUIVO_CANAIS))) {
                 String conteudo = Files.readString(Paths.get(ARQUIVO_CANAIS)).trim();
@@ -138,9 +218,9 @@ public class Server {
                 if (!conteudo.isEmpty()) {
                     String[] partes = conteudo.split(",");
                     for (String parte : partes) {
-                        String canal = parte.trim();
-                        if (!canal.isEmpty()) {
-                            canais.add(canal);
+                        String c = parte.trim();
+                        if (!c.isEmpty()) {
+                            canais.add(c);
                         }
                     }
                 }
@@ -150,7 +230,8 @@ public class Server {
         }
     }
 
-    static void carregarLogins() {
+   static void carregarLogins() {
+        logins.clear();
         try {
             if (Files.exists(Paths.get(ARQUIVO_LOGINS))) {
                 List<String> linhas = Files.readAllLines(Paths.get(ARQUIVO_LOGINS));
@@ -223,13 +304,15 @@ public class Server {
     static byte[] empacotarResposta(String status, String message) throws Exception {
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
 
-        packer.packMapHeader(3);
+        packer.packMapHeader(4);
         packer.packString("status");
         packer.packString(status);
         packer.packString("message");
         packer.packString(message);
         packer.packString("timestamp");
-        packer.packDouble(agora());
+        packer.packDouble(agoraCorrigido());
+        packer.packString("contador");
+        packer.packInt(proximoContador());
 
         packer.close();
         return packer.toByteArray();
@@ -238,7 +321,7 @@ public class Server {
     static byte[] empacotarListaCanais() throws Exception {
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
 
-        packer.packMapHeader(3);
+        packer.packMapHeader(4);
         packer.packString("status");
         packer.packString("ok");
         packer.packString("channels");
@@ -249,16 +332,18 @@ public class Server {
         }
 
         packer.packString("timestamp");
-        packer.packDouble(agora());
+        packer.packDouble(agoraCorrigido());
+        packer.packString("contador");
+        packer.packInt(proximoContador());
 
         packer.close();
         return packer.toByteArray();
     }
 
-    static byte[] empacotarPublicacao(String user, String canal, String message, double requestTimestamp, double publishedTimestamp) throws Exception {
+    static byte[] empacotarPublicacao(String user, String canal, String message, double requestTimestamp, double publishedTimestamp, int contadorPub) throws Exception {
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
 
-        packer.packMapHeader(5);
+        packer.packMapHeader(6);
         packer.packString("user");
         packer.packString(user);
         packer.packString("channel");
@@ -269,6 +354,8 @@ public class Server {
         packer.packDouble(requestTimestamp);
         packer.packString("published_timestamp");
         packer.packDouble(publishedTimestamp);
+        packer.packString("contador");
+        packer.packInt(contadorPub);
 
         packer.close();
         return packer.toByteArray();
