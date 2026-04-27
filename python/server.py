@@ -14,26 +14,32 @@ socket_pub = context.socket(zmq.PUB)
 socket_pub.connect('tcp://proxy:5557')
 
 ref_socket = context.socket(zmq.REQ)
-ref_socket.connect("tcp://referencia:5560")
+ref_socket.connect('tcp://referencia:5560')
 
-nome_servidor = "server_python"
+nome_servidor = 'server_python'
 
 pasta_dados = Path('data')
 pasta_dados.mkdir(exist_ok=True)
 
-# arquivo_canais = pasta_dados / 'channels.json'
-# arquivo_logins = pasta_dados / 'logins.json'
 pasta_compartilhada = Path('/app/shared')
 pasta_compartilhada.mkdir(exist_ok=True)
 
 arquivo_canais = pasta_compartilhada / 'channels.json'
+arquivo_coordenador = pasta_compartilhada / 'coordenador.json'
+
 arquivo_logins = pasta_dados / 'logins.json'
 arquivo_requisicoes = pasta_dados / 'requests.jsonl'
 arquivo_publicacoes = pasta_dados / 'publications.jsonl'
 
 contador_server = 0
-offset_relogio = 0
 contador_requisicoes = 0
+offset_relogio = 0
+
+rank = None
+coordenador = ''
+servidores_ativos = []
+
+INTERVALO_SINCRONIZACAO = 15
 
 
 def ler_json(caminho, valor_padrao):
@@ -44,9 +50,10 @@ def ler_json(caminho, valor_padrao):
                 if not conteudo:
                     return valor_padrao
                 return json.loads(conteudo)
-        except (json.JSONDecodeError, OSError):
+        except Exception:
             return valor_padrao
     return valor_padrao
+
 
 def salvar_json(caminho, dados):
     with open(caminho, 'w', encoding='utf-8') as f:
@@ -66,13 +73,6 @@ def atualizar_contador_recebido(cont_recebido):
     global contador_server
     contador_server = max(contador_server, cont_recebido)
 
-def recarregar_canais():
-    global canais
-    canais = ler_json(arquivo_canais, [])
-
-def recarregar_logins():
-    global logins
-    logins = ler_json(arquivo_logins, [])
 
 def proximo_contador():
     global contador_server
@@ -80,28 +80,133 @@ def proximo_contador():
     return contador_server
 
 
+def recarregar_canais():
+    global canais
+    canais = ler_json(arquivo_canais, [])
+
+
+def recarregar_logins():
+    global logins
+    logins = ler_json(arquivo_logins, [])
+
+
+def registrar_no_servico_referencia():
+    global rank
+
+    ref_socket.send_json({
+        'type': 'register',
+        'name': nome_servidor
+    })
+
+    resposta = ref_socket.recv_json()
+    rank = resposta.get('rank')
+
+    print(f'[SERVER PYTHON] Meu rank: {rank}', flush=True)
+
+
+def pedir_lista_servidores():
+    global servidores_ativos
+
+    ref_socket.send_json({'type': 'list'})
+    resposta = ref_socket.recv_json()
+
+    if isinstance(resposta, list):
+        servidores_ativos = resposta
+    else:
+        servidores_ativos = []
+
+    print('[SERVIDORES ATIVOS]', flush=True)
+    for servidor in servidores_ativos:
+        print(f" - {servidor.get('name')} (rank={servidor.get('rank')})", flush=True)
+
+    return servidores_ativos
+
+
 def enviar_heartbeat():
+    ref_socket.send_json({
+        'type': 'heartbeat',
+        'name': nome_servidor
+    })
+
+    resposta = ref_socket.recv_json()
+    print(f'[HEARTBEAT] resposta={resposta}', flush=True)
+
+
+def publicar_coordenador(nome_coordenador):
+    mensagem = {
+        'type': 'coordinator_announce',
+        'coordinator': nome_coordenador,
+        'server': nome_servidor,
+        'timestamp': agora_corrigido(),
+        'contador': proximo_contador()
+    }
+
+    socket_pub.send_multipart([
+        b'servers',
+        msgpack.packb(mensagem, use_bin_type=True)
+    ])
+
+    print(f'[PUB SERVERS] coordenador eleito: {nome_coordenador}', flush=True)
+
+
+def salvar_coordenador(nome_coordenador):
+    dados = {
+        'coordinator': nome_coordenador,
+        'timestamp': time.time(),
+        'clock': contador_server
+    }
+    salvar_json(arquivo_coordenador, dados)
+
+
+def eleger_coordenador():
+    global coordenador
+
+    print('[ELEICAO] Iniciando eleição...', flush=True)
+
+    servidores = pedir_lista_servidores()
+
+    if not servidores:
+        print('[ELEICAO] Não há servidores ativos para eleger.', flush=True)
+        return
+
+    # Regra simples: vence quem tem o menor rank.
+    servidor_eleito = min(servidores, key=lambda s: s.get('rank', 999999))
+    coordenador = servidor_eleito.get('name')
+
+    salvar_coordenador(coordenador)
+    publicar_coordenador(coordenador)
+
+    print(f'[ELEICAO] Coordenador escolhido: {coordenador}', flush=True)
+
+
+def sou_coordenador():
+    return coordenador == nome_servidor
+
+def sincronizar_berkeley():
     global offset_relogio
 
-    ref_socket.send_json({
-        "type": "heartbeat",
-        "name": nome_servidor
-    })
-    resposta_ref = ref_socket.recv_json()
+    if coordenador == "":
+        return
 
-    tempo_ref = resposta_ref.get("timestamp")
-    if tempo_ref is not None:
-        offset_relogio = tempo_ref - time.time()
-        print(f"[HEARTBEAT] tempo sincronizado: {tempo_ref}", flush=True)
+    if coordenador == nome_servidor:
+        print(
+            f"[BERKELEY] Eu sou o coordenador ({nome_servidor}). Hora atual={agora_corrigido()}",
+            flush=True
+        )
+    else:
+        print(
+            f"[BERKELEY] Coordenador atual é {coordenador}. Aguardando sincronização dele.",
+            flush=True
+        )
 
-    ref_socket.send_json({
-        "type": "list"
-    })
-    lista_servidores = ref_socket.recv_json()
 
-    print("[SERVIDORES ATIVOS]", flush=True)
-    for s in lista_servidores:
-        print(f" - {s['name']} (rank={s['rank']})", flush=True)
+def parte4_a_cada_15_mensagens():
+    enviar_heartbeat()
+
+    if not coordenador:
+        eleger_coordenador()
+
+    sincronizar_berkeley()
 
 
 canais = ler_json(arquivo_canais, [])
@@ -109,15 +214,8 @@ logins = ler_json(arquivo_logins, [])
 
 print('[SERVER PYTHON] Iniciado...', flush=True)
 
-# registro inicial para obter rank
-ref_socket.send_json({
-    "type": "register",
-    "name": nome_servidor
-})
-resposta = ref_socket.recv_json()
-rank = resposta["rank"]
-
-print(f"[SERVER] Meu rank: {rank}", flush=True)
+registrar_no_servico_referencia()
+pedir_lista_servidores()
 
 while True:
     mensagem_bruta = socket_rep.recv()
@@ -134,7 +232,7 @@ while True:
 
     atualizar_contador_recebido(contador_recebido)
 
-    print("Contador servidor atualizado para:", contador_server, flush=True)
+    print(f'[CLOCK] contador servidor={contador_server}', flush=True)
 
     timestamp_recebimento = agora_corrigido()
 
@@ -234,9 +332,10 @@ while True:
         }
 
     resposta['contador'] = proximo_contador()
+    resposta['coordenador'] = coordenador
 
     print('[SERVER] Resposta:', resposta, flush=True)
     socket_rep.send(msgpack.packb(resposta, use_bin_type=True))
 
-    if contador_requisicoes % 10 == 0:
-        enviar_heartbeat()
+    if contador_requisicoes % INTERVALO_SINCRONIZACAO == 0:
+        parte4_a_cada_15_mensagens()

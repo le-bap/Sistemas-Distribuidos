@@ -25,8 +25,11 @@ const char *ARQUIVO_CANAIS = "/app/shared/channels.json";
 const char *ARQUIVO_LOGINS = "data/logins.json";
 const char *ARQUIVO_REQUISICOES = "data/requests.jsonl";
 const char *ARQUIVO_PUBLICACOES = "data/publications.jsonl";
+const char *ARQUIVO_COORDENADOR = "/app/shared/coordenador.json";
 
 const char *NOME_SERVIDOR = "server_c";
+
+char coordenador[64] = "";
 
 int contador_servidor = 0;
 int contador_requisicoes = 0;
@@ -182,7 +185,7 @@ void resposta_simples(void *socket, char *status, char *message) {
     msgpack_packer pk;
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
 
-    msgpack_pack_map(&pk, 4);
+    msgpack_pack_map(&pk, 5);
 
     pack_string(&pk, "status");
     pack_string(&pk, status);
@@ -196,6 +199,9 @@ void resposta_simples(void *socket, char *status, char *message) {
     pack_string(&pk, "contador");
     msgpack_pack_int(&pk, proximo_contador());
 
+    pack_string(&pk, "coordenador");
+    pack_string(&pk, coordenador);
+
     zmq_send(socket, sbuf.data, sbuf.size, 0);
     msgpack_sbuffer_destroy(&sbuf);
 }
@@ -207,7 +213,7 @@ void resposta_lista_canais(void *socket) {
     msgpack_packer pk;
     msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
 
-    msgpack_pack_map(&pk, 4);
+    msgpack_pack_map(&pk, 5);
 
     pack_string(&pk, "status");
     pack_string(&pk, "ok");
@@ -224,6 +230,9 @@ void resposta_lista_canais(void *socket) {
 
     pack_string(&pk, "contador");
     msgpack_pack_int(&pk, proximo_contador());
+
+    pack_string(&pk, "coordenador");
+    pack_string(&pk, coordenador);
 
     zmq_send(socket, sbuf.data, sbuf.size, 0);
     msgpack_sbuffer_destroy(&sbuf);
@@ -295,6 +304,123 @@ void registrar_na_referencia(void *ref_socket) {
     printf("[SERVER C] Meu rank: %d\n", rank_servidor);
 }
 
+void salvar_coordenador_arquivo() {
+    FILE *f = fopen(ARQUIVO_COORDENADOR, "w");
+    if (!f) return;
+
+    fprintf(
+        f,
+        "{\n  \"coordinator\": \"%s\",\n  \"timestamp\": %.0f,\n  \"clock\": %d\n}\n",
+        coordenador,
+        agora_corrigido(),
+        contador_servidor
+    );
+
+    fclose(f);
+}
+
+void publicar_coordenador(void *pub_socket) {
+    if (strlen(coordenador) == 0) return;
+
+    msgpack_sbuffer sbuf;
+    msgpack_sbuffer_init(&sbuf);
+
+    msgpack_packer pk;
+    msgpack_packer_init(&pk, &sbuf, msgpack_sbuffer_write);
+
+    msgpack_pack_map(&pk, 5);
+
+    pack_string(&pk, "type");
+    pack_string(&pk, "coordinator_announce");
+
+    pack_string(&pk, "coordinator");
+    pack_string(&pk, coordenador);
+
+    pack_string(&pk, "server");
+    pack_string(&pk, NOME_SERVIDOR);
+
+    pack_string(&pk, "timestamp");
+    msgpack_pack_double(&pk, agora_corrigido());
+
+    pack_string(&pk, "contador");
+    msgpack_pack_int(&pk, proximo_contador());
+
+    zmq_send(pub_socket, "servers", strlen("servers"), ZMQ_SNDMORE);
+    zmq_send(pub_socket, sbuf.data, sbuf.size, 0);
+
+    printf("[PUB SERVERS] coordenador eleito: %s\n", coordenador);
+
+    msgpack_sbuffer_destroy(&sbuf);
+}
+
+void escolher_coordenador_da_lista(char *lista_json) {
+    char *p = lista_json;
+    int melhor_rank = 999999;
+    char melhor_nome[64] = "";
+
+    while ((p = strstr(p, "\"name\"")) != NULL) {
+        char nome[64] = "";
+        int rank = 999999;
+
+        char *colon = strchr(p, ':');
+        if (!colon) break;
+
+        char *q1 = strchr(colon, '"');
+        if (!q1) break;
+
+        char *q2 = strchr(q1 + 1, '"');
+        if (!q2) break;
+
+        int tamanho_nome = q2 - q1 - 1;
+        if (tamanho_nome > 63) tamanho_nome = 63;
+        strncpy(nome, q1 + 1, tamanho_nome);
+        nome[tamanho_nome] = '\0';
+
+        char *rank_ptr = strstr(q2, "\"rank\"");
+        if (rank_ptr != NULL) {
+            char *rank_colon = strchr(rank_ptr, ':');
+            if (rank_colon != NULL) {
+                rank = atoi(rank_colon + 1);
+            }
+        }
+
+        printf(" - %s (rank=%d)\n", nome, rank);
+
+        if (rank < melhor_rank) {
+            melhor_rank = rank;
+            strcpy(melhor_nome, nome);
+        }
+
+        p = q2 + 1;
+    }
+
+    if (strlen(melhor_nome) > 0) {
+        strcpy(coordenador, melhor_nome);
+    }
+}
+
+void pedir_lista_servidores(void *ref_socket, void *pub_socket) {
+    char json[256];
+    char buffer[BUFFER];
+
+    snprintf(json, sizeof(json), "{\"type\":\"list\"}");
+    zmq_send(ref_socket, json, strlen(json), 0);
+
+    int tamanho = zmq_recv(ref_socket, buffer, sizeof(buffer) - 1, 0);
+    if (tamanho <= 0) return;
+
+    buffer[tamanho] = '\0';
+
+    printf("[SERVIDORES ATIVOS]\n");
+    escolher_coordenador_da_lista(buffer);
+
+    if (strlen(coordenador) > 0) {
+        salvar_coordenador_arquivo();
+        publicar_coordenador(pub_socket);
+        printf("[ELEICAO] Coordenador escolhido: %s\n", coordenador);
+    }
+}
+
 void enviar_heartbeat(void *ref_socket) {
     char json[256];
     char buffer[BUFFER];
@@ -302,29 +428,42 @@ void enviar_heartbeat(void *ref_socket) {
     snprintf(json, sizeof(json),
              "{\"type\":\"heartbeat\",\"name\":\"%s\"}",
              NOME_SERVIDOR);
+
     zmq_send(ref_socket, json, strlen(json), 0);
 
     int tamanho = zmq_recv(ref_socket, buffer, sizeof(buffer) - 1, 0);
     if (tamanho > 0) {
         buffer[tamanho] = '\0';
+        printf("[HEARTBEAT] resposta=%s\n", buffer);
+    }
+}
 
-        double tempo_ref = 0;
-        char *ptr = strstr(buffer, "\"timestamp\":");
-        if (ptr != NULL) {
-            sscanf(ptr, "\"timestamp\":%lf", &tempo_ref);
-            offset_relogio = tempo_ref - agora();
-            printf("[HEARTBEAT] tempo sincronizado: %.0f\n", tempo_ref);
-        }
+int sou_coordenador() {
+    return strcmp(coordenador, NOME_SERVIDOR) == 0;
+}
+
+void sincronizar_berkeley() {
+    if (strlen(coordenador) == 0) {
+        return;
     }
 
-    snprintf(json, sizeof(json), "{\"type\":\"list\"}");
-    zmq_send(ref_socket, json, strlen(json), 0);
-
-    tamanho = zmq_recv(ref_socket, buffer, sizeof(buffer) - 1, 0);
-    if (tamanho > 0) {
-        buffer[tamanho] = '\0';
-        printf("[SERVIDORES ATIVOS] %s\n", buffer);
+    if (sou_coordenador()) {
+        salvar_coordenador_arquivo();
+        printf("[BERKELEY] Eu sou o coordenador (%s). Hora atual=%.0f\n", NOME_SERVIDOR, agora_corrigido());
+    } else {
+        printf("[BERKELEY] Coordenador atual é %s. Aguardando sincronização dele.\n", coordenador);
     }
+}
+
+void parte4_a_cada_15_mensagens(void *ref_socket, void *pub_socket) {
+    enviar_heartbeat(ref_socket);
+
+    if (strlen(coordenador) == 0) {
+        printf("[ELEICAO] Iniciando eleição...\n");
+        pedir_lista_servidores(ref_socket, pub_socket);
+    }
+
+    sincronizar_berkeley();
 }
 
 int main() {
@@ -463,8 +602,8 @@ int main() {
             resposta_simples(rep_socket, "error", "tipo inválido");
         }
 
-        if (contador_requisicoes % 10 == 0) {
-            enviar_heartbeat(ref_socket);
+        if (contador_requisicoes % 15 == 0) {
+            parte4_a_cada_15_mensagens(ref_socket, pub_socket);
         }
 
         msgpack_unpacked_destroy(&msg);

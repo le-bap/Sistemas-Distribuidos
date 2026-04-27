@@ -10,18 +10,21 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Server {
     static List<String> canais = new ArrayList<>();
     static List<String> logins = new ArrayList<>();
 
     static final String PASTA_DADOS = "data";
-    // static final String ARQUIVO_CANAIS = "data/channels.json";
-    // static final String ARQUIVO_LOGINS = "data/logins.json";
     static final String ARQUIVO_CANAIS = "/app/shared/channels.json";
     static final String ARQUIVO_LOGINS = "data/logins.json";
     static final String ARQUIVO_REQUISICOES = "data/requests.jsonl";
     static final String ARQUIVO_PUBLICACOES = "data/publications.jsonl";
+
+    static final String ARQUIVO_COORDENADOR = "/app/shared/coordenador.json";
+    static final String ARQUIVO_HORA_COORDENADOR = "/app/shared/hora_coordenador.json";
 
     static final String NOME_SERVIDOR = "server_java";
 
@@ -29,9 +32,11 @@ public class Server {
     static int contadorRequisicoes = 0;
     static double offsetRelogio = 0.0;
     static int rankServidor = 0;
+    static String coordenador = "";
 
     public static void main(String[] args) throws Exception {
         new File(PASTA_DADOS).mkdirs();
+        new File("/app/shared").mkdirs();
 
         carregarCanais();
         carregarLogins();
@@ -57,6 +62,7 @@ public class Server {
 
             carregarCanais();
             carregarLogins();
+            lerCoordenadorDoArquivo();
 
             MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(mensagemBruta);
             int mapSize = unpacker.unpackMapHeader();
@@ -145,11 +151,12 @@ public class Server {
             String msgLog = "[SERVER JAVA] tipo=" + tipo +
                 " | user=" + usuario +
                 " | canal=" + canal +
-                " | contador=" + contadorServidor;
+                " | contador=" + contadorServidor +
+                " | coordenador=" + coordenador;
             System.out.println(msgLog);
 
-            if (contadorRequisicoes % 10 == 0) {
-                enviarHeartbeat(ref);
+            if (contadorRequisicoes % 15 == 0) {
+                enviarHeartbeat(ref, pub);
             }
         }
     }
@@ -187,25 +194,125 @@ public class Server {
         System.out.println("[SERVER JAVA] Meu rank: " + rankServidor);
     }
 
-    static void enviarHeartbeat(ZMQ.Socket ref) {
+    static void enviarHeartbeat(ZMQ.Socket ref, ZMQ.Socket pub) {
         String json = "{\"type\":\"heartbeat\",\"name\":\"" + NOME_SERVIDOR + "\"}";
         ref.send(json);
 
         String resposta = ref.recvStr();
-        int idx = resposta.indexOf("\"timestamp\":");
-        if (idx >= 0) {
-            String resto = resposta.substring(idx + 12).replace("}", "").trim();
-            try {
-                double tempoRef = Double.parseDouble(resto);
-                offsetRelogio = tempoRef - agora();
-                System.out.println("[HEARTBEAT] tempo sincronizado: " + tempoRef);
-            } catch (Exception ignored) {
-            }
-        }
+        System.out.println("[HEARTBEAT] resposta=" + resposta);
 
         ref.send("{\"type\":\"list\"}");
         String lista = ref.recvStr();
-        System.out.println("[SERVIDORES ATIVOS] " + lista);
+
+        List<ServidorInfo> servidores = extrairServidores(lista);
+
+        System.out.println("[SERVIDORES ATIVOS]");
+        for (ServidorInfo s : servidores) {
+            System.out.println(" - " + s.nome + " (rank=" + s.rank + ")");
+        }
+
+        if (coordenador.equals("")) {
+            iniciarEleicao(servidores, pub);
+        }
+
+        sincronizarBerkeley();
+    }
+
+    static void iniciarEleicao(List<ServidorInfo> servidores, ZMQ.Socket pub) {
+        System.out.println("[ELEICAO] Iniciando eleição...");
+
+        String eleito = NOME_SERVIDOR;
+        int menorRank = rankServidor;
+
+        for (ServidorInfo s : servidores) {
+            if (s.rank < menorRank) {
+                menorRank = s.rank;
+                eleito = s.nome;
+            }
+        }
+
+        coordenador = eleito;
+        salvarCoordenador();
+        publicarCoordenador(pub, eleito);
+
+        System.out.println("[ELEICAO] Coordenador escolhido: " + coordenador);
+    }
+
+    static void publicarCoordenador(ZMQ.Socket pub, String eleito) {
+        pub.sendMore("servers");
+        pub.send(eleito);
+        System.out.println("[PUB SERVERS] coordenador eleito: " + eleito);
+    }
+
+    static void sincronizarBerkeley() {
+        if (coordenador.equals("")) {
+            return;
+        }
+
+        if (coordenador.equals(NOME_SERVIDOR)) {
+            double hora = agoraCorrigido();
+            salvarHoraCoordenador(hora);
+            System.out.println("[BERKELEY] Eu sou o coordenador (" + NOME_SERVIDOR + "). Hora atual=" + hora);
+        } else {
+            System.out.println("[BERKELEY] Coordenador atual é " + coordenador + ". Aguardando sincronização dele.");
+        }
+    }
+
+    static void salvarCoordenador() {
+        try {
+            Files.writeString(
+                Paths.get(ARQUIVO_COORDENADOR),
+                "{\"coordenador\":\"" + coordenador + "\"}"
+            );
+        } catch (Exception e) {
+            System.out.println("[ERRO] ao salvar coordenador");
+        }
+    }
+
+    static void lerCoordenadorDoArquivo() {
+        try {
+            if (!Files.exists(Paths.get(ARQUIVO_COORDENADOR))) {
+                return;
+            }
+
+            String conteudo = Files.readString(Paths.get(ARQUIVO_COORDENADOR));
+            int idx = conteudo.indexOf("\"coordenador\":");
+            if (idx >= 0) {
+                String resto = conteudo.substring(idx + 15);
+                resto = resto.replace("\"", "").replace("}", "").trim();
+                if (!resto.isEmpty()) {
+                    coordenador = resto;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("[ERRO] ao ler coordenador");
+        }
+    }
+
+    static void salvarHoraCoordenador(double hora) {
+        try {
+            Files.writeString(
+                Paths.get(ARQUIVO_HORA_COORDENADOR),
+                "{\"coordenador\":\"" + NOME_SERVIDOR + "\",\"hora\":" + hora + "}"
+            );
+        } catch (Exception e) {
+            System.out.println("[ERRO] ao salvar hora do coordenador");
+        }
+    }
+
+    static List<ServidorInfo> extrairServidores(String lista) {
+        List<ServidorInfo> servidores = new ArrayList<>();
+
+        Pattern p = Pattern.compile("\\{\\s*\\\"name\\\"\\s*:\\s*\\\"([^\\\"]+)\\\"\\s*,\\s*\\\"rank\\\"\\s*:\\s*(\\d+)\\s*\\}");
+        Matcher m = p.matcher(lista);
+
+        while (m.find()) {
+            String nome = m.group(1);
+            int rank = Integer.parseInt(m.group(2));
+            servidores.add(new ServidorInfo(nome, rank));
+        }
+
+        return servidores;
     }
 
     static void carregarCanais() {
@@ -230,7 +337,7 @@ public class Server {
         }
     }
 
-   static void carregarLogins() {
+    static void carregarLogins() {
         logins.clear();
         try {
             if (Files.exists(Paths.get(ARQUIVO_LOGINS))) {
@@ -304,7 +411,7 @@ public class Server {
     static byte[] empacotarResposta(String status, String message) throws Exception {
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
 
-        packer.packMapHeader(4);
+        packer.packMapHeader(5);
         packer.packString("status");
         packer.packString(status);
         packer.packString("message");
@@ -313,6 +420,8 @@ public class Server {
         packer.packDouble(agoraCorrigido());
         packer.packString("contador");
         packer.packInt(proximoContador());
+        packer.packString("coordenador");
+        packer.packString(coordenador);
 
         packer.close();
         return packer.toByteArray();
@@ -321,7 +430,7 @@ public class Server {
     static byte[] empacotarListaCanais() throws Exception {
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
 
-        packer.packMapHeader(4);
+        packer.packMapHeader(5);
         packer.packString("status");
         packer.packString("ok");
         packer.packString("channels");
@@ -335,6 +444,8 @@ public class Server {
         packer.packDouble(agoraCorrigido());
         packer.packString("contador");
         packer.packInt(proximoContador());
+        packer.packString("coordenador");
+        packer.packString(coordenador);
 
         packer.close();
         return packer.toByteArray();
@@ -359,5 +470,15 @@ public class Server {
 
         packer.close();
         return packer.toByteArray();
+    }
+
+    static class ServidorInfo {
+        String nome;
+        int rank;
+
+        ServidorInfo(String nome, int rank) {
+            this.nome = nome;
+            this.rank = rank;
+        }
     }
 }
