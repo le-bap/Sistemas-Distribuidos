@@ -8,13 +8,14 @@ socket.bind("tcp://*:5560")
 servidores = {}
 proximo_rank = 1
 
-TIMEOUT = 20
+TIMEOUT = 6
 socket.RCVTIMEO = 1000
 
 
 def limpar_servidores_mortos():
     agora = time.time()
     mortos = []
+    print(f"ENTROU AQUI ENTROU AQUI ENTROU AQUI", flush=True)
 
     for nome, dados in list(servidores.items()):
         diff = agora - dados["last_seen"]

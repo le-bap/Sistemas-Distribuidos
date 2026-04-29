@@ -199,15 +199,24 @@ def sincronizar_berkeley():
             flush=True
         )
 
+def coordenador_vivo(servidores):
+    nomes = [s.get('name') for s in servidores]
+    return coordenador in nomes
 
-def parte4_a_cada_15_mensagens():
+ def parte4_a_cada_15_mensagens():
     enviar_heartbeat()
 
-    if not coordenador:
+    servidores = pedir_lista_servidores()
+
+    if not coordenador or not coordenador_vivo(servidores):
+        print('[ELEICAO] Coordenador caiu ou inexistente!', flush=True)
         eleger_coordenador()
 
-    sincronizar_berkeley()
+    # 🔥 Berkeley (REQ relógio)
+    if coordenador and coordenador != nome_servidor:
+        print(f"[BERKELEY] Pedindo hora para {coordenador}", flush=True)
 
+    sincronizar_berkeley()
 
 canais = ler_json(arquivo_canais, [])
 logins = ler_json(arquivo_logins, [])
@@ -323,6 +332,15 @@ while True:
                 'message': f"mensagem publicada em '{canal}'",
                 'timestamp': agora_corrigido()
             }
+            
+    elif tipo == 'election':
+        print('[ELEICAO] Recebi pedido de eleição', flush=True)
+
+        resposta = {
+            'status': 'ok',
+            'message': 'OK',
+            'timestamp': agora_corrigido()
+        }
 
     else:
         resposta = {

@@ -142,7 +142,9 @@ public class Server {
 
                     resposta = empacotarResposta("ok", "mensagem publicada em '" + canal + "'");
                 }
-            } else {
+            } else if (tipo.equals("election")) {
+                resposta = empacotarResposta("ok", "OK");
+            }else {
                 resposta = empacotarResposta("error", "tipo inválido");
             }
 
@@ -195,24 +197,32 @@ public class Server {
     }
 
     static void enviarHeartbeat(ZMQ.Socket ref, ZMQ.Socket pub) {
-        String json = "{\"type\":\"heartbeat\",\"name\":\"" + NOME_SERVIDOR + "\"}";
-        ref.send(json);
-
+        ref.send("{\"type\":\"heartbeat\",\"name\":\"" + NOME_SERVIDOR + "\"}");
         String resposta = ref.recvStr();
-        System.out.println("[HEARTBEAT] resposta=" + resposta);
 
         ref.send("{\"type\":\"list\"}");
         String lista = ref.recvStr();
 
         List<ServidorInfo> servidores = extrairServidores(lista);
 
-        System.out.println("[SERVIDORES ATIVOS]");
+        boolean coordenadorVivo = false;
+
         for (ServidorInfo s : servidores) {
-            System.out.println(" - " + s.nome + " (rank=" + s.rank + ")");
+            if (s.nome.equals(coordenador)) {
+                coordenadorVivo = true;
+                break;
+            }
         }
 
-        if (coordenador.equals("")) {
+        // 🔥 CORREÇÃO
+        if (coordenador.equals("") || !coordenadorVivo) {
+            System.out.println("[ELEICAO] Coordenador inválido ou caiu! Nova eleição...");
             iniciarEleicao(servidores, pub);
+        }
+
+        // 🔥 Berkeley
+        if (!coordenador.equals(NOME_SERVIDOR)) {
+            System.out.println("[BERKELEY] Pedindo hora ao coordenador...");
         }
 
         sincronizarBerkeley();
