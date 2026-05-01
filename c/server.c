@@ -1,5 +1,6 @@
 #include <zmq.h>
 #include <msgpack.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,6 +8,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <pthread.h>
 
 #define MAX_CANAIS 1000
 #define MAX_LOGINS 1000
@@ -19,8 +21,6 @@ char *logins[MAX_LOGINS];
 int qtd_logins = 0;
 
 const char *PASTA_DADOS = "data";
-// const char *ARQUIVO_CANAIS = "data/channels.json";
-// const char *ARQUIVO_LOGINS = "data/logins.json";
 const char *ARQUIVO_CANAIS = "/app/shared/channels.json";
 const char *ARQUIVO_LOGINS = "data/logins.json";
 const char *ARQUIVO_REQUISICOES = "data/requests.jsonl";
@@ -29,12 +29,19 @@ const char *ARQUIVO_COORDENADOR = "/app/shared/coordenador.json";
 
 const char *NOME_SERVIDOR = "server_c";
 
+#define PORTA_DIRETA_C      "tcp://*:5570"
+#define ADDR_SERVER_C       "tcp://server_c:5570"
+#define ADDR_SERVER_PYTHON  "tcp://server_python:5571"
+#define ADDR_SERVER_JAVA    "tcp://server_java:5572"
+
 char coordenador[64] = "";
 
 int contador_servidor = 0;
 int contador_requisicoes = 0;
 double offset_relogio = 0.0;
 int rank_servidor = 0;
+
+void *contexto_global = NULL;
 
 double agora() {
     return (double)time(NULL);
@@ -353,7 +360,66 @@ void publicar_coordenador(void *pub_socket) {
     msgpack_sbuffer_destroy(&sbuf);
 }
 
-void escolher_coordenador_da_lista(char *lista_json) {
+const char* porta_do_servidor(const char *nome) {
+    if (strcmp(nome, "server_c") == 0)      return ADDR_SERVER_C;
+    if (strcmp(nome, "server_python") == 0) return ADDR_SERVER_PYTHON;
+    if (strcmp(nome, "server_java") == 0)   return ADDR_SERVER_JAVA;
+    return NULL;
+}
+
+void *thread_servidor_direto(void *arg) {
+    void *sock = zmq_socket(contexto_global, ZMQ_REP);
+    zmq_bind(sock, PORTA_DIRETA_C);
+
+    printf("[SERVER C] Thread direta escutando na porta 5570\n");
+
+    char buf[256];
+    while (1) {
+        int n = zmq_recv(sock, buf, sizeof(buf) - 1, 0);
+        if (n <= 0) continue;
+        buf[n] = '\0';
+
+        if (strstr(buf, "election")) {
+            const char *resp = "{\"status\":\"ok\"}";
+            zmq_send(sock, resp, strlen(resp), 0);
+        } else if (strstr(buf, "get_time")) {
+            char resp[64];
+            snprintf(resp, sizeof(resp), "{\"time\":%.3f}", agora_corrigido());
+            zmq_send(sock, resp, strlen(resp), 0);
+        } else {
+            const char *resp = "{\"status\":\"error\"}";
+            zmq_send(sock, resp, strlen(resp), 0);
+        }
+    }
+    return NULL;
+}
+
+int coordenador_esta_vivo() {
+    if (strlen(coordenador) == 0) return 0;
+
+    const char *porta = porta_do_servidor(coordenador);
+    if (!porta) return 0;
+
+    void *sock = zmq_socket(contexto_global, ZMQ_REQ);
+    int timeout = 1000;
+    zmq_setsockopt(sock, ZMQ_RCVTIMEO, &timeout, sizeof(timeout));
+    zmq_connect(sock, porta);
+
+    const char *msg = "{\"type\":\"election\"}";
+    zmq_send(sock, msg, strlen(msg), 0);
+
+    char resp[64];
+    int n = zmq_recv(sock, resp, sizeof(resp) - 1, 0);
+    zmq_close(sock);
+
+    if (n > 0) {
+        resp[n] = '\0';
+        return strstr(resp, "ok") != NULL ? 1 : 0;
+    }
+    return 0;
+}
+
+void eleger_coordenador_direto(char *lista_json, void *pub_socket) {
     char *p = lista_json;
     int melhor_rank = 999999;
     char melhor_nome[64] = "";
@@ -384,9 +450,30 @@ void escolher_coordenador_da_lista(char *lista_json) {
             }
         }
 
-        printf(" - %s (rank=%d)\n", nome, rank);
+        const char *porta = porta_do_servidor(nome);
+        int vivo = 0;
+        if (porta) {
+            void *sock = zmq_socket(contexto_global, ZMQ_REQ);
+            int timeout = 1000;
+            zmq_setsockopt(sock, ZMQ_RCVTIMEO, &timeout, sizeof(timeout));
+            zmq_connect(sock, porta);
 
-        if (rank < melhor_rank) {
+            const char *msg = "{\"type\":\"election\"}";
+            zmq_send(sock, msg, strlen(msg), 0);
+
+            char resp[64];
+            int n = zmq_recv(sock, resp, sizeof(resp) - 1, 0);
+            zmq_close(sock);
+
+            if (n > 0) {
+                vivo = 1;
+                printf("[ELEICAO] %s respondeu OK\n", nome);
+            } else {
+                printf("[ELEICAO] %s nao respondeu\n", nome);
+            }
+        }
+
+        if (vivo && rank < melhor_rank) {
             melhor_rank = rank;
             strcpy(melhor_nome, nome);
         }
@@ -396,6 +483,9 @@ void escolher_coordenador_da_lista(char *lista_json) {
 
     if (strlen(melhor_nome) > 0) {
         strcpy(coordenador, melhor_nome);
+        salvar_coordenador_arquivo();
+        publicar_coordenador(pub_socket);
+        printf("[ELEICAO] Coordenador eleito: %s\n", coordenador);
     }
 }
 
@@ -412,12 +502,16 @@ void pedir_lista_servidores(void *ref_socket, void *pub_socket) {
     buffer[tamanho] = '\0';
 
     printf("[SERVIDORES ATIVOS]\n");
-    escolher_coordenador_da_lista(buffer);
 
-    if (strlen(coordenador) > 0) {
-        salvar_coordenador_arquivo();
-        publicar_coordenador(pub_socket);
-        printf("[ELEICAO] Coordenador escolhido: %s\n", coordenador);
+    if (!coordenador_esta_vivo()) {
+        if (strlen(coordenador) > 0) {
+            printf("[FALHA] Coordenador caiu: %s\n", coordenador);
+        }
+        coordenador[0] = '\0';
+        printf("[ELEICAO] Escolhendo novo coordenador...\n");
+        eleger_coordenador_direto(buffer, pub_socket);
+    } else {
+        printf("[OK] Coordenador ainda ativo: %s\n", coordenador);
     }
 }
 
@@ -443,25 +537,50 @@ int sou_coordenador() {
 }
 
 void sincronizar_berkeley() {
-    if (strlen(coordenador) == 0) {
+    if (strlen(coordenador) == 0) return;
+
+    if (sou_coordenador()) {
+        printf("[BERKELEY] Sou coordenador (%s), hora=%.0f\n", NOME_SERVIDOR, agora_corrigido());
         return;
     }
 
-    if (sou_coordenador()) {
-        salvar_coordenador_arquivo();
-        printf("[BERKELEY] Eu sou o coordenador (%s). Hora atual=%.0f\n", NOME_SERVIDOR, agora_corrigido());
+    const char *porta = porta_do_servidor(coordenador);
+    if (!porta) return;
+
+    void *sock = zmq_socket(contexto_global, ZMQ_REQ);
+    int timeout = 2000;
+    zmq_setsockopt(sock, ZMQ_RCVTIMEO, &timeout, sizeof(timeout));
+    zmq_connect(sock, porta);
+
+    const char *req = "{\"type\":\"get_time\"}";
+    zmq_send(sock, req, strlen(req), 0);
+
+    char buf[128];
+    int n = zmq_recv(sock, buf, sizeof(buf) - 1, 0);
+    zmq_close(sock);
+
+    if (n > 0) {
+        buf[n] = '\0';
+        double hora_coordenador = 0.0;
+        char *ptr = strstr(buf, "\"time\":");
+        if (ptr) {
+            sscanf(ptr, "\"time\":%lf", &hora_coordenador);
+            if (hora_coordenador > 0) {
+                offset_relogio = hora_coordenador - agora();
+                printf("[BERKELEY] Offset atualizado: %.4f\n", offset_relogio);
+            }
+        }
     } else {
-        printf("[BERKELEY] Coordenador atual é %s. Aguardando sincronização dele.\n", coordenador);
+        printf("[ERRO BERKELEY] %s\n", coordenador);
     }
 }
 
 void parte4_a_cada_15_mensagens(void *ref_socket, void *pub_socket) {
     enviar_heartbeat(ref_socket);
 
-    if (strlen(coordenador) == 0) {
-        printf("[ELEICAO] Iniciando eleição...\n");
-        pedir_lista_servidores(ref_socket, pub_socket);
-    }
+    printf("[CHECK] Verificando coordenador...\n");
+
+    pedir_lista_servidores(ref_socket, pub_socket);
 
     sincronizar_berkeley();
 }
@@ -470,25 +589,36 @@ int main() {
     criar_pasta_dados();
     setvbuf(stdout, NULL, _IONBF, 0);
 
-    void *contexto = zmq_ctx_new();
+    contexto_global = zmq_ctx_new();
 
-    void *rep_socket = zmq_socket(contexto, ZMQ_REP);
+    void *rep_socket = zmq_socket(contexto_global, ZMQ_REP);
     zmq_connect(rep_socket, "tcp://broker:5556");
 
-    void *pub_socket = zmq_socket(contexto, ZMQ_PUB);
+    int timeout = 1000;
+    zmq_setsockopt(rep_socket, ZMQ_RCVTIMEO, &timeout, sizeof(timeout));
+
+    void *pub_socket = zmq_socket(contexto_global, ZMQ_PUB);
     zmq_connect(pub_socket, "tcp://proxy:5557");
 
-    void *ref_socket = zmq_socket(contexto, ZMQ_REQ);
+    void *ref_socket = zmq_socket(contexto_global, ZMQ_REQ);
     zmq_connect(ref_socket, "tcp://referencia:5560");
 
     printf("[SERVER C] Iniciado...\n");
 
     registrar_na_referencia(ref_socket);
 
+    pthread_t tid;
+    pthread_create(&tid, NULL, thread_servidor_direto, NULL);
+    pthread_detach(tid);
+
+    int contador_requisicoes = 0;
     while (1) {
         char buffer[BUFFER];
         int tamanho = zmq_recv(rep_socket, buffer, sizeof(buffer), 0);
-        if (tamanho <= 0) continue;
+
+        if (tamanho == -1 && errno == EAGAIN) {
+            continue;
+        }
 
         carregar_canais();
         carregar_logins();

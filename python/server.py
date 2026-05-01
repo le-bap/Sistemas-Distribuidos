@@ -1,5 +1,6 @@
 import json
 import time
+import threading
 from pathlib import Path
 
 import msgpack
@@ -16,7 +17,16 @@ socket_pub.connect('tcp://proxy:5557')
 ref_socket = context.socket(zmq.REQ)
 ref_socket.connect('tcp://referencia:5560')
 
+socket_server = context.socket(zmq.REP)
+socket_server.bind('tcp://*:5571')
+
 nome_servidor = 'server_python'
+
+PORTA_SERVIDORES = {
+    'server_c':      'tcp://server_c:5570',
+    'server_python': 'tcp://server_python:5571',
+    'server_java':   'tcp://server_java:5572',
+}
 
 pasta_dados = Path('data')
 pasta_dados.mkdir(exist_ok=True)
@@ -158,6 +168,27 @@ def salvar_coordenador(nome_coordenador):
     salvar_json(arquivo_coordenador, dados)
 
 
+def coordenador_esta_vivo():
+    global coordenador
+    if not coordenador:
+        return False
+    porta = PORTA_SERVIDORES.get(coordenador)
+    if not porta:
+        return False
+    sock = context.socket(zmq.REQ)
+    try:
+        sock.setsockopt(zmq.RCVTIMEO, 1000)
+        sock.connect(porta)
+        sock.send_json({'type': 'election'})
+        resp = sock.recv_json()
+        sock.close()
+        return resp.get('status') == 'ok'
+    except Exception:
+        sock.close()
+        coordenador = ''
+        return False
+
+
 def eleger_coordenador():
     global coordenador
 
@@ -169,8 +200,31 @@ def eleger_coordenador():
         print('[ELEICAO] Não há servidores ativos para eleger.', flush=True)
         return
 
-    # Regra simples: vence quem tem o menor rank.
-    servidor_eleito = min(servidores, key=lambda s: s.get('rank', 999999))
+    # contata cada servidor diretamente para confirmar que está vivo
+    servidores_vivos = []
+    for servidor in servidores:
+        nome = servidor.get('name')
+        porta = PORTA_SERVIDORES.get(nome)
+        if not porta:
+            continue
+        sock = context.socket(zmq.REQ)
+        try:
+            sock.setsockopt(zmq.RCVTIMEO, 1000)
+            sock.connect(porta)
+            sock.send_json({'type': 'election'})
+            resposta = sock.recv_json()
+            sock.close()
+            if resposta.get('status') == 'ok':
+                servidores_vivos.append(servidor)
+                print(f'[ELEICAO] {nome} respondeu OK', flush=True)
+        except Exception:
+            sock.close()
+            print(f'[ELEICAO] {nome} não respondeu', flush=True)
+
+    if not servidores_vivos:
+        servidores_vivos = servidores
+
+    servidor_eleito = min(servidores_vivos, key=lambda s: s.get('rank', 999999))
     coordenador = servidor_eleito.get('name')
 
     salvar_coordenador(coordenador)
@@ -182,29 +236,68 @@ def eleger_coordenador():
 def sou_coordenador():
     return coordenador == nome_servidor
 
+
 def sincronizar_berkeley():
     global offset_relogio
 
-    if coordenador == "":
+    if not coordenador:
         return
 
     if coordenador == nome_servidor:
-        print(
-            f"[BERKELEY] Eu sou o coordenador ({nome_servidor}). Hora atual={agora_corrigido()}",
-            flush=True
-        )
-    else:
-        print(
-            f"[BERKELEY] Coordenador atual é {coordenador}. Aguardando sincronização dele.",
-            flush=True
-        )
+        print(f'[BERKELEY] Sou coordenador ({nome_servidor})', flush=True)
+        return
+
+    # pede hora diretamente ao coordenador
+    porta = PORTA_SERVIDORES.get(coordenador)
+    if not porta:
+        return
+
+    try:
+        sock = context.socket(zmq.REQ)
+        sock.setsockopt(zmq.RCVTIMEO, 2000)
+        sock.connect(porta)
+        sock.send_json({'type': 'get_time'})
+        resposta = sock.recv_json()
+        sock.close()
+
+        if 'time' in resposta:
+            hora_correta = resposta['time']
+            offset_relogio = hora_correta - time.time()
+            print(f'[BERKELEY] Ajustando relógio. Offset={offset_relogio}', flush=True)
+
+    except Exception as e:
+        print(f'[ERRO BERKELEY] {e}', flush=True)
+
+
+def thread_servidor_direto():
+    """Responde requisicoes diretas de outros servidores (eleicao e berkeley)."""
+    while True:
+        try:
+            msg = socket_server.recv_json()
+            tipo = msg.get('type')
+
+            if tipo == 'election':
+                socket_server.send_json({'status': 'ok'})
+
+            elif tipo == 'get_time':
+                socket_server.send_json({'time': agora_corrigido()})
+
+            else:
+                socket_server.send_json({'status': 'error'})
+
+        except Exception as e:
+            print(f'[ERRO SERVER DIRETO] {e}', flush=True)
 
 
 def parte4_a_cada_15_mensagens():
+    global coordenador
     enviar_heartbeat()
 
-    if not coordenador:
+    if not coordenador_esta_vivo():
+        coordenador = ''
         eleger_coordenador()
+    else:
+        print(f'[OK] Coordenador ainda ativo: {coordenador}', flush=True)
 
     sincronizar_berkeley()
 
@@ -216,9 +309,18 @@ print('[SERVER PYTHON] Iniciado...', flush=True)
 
 registrar_no_servico_referencia()
 pedir_lista_servidores()
+socket_rep.setsockopt(zmq.RCVTIMEO, 1000)
+
+# inicia thread para atender outros servidores diretamente
+t = threading.Thread(target=thread_servidor_direto, daemon=True)
+t.start()
 
 while True:
-    mensagem_bruta = socket_rep.recv()
+    try:
+        mensagem_bruta = socket_rep.recv()
+    except zmq.Again:
+        continue
+
     mensagem = msgpack.unpackb(mensagem_bruta, raw=False)
 
     recarregar_canais()

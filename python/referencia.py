@@ -83,6 +83,11 @@ while True:
             "status": "ok"
         }
 
+    elif tipo == "get_time":
+        resposta = {
+            "time": time.time()
+        }
+
     else:
         resposta = {
             "status": "error",

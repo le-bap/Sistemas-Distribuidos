@@ -9,7 +9,9 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,6 +29,14 @@ public class Server {
     static final String ARQUIVO_HORA_COORDENADOR = "/app/shared/hora_coordenador.json";
 
     static final String NOME_SERVIDOR = "server_java";
+    static final int PORTA_DIRETA = 5572;
+
+    static final Map<String, String> PORTAS = new HashMap<>();
+    static {
+        PORTAS.put("server_c",      "tcp://server_c:5570");
+        PORTAS.put("server_python", "tcp://server_python:5571");
+        PORTAS.put("server_java",   "tcp://server_java:5572");
+    }
 
     static int contadorServidor = 0;
     static int contadorRequisicoes = 0;
@@ -56,13 +66,14 @@ public class Server {
 
         registrarNaReferencia(ref);
 
+        iniciarThreadServidor(context);
+
         while (true) {
             byte[] mensagemBruta = rep.recv();
             contadorRequisicoes++;
 
             carregarCanais();
             carregarLogins();
-            lerCoordenadorDoArquivo();
 
             MessageUnpacker unpacker = MessagePack.newDefaultUnpacker(mensagemBruta);
             int mapSize = unpacker.unpackMapHeader();
@@ -155,10 +166,34 @@ public class Server {
                 " | coordenador=" + coordenador;
             System.out.println(msgLog);
 
-            if (contadorRequisicoes % 15 == 0) {
-                enviarHeartbeat(ref, pub);
+            if (contadorRequisicoes % 15 == 0 && contadorRequisicoes > 0) {
+                enviarHeartbeat(ref, pub, context);
             }
         }
+    }
+
+    static void iniciarThreadServidor(ZMQ.Context context) {
+        new Thread(() -> {
+            ZMQ.Socket srv = context.socket(ZMQ.REP);
+            srv.bind("tcp://*:" + PORTA_DIRETA);
+            System.out.println("[SERVER JAVA] Thread direta escutando na porta " + PORTA_DIRETA);
+            while (true) {
+                try {
+                    String msg = srv.recvStr();
+                    if (msg == null) continue;
+
+                    if (msg.contains("\"election\"")) {
+                        srv.send("{\"status\":\"ok\"}");
+                    } else if (msg.contains("\"get_time\"")) {
+                        srv.send("{\"time\":" + agoraCorrigido() + "}");
+                    } else {
+                        srv.send("{\"status\":\"error\"}");
+                    }
+                } catch (Exception e) {
+                    System.out.println("[ERRO THREAD] " + e.getMessage());
+                }
+            }
+        }, "servidor-direto").start();
     }
 
     static double agora() {
@@ -194,47 +229,86 @@ public class Server {
         System.out.println("[SERVER JAVA] Meu rank: " + rankServidor);
     }
 
-    static void enviarHeartbeat(ZMQ.Socket ref, ZMQ.Socket pub) {
+    static boolean coordenadorEstaVivo(ZMQ.Context context) {
+        if (coordenador.equals("")) return false;
+        String porta = PORTAS.get(coordenador);
+        if (porta == null) return false;
+
+        ZMQ.Socket sock = context.socket(ZMQ.REQ);
+        sock.setReceiveTimeOut(1000);
+        try {
+            sock.connect(porta);
+            sock.send("{\"type\":\"election\"}");
+            String resp = sock.recvStr();
+            return resp != null && resp.contains("ok");
+        } catch (Exception e) {
+            return false;
+        } finally {
+            sock.close();
+        }
+    }
+
+    static void enviarHeartbeat(ZMQ.Socket ref, ZMQ.Socket pub, ZMQ.Context context) {
         String json = "{\"type\":\"heartbeat\",\"name\":\"" + NOME_SERVIDOR + "\"}";
         ref.send(json);
-
-        String resposta = ref.recvStr();
-        System.out.println("[HEARTBEAT] resposta=" + resposta);
+        String respostaHb = ref.recvStr();
+        System.out.println("[HEARTBEAT] resposta=" + respostaHb);
 
         ref.send("{\"type\":\"list\"}");
         String lista = ref.recvStr();
 
         List<ServidorInfo> servidores = extrairServidores(lista);
-
         System.out.println("[SERVIDORES ATIVOS]");
         for (ServidorInfo s : servidores) {
             System.out.println(" - " + s.nome + " (rank=" + s.rank + ")");
         }
 
-        if (coordenador.equals("")) {
-            iniciarEleicao(servidores, pub);
+        if (!coordenadorEstaVivo(context)) {
+            System.out.println("[FALHA] Coordenador caiu: " + coordenador);
+            coordenador = "";
+            iniciarEleicao(servidores, pub, context);
+        } else {
+            System.out.println("[OK] Coordenador ainda ativo: " + coordenador);
         }
 
-        sincronizarBerkeley();
+        sincronizarBerkeley(context);
     }
 
-    static void iniciarEleicao(List<ServidorInfo> servidores, ZMQ.Socket pub) {
+    static void iniciarEleicao(List<ServidorInfo> servidores, ZMQ.Socket pub, ZMQ.Context context) {
         System.out.println("[ELEICAO] Iniciando eleição...");
 
-        String eleito = NOME_SERVIDOR;
-        int menorRank = rankServidor;
-
+        List<ServidorInfo> vivos = new ArrayList<>();
         for (ServidorInfo s : servidores) {
-            if (s.rank < menorRank) {
-                menorRank = s.rank;
-                eleito = s.nome;
+            String porta = PORTAS.get(s.nome);
+            if (porta == null) continue;
+            ZMQ.Socket sock = context.socket(ZMQ.REQ);
+            sock.setReceiveTimeOut(1000);
+            try {
+                sock.connect(porta);
+                sock.send("{\"type\":\"election\"}");
+                String resp = sock.recvStr();
+                if (resp != null && resp.contains("ok")) {
+                    vivos.add(s);
+                    System.out.println("[ELEICAO] " + s.nome + " respondeu OK");
+                }
+            } catch (Exception e) {
+                System.out.println("[ELEICAO] " + s.nome + " não respondeu");
+            } finally {
+                sock.close();
             }
         }
 
-        coordenador = eleito;
-        salvarCoordenador();
-        publicarCoordenador(pub, eleito);
+        if (vivos.isEmpty()) vivos = servidores;
 
+        ServidorInfo eleito = vivos.stream()
+            .min(java.util.Comparator.comparingInt(s -> s.rank))
+            .orElse(null);
+
+        if (eleito == null) return;
+
+        coordenador = eleito.nome;
+        salvarCoordenador();
+        publicarCoordenador(pub, coordenador);
         System.out.println("[ELEICAO] Coordenador escolhido: " + coordenador);
     }
 
@@ -244,17 +318,40 @@ public class Server {
         System.out.println("[PUB SERVERS] coordenador eleito: " + eleito);
     }
 
-    static void sincronizarBerkeley() {
-        if (coordenador.equals("")) {
-            return;
-        }
+    static void sincronizarBerkeley(ZMQ.Context context) {
+        if (coordenador.equals("")) return;
 
         if (coordenador.equals(NOME_SERVIDOR)) {
             double hora = agoraCorrigido();
             salvarHoraCoordenador(hora);
-            System.out.println("[BERKELEY] Eu sou o coordenador (" + NOME_SERVIDOR + "). Hora atual=" + hora);
-        } else {
-            System.out.println("[BERKELEY] Coordenador atual é " + coordenador + ". Aguardando sincronização dele.");
+            System.out.println("[BERKELEY] Sou coordenador (" + NOME_SERVIDOR + "). Hora=" + hora);
+            return;
+        }
+
+        String porta = PORTAS.get(coordenador);
+        if (porta == null) return;
+
+        ZMQ.Socket sock = context.socket(ZMQ.REQ);
+        sock.setReceiveTimeOut(2000);
+        try {
+            sock.connect(porta);
+            sock.send("{\"type\":\"get_time\"}");
+            String resposta = sock.recvStr();
+            if (resposta != null) {
+                int idx = resposta.indexOf("\"time\":");
+                if (idx >= 0) {
+                    String resto = resposta.substring(idx + 7).replaceAll("[^0-9.]", "");
+                    if (!resto.isEmpty()) {
+                        double horaCorreta = Double.parseDouble(resto);
+                        offsetRelogio = horaCorreta - agora();
+                        System.out.println("[BERKELEY] Offset atualizado: " + offsetRelogio);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("[ERRO BERKELEY] " + e.getMessage());
+        } finally {
+            sock.close();
         }
     }
 
@@ -266,26 +363,6 @@ public class Server {
             );
         } catch (Exception e) {
             System.out.println("[ERRO] ao salvar coordenador");
-        }
-    }
-
-    static void lerCoordenadorDoArquivo() {
-        try {
-            if (!Files.exists(Paths.get(ARQUIVO_COORDENADOR))) {
-                return;
-            }
-
-            String conteudo = Files.readString(Paths.get(ARQUIVO_COORDENADOR));
-            int idx = conteudo.indexOf("\"coordenador\":");
-            if (idx >= 0) {
-                String resto = conteudo.substring(idx + 15);
-                resto = resto.replace("\"", "").replace("}", "").trim();
-                if (!resto.isEmpty()) {
-                    coordenador = resto;
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("[ERRO] ao ler coordenador");
         }
     }
 
