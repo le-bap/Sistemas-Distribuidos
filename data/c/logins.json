@@ -1,73 +1,14 @@
 [
-{"user":"bot_c_4674","timestamp":1776984576},
-,
-{"user":"bot_py_3317","timestamp":1776984577},
-,
-{"user":"bot_java_3084","timestamp":1776984577}
-,
-{"user":"bot_c_4183","timestamp":1776985616}
-,
-{"user":"bot_java_1563","timestamp":1776985618}
-,
-{"user":"bot_c_6972","timestamp":1776985704}
-,
-{"user":"bot_py_5421","timestamp":1776985705}
-,
-{"user":"bot_java_1250","timestamp":1776985706}
-,
-{"user":"bot_c_3340","timestamp":1776985853}
-,
-{"user":"bot_c_5142","timestamp":1777331060}
-,
-{"user":"bot_c_1526","timestamp":1777331282}
-,
-{"user":"bot_c_1363","timestamp":1777331467}
-,
-{"user":"bot_java_5525","timestamp":1777331468}
-,
-{"user":"bot_c_3944","timestamp":1777331804}
-,
-{"user":"bot_py_6363","timestamp":1777331805}
-,
-{"user":"bot_java_5188","timestamp":1777331805}
-,
-{"user":"bot_c_2134","timestamp":1777331987}
-,
-{"user":"bot_c_3786","timestamp":1777332048}
-,
-{"user":"bot_py_6390","timestamp":1777332048}
-,
-{"user":"bot_java_4407","timestamp":1777332049}
-,
-{"user":"bot_c_9387","timestamp":1777332231}
-,
-{"user":"bot_py_5629","timestamp":1777332232}
-,
-{"user":"bot_java_6982","timestamp":1777332232}
-,
-{"user":"bot_py_4796","timestamp":1777675042}
-,
-{"user":"bot_c_9494","timestamp":1777675041}
-,
-{"user":"bot_java_1514","timestamp":1777675042}
-,
-{"user":"bot_c_1143","timestamp":1777675809}
-,
-{"user":"bot_java_8815","timestamp":1777675810}
-,
-{"user":"bot_c_9802","timestamp":1777676044}
-,
-{"user":"bot_java_7662","timestamp":1777676045}
-,
-{"user":"bot_c_2946","timestamp":1777676131}
-,
-{"user":"bot_c_3100","timestamp":1777676852}
-,
-{"user":"bot_c_8494","timestamp":1777677980}
-,
-{"user":"bot_java_5449","timestamp":1777677981}
-,
-{"user":"bot_c_5860","timestamp":1777678808}
-,
-{"user":"bot_java_2543","timestamp":1777678809}
+  {"user":"bot_c_7220","timestamp":1778195233},
+  {"user":"bot_python_2008","timestamp":1778195233},
+  {"user":"bot_java_9822","timestamp":1778195234},
+  {"user":"bot_c_7580","timestamp":1778195258},
+  {"user":"bot_python_9806","timestamp":1778195259},
+  {"user":"bot_java_4204","timestamp":1778195259},
+  {"user":"bot_c_9154","timestamp":1778195287},
+  {"user":"bot_python_5274","timestamp":1778195288},
+  {"user":"bot_java_8781","timestamp":1778195288},
+  {"user":"bot_c_5748","timestamp":1778195538},
+  {"user":"bot_python_2093","timestamp":1778195539},
+  {"user":"bot_java_8050","timestamp":1778195539}
 ]

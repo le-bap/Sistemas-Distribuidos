@@ -1,4 +1,4 @@
-# Projeto de Sistemas Distribuídos - Partes 1, 2, 3 e 4
+# Projeto de Sistemas Distribuídos - Partes 1, 2, 3, 4 e 5
 
 ## Integrantes
 
@@ -23,6 +23,8 @@ Nas Partes 3 e 4, adicionamos conceitos de sincronização em sistemas distribu�
 - eleição de coordenador;
 - sincronização baseada no algoritmo de Berkeley.
 
+Na Parte 5, foi adicionada a **replicação dos dados entre os servidores**, para que todos os servidores ativos mantenham uma cópia das operações realizadas no sistema.
+
 Com a troca de mensagens, é possível:
 
 - fazer login;
@@ -33,9 +35,11 @@ Com a troca de mensagens, é possível:
 - receber mensagens publicadas;
 - manter relógios lógicos nas mensagens;
 - monitorar servidores ativos;
-- eleger um coordenador entre os servidores.
+- eleger um coordenador entre os servidores;
+- sincronizar os relógios físicos com o coordenador;
+- replicar dados entre os servidores.
 
-Além disso, os servidores armazenam os dados para não perder as informações entre execuções.
+Além disso, os servidores armazenam os dados em disco para não perder as informações entre execuções.
 
 ---
 
@@ -51,7 +55,8 @@ Usado para:
 - criação de canal;
 - listagem de canais;
 - envio de mensagens;
-- comunicação dos servidores com o serviço de referência.
+- comunicação dos servidores com o serviço de referência;
+- comunicação direta entre servidores para eleição e sincronização do relógio.
 
 Portas do broker:
 
@@ -62,6 +67,14 @@ Porta do serviço de referência:
 
 - `5560`: comunicação entre servidores e referência.
 
+Portas diretas dos servidores:
+
+- `5570`: servidor C;
+- `5571`: servidor Python;
+- `5572`: servidor Java.
+
+Essas portas são usadas para mensagens internas entre servidores, como eleição e pedido de hora ao coordenador.
+
 ### Pub/Sub
 
 Usado para:
@@ -69,7 +82,8 @@ Usado para:
 - publicação de mensagens nos canais;
 - distribuição de mensagens entre os bots;
 - recebimento de mensagens dos canais inscritos;
-- publicação do coordenador eleito no tópico `servers`.
+- publicação do coordenador eleito no tópico `servers`;
+- replicação interna dos dados no tópico `replication`.
 
 Portas do proxy:
 
@@ -147,16 +161,25 @@ Os dados salvos são:
 - logins realizados;
 - canais criados;
 - requisições recebidas;
-- publicações feitas.
+- publicações feitas;
+- eventos de replicação aplicados.
 
 Foram utilizados arquivos:
 
 - `channels.json`;
 - `logins.json`;
 - `publications.jsonl`;
-- `requests.jsonl`.
+- `requests.jsonl`;
+- `replicated_events.jsonl`;
+- `applied_events.json`.
 
-A pasta `shared` é utilizada para informações compartilhadas entre os servidores, como canais e dados do coordenador.
+Cada servidor possui sua própria pasta de dados:
+
+- `data/python`;
+- `data/java`;
+- `data/c`.
+
+Assim, cada servidor mantém seu próprio conjunto de arquivos persistidos.
 
 ---
 
@@ -172,8 +195,7 @@ Foram implementados:
 - serviço de referência;
 - heartbeat dos servidores;
 - ranking dos servidores;
-- lista de servidores ativos;
-- sincronização simples do relógio físico usando o serviço de referência.
+- lista de servidores ativos.
 
 ---
 
@@ -190,10 +212,77 @@ A regra utilizada foi:
 3. Ao receber uma mensagem, o processo compara o contador recebido com o contador local.
 4. O novo valor do contador local passa a ser o maior valor entre os dois.
 
+Dessa forma, cada mensagem carrega uma informação de ordem lógica, permitindo acompanhar a sequência de eventos no sistema distribuído.
+
 ---
 
-## Como executar
-Para executar o projeto, basta rodar:
+## Heartbeat
+
+Os servidores enviam periodicamente uma mensagem de heartbeat para o serviço de referência.
+
+O serviço de referência mantém:
+
+- nome do servidor;
+- rank do servidor;
+- horário do último heartbeat recebido.
+
+Caso um servidor fique muito tempo sem enviar heartbeat, ele é considerado inativo e pode ser removido da lista de servidores disponíveis.
+
+---
+
+# Parte 4 - Eleição e sincronização Berkeley
+
+Na Parte 4, foi implementada a eleição de coordenador entre os servidores.
+
+Cada servidor possui um rank informado pelo serviço de referência. O servidor com menor rank disponível é escolhido como coordenador.
+
+Quando um servidor percebe que o coordenador atual não está respondendo, ele inicia uma eleição. Durante a eleição, os servidores ativos são consultados diretamente pelas portas internas.
+
+Após a escolha, o novo coordenador é publicado no tópico:
+
+```text
+servers
+```
+
+---
+
+# Parte 5 - Consistência e replicação
+
+Na Parte 5, foi implementada a replicação dos dados entre os servidores.
+
+Como o broker faz o balanceamento de carga entre os servidores, cada requisição pode ser atendida por um servidor diferente. Sem replicação, cada servidor teria apenas uma parte dos dados do sistema. Por exemplo, uma mensagem publicada em um servidor ficaria salva somente nele, e os outros servidores não teriam esse histórico.
+
+Para resolver isso, implementamos uma replicação ativa usando Pub/Sub.
+
+## Método escolhido
+
+O método escolhido foi a **replicação ativa por difusão de eventos**.
+
+Sempre que um servidor recebe uma operação que altera o estado do sistema, ele salva essa operação localmente e publica um evento de replicação para os outros servidores.
+
+As operações replicadas são:
+
+- login de usuário;
+- criação de canal;
+- publicação de mensagem.
+
+Dessa forma, quando um servidor recebe uma dessas operações, os demais servidores ativos também recebem uma cópia e salvam a mesma informação localmente.
+
+## Tópico de replicação
+
+Foi criado um tópico interno chamado:
+
+```text
+replication
+```
+
+# Como executar
+
+Para rodar o projeto, use o comando:
 
 ```bash
 docker compose up --build
+
+
+e em outro terminal
+docker stop server_...

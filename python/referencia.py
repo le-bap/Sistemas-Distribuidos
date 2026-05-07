@@ -8,7 +8,7 @@ socket.bind("tcp://*:5560")
 servidores = {}
 proximo_rank = 1
 
-TIMEOUT = 20
+TIMEOUT = 60
 socket.RCVTIMEO = 1000
 
 
@@ -34,64 +34,76 @@ while True:
     try:
         mensagem = socket.recv_json()
         tipo = mensagem.get("type")
+
     except zmq.Again:
-        mensagem = None
-        tipo = None
+        limpar_servidores_mortos()
+        continue
+
+    except Exception as e:
+        print(f"[REF] Erro ao receber mensagem: {e}", flush=True)
+        continue
 
     limpar_servidores_mortos()
-
-    if mensagem is None:
-        continue
 
     if tipo == "register":
         nome = mensagem.get("name")
 
-        if nome not in servidores:
-            servidores[nome] = {
-                "rank": proximo_rank,
-                "last_seen": time.time()
+        if not nome:
+            resposta = {
+                "status": "error",
+                "message": "nome inválido",
             }
-            proximo_rank += 1
         else:
-            servidores[nome]["last_seen"] = time.time()
+            if nome not in servidores:
+                servidores[nome] = {
+                    "rank": proximo_rank,
+                    "last_seen": time.time(),
+                }
+                proximo_rank += 1
+            else:
+                servidores[nome]["last_seen"] = time.time()
 
-        resposta = {
-            "rank": servidores[nome]["rank"]
-        }
+            resposta = {
+                "rank": servidores[nome]["rank"]
+            }
 
     elif tipo == "list":
         resposta = [
-            {"name": nome, "rank": dados["rank"]}
+            {
+                "name": nome,
+                "rank": dados["rank"],
+            }
             for nome, dados in servidores.items()
         ]
 
     elif tipo == "heartbeat":
         nome = mensagem.get("name")
 
-        if nome in servidores:
-            servidores[nome]["last_seen"] = time.time()
-            print(f"[REF] Heartbeat recebido de: {nome}", flush=True)
-        else:
-            servidores[nome] = {
-                "rank": proximo_rank,
-                "last_seen": time.time()
+        if not nome:
+            resposta = {
+                "status": "error",
+                "message": "nome inválido",
             }
-            proximo_rank += 1
-            print(f"[REF] Servidor registrado via heartbeat: {nome}", flush=True)
+        else:
+            if nome in servidores:
+                servidores[nome]["last_seen"] = time.time()
+                print(f"[REF] Heartbeat recebido de: {nome}", flush=True)
+            else:
+                servidores[nome] = {
+                    "rank": proximo_rank,
+                    "last_seen": time.time(),
+                }
+                proximo_rank += 1
+                print(f"[REF] Servidor registrado via heartbeat: {nome}", flush=True)
 
-        resposta = {
-            "status": "ok"
-        }
-
-    elif tipo == "get_time":
-        resposta = {
-            "time": time.time()
-        }
+            resposta = {
+                "status": "ok"
+            }
 
     else:
         resposta = {
             "status": "error",
-            "message": "tipo inválido"
+            "message": "tipo inválido",
         }
 
     socket.send_json(resposta)

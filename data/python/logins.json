@@ -1,242 +1,50 @@
 [
   {
-    "user": "bot_py_2543",
-    "timestamp": 1775603371.3130407
+    "user": "bot_c_7220",
+    "timestamp": 1778195233.0
   },
   {
-    "user": "bot_py_6606",
-    "timestamp": 1775603907.8688252
+    "user": "bot_python_2008",
+    "timestamp": 1778195233.3494482
   },
   {
-    "user": "bot_c_7561",
-    "timestamp": 1775603907.0
+    "user": "bot_java_9822",
+    "timestamp": 1778195233.774
   },
   {
-    "user": "bot_java_1555",
-    "timestamp": 1775603908.495
+    "user": "bot_c_7580",
+    "timestamp": 1778195258.0
   },
   {
-    "user": "bot_c_6880",
-    "timestamp": 1775775262.0
+    "user": "bot_python_9806",
+    "timestamp": 1778195259.0859067
   },
   {
-    "user": "bot_py_2114",
-    "timestamp": 1775775262.58847
+    "user": "bot_java_4204",
+    "timestamp": 1778195259.355
   },
   {
-    "user": "bot_java_5970",
-    "timestamp": 1775775262.92
+    "user": "bot_c_9154",
+    "timestamp": 1778195287.0
   },
   {
-    "user": "bot_c_7593",
-    "timestamp": 1775775335.0
+    "user": "bot_python_5274",
+    "timestamp": 1778195287.635152
   },
   {
-    "user": "bot_py_9309",
-    "timestamp": 1775775335.3036206
+    "user": "bot_java_8781",
+    "timestamp": 1778195288.111
   },
   {
-    "user": "bot_java_7386",
-    "timestamp": 1775775335.433
+    "user": "bot_c_5748",
+    "timestamp": 1778195538.0
   },
   {
-    "user": "bot_py_6000",
-    "timestamp": 1775775876.556081
+    "user": "bot_python_2093",
+    "timestamp": 1778195539.1490462
   },
   {
-    "user": "bot_java_1424",
-    "timestamp": 1776293668.681
-  },
-  {
-    "user": "bot_c_3001",
-    "timestamp": 1776293807.0
-  },
-  {
-    "user": "bot_java_3070",
-    "timestamp": 1776293807.773
-  },
-  {
-    "user": "bot_java_6242",
-    "timestamp": 1776294517.512
-  },
-  {
-    "user": "bot_py_4066",
-    "timestamp": 1776294983.7098432,
-    "contador": 2
-  },
-  {
-    "user": "bot_java_1093",
-    "timestamp": 1776294983.99,
-    "contador": 3
-  },
-  {
-    "user": "bot_py_8857",
-    "timestamp": 1776295196.1307216,
-    "contador": 2
-  },
-  {
-    "user": "bot_java_1577",
-    "timestamp": 1776295196.594,
-    "contador": 3
-  },
-  {
-    "user": "bot_py_7479",
-    "timestamp": 1776895935.8132393
-  },
-  {
-    "user": "bot_java_3340",
-    "timestamp": 1776895936.18
-  },
-  {
-    "user": "bot_py_5397",
-    "timestamp": 1776896079.5001867
-  },
-  {
-    "user": "bot_py_8516",
-    "timestamp": 1776896772.083946
-  },
-  {
-    "user": "bot_py_9882",
-    "timestamp": 1776896940.9659474
-  },
-  {
-    "user": "bot_py_6982",
-    "timestamp": 1776897244.5481331
-  },
-  {
-    "user": "bot_py_9088",
-    "timestamp": 1776897308.2428653
-  },
-  {
-    "user": "bot_py_6642",
-    "timestamp": 1776897519.1132524
-  },
-  {
-    "user": "bot_py_5502",
-    "timestamp": 1776897888.0034668
-  },
-  {
-    "user": "bot_py_5967",
-    "timestamp": 1776897948.04463
-  },
-  {
-    "user": "bot_py_4869",
-    "timestamp": 1776898140.2249188
-  },
-  {
-    "user": "bot_py_6734",
-    "timestamp": 1776898565.8700082
-  },
-  {
-    "user": "bot_py_7639",
-    "timestamp": 1776898792.2917538
-  },
-  {
-    "user": "bot_py_2547",
-    "timestamp": 1776898980.8749192
-  },
-  {
-    "user": "bot_c_9541",
-    "timestamp": 1776899497.0
-  },
-  {
-    "user": "bot_py_9328",
-    "timestamp": 1776899497.7365067
-  },
-  {
-    "user": "bot_java_5801",
-    "timestamp": 1776900882.224
-  },
-  {
-    "user": "bot_c_1045",
-    "timestamp": 1776900892.0
-  },
-  {
-    "user": "bot_py_7865",
-    "timestamp": 1776983712.382896
-  },
-  {
-    "user": "bot_py_6780",
-    "timestamp": 1776984012.6045988
-  },
-  {
-    "user": "bot_java_8053",
-    "timestamp": 1776984012.841
-  },
-  {
-    "user": "bot_py_2895",
-    "timestamp": 1776984405.029731
-  },
-  {
-    "user": "bot_java_7682",
-    "timestamp": 1776984405.459
-  },
-  {
-    "user": "bot_py_8539",
-    "timestamp": 1776985617.3722079
-  },
-  {
-    "user": "bot_py_4899",
-    "timestamp": 1776985853.5046127
-  },
-  {
-    "user": "bot_java_4427",
-    "timestamp": 1776985853.941
-  },
-  {
-    "user": "bot_py_8781",
-    "timestamp": 1777331060.659429
-  },
-  {
-    "user": "bot_java_3361",
-    "timestamp": 1777331061.516
-  },
-  {
-    "user": "bot_py_2822",
-    "timestamp": 1777331282.1475801
-  },
-  {
-    "user": "bot_py_4594",
-    "timestamp": 1777331467.9573505
-  },
-  {
-    "user": "bot_py_6831",
-    "timestamp": 1777331988.2837718
-  },
-  {
-    "user": "bot_java_3636",
-    "timestamp": 1777331988.413
-  },
-  {
-    "user": "bot_py_9112",
-    "timestamp": 1777675810.0776553
-  },
-  {
-    "user": "bot_py_3740",
-    "timestamp": 1777676044.2456272
-  },
-  {
-    "user": "bot_py_8195",
-    "timestamp": 1777676131.752088
-  },
-  {
-    "user": "bot_java_1201",
-    "timestamp": 1777676132.171
-  },
-  {
-    "user": "bot_py_1891",
-    "timestamp": 1777676852.550476
-  },
-  {
-    "user": "bot_java_3183",
-    "timestamp": 1777676852.724
-  },
-  {
-    "user": "bot_py_9951",
-    "timestamp": 1777677980.2242572
-  },
-  {
-    "user": "bot_py_3646",
-    "timestamp": 1777678809.0971117
+    "user": "bot_java_8050",
+    "timestamp": 1778195539.354
   }
 ]

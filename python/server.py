@@ -1,78 +1,115 @@
 import json
 import time
+import uuid
 import threading
 from pathlib import Path
 
 import msgpack
 import zmq
 
+
 context = zmq.Context()
 
-socket_rep = context.socket(zmq.REP)
-socket_rep.connect('tcp://broker:5556')
+nome_servidor = "server_python"
 
-socket_pub = context.socket(zmq.PUB)
-socket_pub.connect('tcp://proxy:5557')
+BROKER_REP_ADDR = "tcp://broker:5556"
+PROXY_XSUB_ADDR = "tcp://proxy:5557"
+PROXY_XPUB_ADDR = "tcp://proxy:5558"
+REFERENCIA_ADDR = "tcp://referencia:5560"
 
-ref_socket = context.socket(zmq.REQ)
-ref_socket.connect('tcp://referencia:5560')
-
-socket_server = context.socket(zmq.REP)
-socket_server.bind('tcp://*:5571')
-
-nome_servidor = 'server_python'
+PORTA_DIRETA = "tcp://*:5571"
 
 PORTA_SERVIDORES = {
-    'server_c':      'tcp://server_c:5570',
-    'server_python': 'tcp://server_python:5571',
-    'server_java':   'tcp://server_java:5572',
+    "server_c": "tcp://server_c:5570",
+    "server_python": "tcp://server_python:5571",
+    "server_java": "tcp://server_java:5572",
 }
 
-pasta_dados = Path('data')
+INTERVALO_HEARTBEAT = 10
+INTERVALO_BERKELEY = 15
+
+
+socket_rep = context.socket(zmq.REP)
+socket_rep.connect(BROKER_REP_ADDR)
+socket_rep.setsockopt(zmq.RCVTIMEO, 1000)
+
+socket_pub = context.socket(zmq.PUB)
+socket_pub.connect(PROXY_XSUB_ADDR)
+
+socket_sub_replication = context.socket(zmq.SUB)
+socket_sub_replication.connect(PROXY_XPUB_ADDR)
+socket_sub_replication.setsockopt_string(zmq.SUBSCRIBE, "replication")
+
+ref_socket = context.socket(zmq.REQ)
+ref_socket.connect(REFERENCIA_ADDR)
+
+socket_server = context.socket(zmq.REP)
+socket_server.bind(PORTA_DIRETA)
+
+
+pasta_dados = Path("data")
 pasta_dados.mkdir(exist_ok=True)
 
-pasta_compartilhada = Path('/app/shared')
-pasta_compartilhada.mkdir(exist_ok=True)
+arquivo_canais = pasta_dados / "channels.json"
+arquivo_logins = pasta_dados / "logins.json"
+arquivo_requisicoes = pasta_dados / "requests.jsonl"
+arquivo_publicacoes = pasta_dados / "publications.jsonl"
+arquivo_replicados = pasta_dados / "replicated_events.jsonl"
+arquivo_eventos_aplicados = pasta_dados / "applied_events.json"
 
-arquivo_canais = pasta_compartilhada / 'channels.json'
-arquivo_coordenador = pasta_compartilhada / 'coordenador.json'
-
-arquivo_logins = pasta_dados / 'logins.json'
-arquivo_requisicoes = pasta_dados / 'requests.jsonl'
-arquivo_publicacoes = pasta_dados / 'publications.jsonl'
 
 contador_server = 0
 contador_requisicoes = 0
-offset_relogio = 0
+offset_relogio = 0.0
 
 rank = None
-coordenador = ''
-servidores_ativos = []
+coordenador = ""
 
-INTERVALO_SINCRONIZACAO = 15
+canais = []
+logins = []
+eventos_aplicados = set()
+
+lock_estado = threading.Lock()
 
 
 def ler_json(caminho, valor_padrao):
-    if caminho.exists():
-        try:
-            with open(caminho, 'r', encoding='utf-8') as f:
-                conteudo = f.read().strip()
-                if not conteudo:
-                    return valor_padrao
-                return json.loads(conteudo)
-        except Exception:
-            return valor_padrao
-    return valor_padrao
+    if not caminho.exists():
+        return valor_padrao
+
+    try:
+        with open(caminho, "r", encoding="utf-8") as f:
+            conteudo = f.read().strip()
+            if not conteudo:
+                return valor_padrao
+            return json.loads(conteudo)
+    except Exception:
+        return valor_padrao
 
 
 def salvar_json(caminho, dados):
-    with open(caminho, 'w', encoding='utf-8') as f:
+    with open(caminho, "w", encoding="utf-8") as f:
         json.dump(dados, f, ensure_ascii=False, indent=2)
 
 
 def salvar_jsonl(caminho, dados):
-    with open(caminho, 'a', encoding='utf-8') as f:
-        f.write(json.dumps(dados, ensure_ascii=False) + '\n')
+    with open(caminho, "a", encoding="utf-8") as f:
+        f.write(json.dumps(dados, ensure_ascii=False) + "\n")
+
+
+def carregar_estado():
+    global canais, logins, eventos_aplicados
+
+    canais = ler_json(arquivo_canais, [])
+    logins = ler_json(arquivo_logins, [])
+    eventos_aplicados = set(ler_json(arquivo_eventos_aplicados, []))
+
+
+def salvar_eventos_aplicados():
+    salvar_json(arquivo_eventos_aplicados, sorted(list(eventos_aplicados)))
+
+
+def agora():
+    return time.time()
 
 
 def agora_corrigido():
@@ -81,6 +118,12 @@ def agora_corrigido():
 
 def atualizar_contador_recebido(cont_recebido):
     global contador_server
+
+    try:
+        cont_recebido = int(cont_recebido)
+    except Exception:
+        cont_recebido = 0
+
     contador_server = max(contador_server, cont_recebido)
 
 
@@ -90,151 +133,138 @@ def proximo_contador():
     return contador_server
 
 
-def recarregar_canais():
-    global canais
-    canais = ler_json(arquivo_canais, [])
-
-
-def recarregar_logins():
-    global logins
-    logins = ler_json(arquivo_logins, [])
-
-
 def registrar_no_servico_referencia():
     global rank
 
     ref_socket.send_json({
-        'type': 'register',
-        'name': nome_servidor
+        "type": "register",
+        "name": nome_servidor,
     })
 
     resposta = ref_socket.recv_json()
-    rank = resposta.get('rank')
+    rank = resposta.get("rank")
 
-    print(f'[SERVER PYTHON] Meu rank: {rank}', flush=True)
+    print(f"[SERVER PYTHON] Meu rank: {rank}", flush=True)
 
 
 def pedir_lista_servidores():
-    global servidores_ativos
-
-    ref_socket.send_json({'type': 'list'})
+    ref_socket.send_json({"type": "list"})
     resposta = ref_socket.recv_json()
 
-    if isinstance(resposta, list):
-        servidores_ativos = resposta
-    else:
-        servidores_ativos = []
+    if not isinstance(resposta, list):
+        return []
 
-    print('[SERVIDORES ATIVOS]', flush=True)
-    for servidor in servidores_ativos:
+    print("[SERVIDORES ATIVOS]", flush=True)
+    for servidor in resposta:
         print(f" - {servidor.get('name')} (rank={servidor.get('rank')})", flush=True)
 
-    return servidores_ativos
+    return resposta
 
 
 def enviar_heartbeat():
     ref_socket.send_json({
-        'type': 'heartbeat',
-        'name': nome_servidor
+        "type": "heartbeat",
+        "name": nome_servidor,
     })
 
     resposta = ref_socket.recv_json()
-    print(f'[HEARTBEAT] resposta={resposta}', flush=True)
-
-
-def publicar_coordenador(nome_coordenador):
-    mensagem = {
-        'type': 'coordinator_announce',
-        'coordinator': nome_coordenador,
-        'server': nome_servidor,
-        'timestamp': agora_corrigido(),
-        'contador': proximo_contador()
-    }
-
-    socket_pub.send_multipart([
-        b'servers',
-        msgpack.packb(mensagem, use_bin_type=True)
-    ])
-
-    print(f'[PUB SERVERS] coordenador eleito: {nome_coordenador}', flush=True)
-
-
-def salvar_coordenador(nome_coordenador):
-    dados = {
-        'coordinator': nome_coordenador,
-        'timestamp': time.time(),
-        'clock': contador_server
-    }
-    salvar_json(arquivo_coordenador, dados)
+    print(f"[HEARTBEAT] resposta={resposta}", flush=True)
 
 
 def coordenador_esta_vivo():
     global coordenador
+
     if not coordenador:
         return False
+
     porta = PORTA_SERVIDORES.get(coordenador)
     if not porta:
+        coordenador = ""
         return False
+
     sock = context.socket(zmq.REQ)
+    sock.setsockopt(zmq.RCVTIMEO, 1000)
+
     try:
-        sock.setsockopt(zmq.RCVTIMEO, 1000)
         sock.connect(porta)
-        sock.send_json({'type': 'election'})
+        sock.send_json({"type": "election"})
         resp = sock.recv_json()
-        sock.close()
-        return resp.get('status') == 'ok'
+        return resp.get("status") == "ok"
     except Exception:
-        sock.close()
-        coordenador = ''
+        coordenador = ""
         return False
+    finally:
+        sock.close()
+
+
+def publicar_coordenador(nome_coordenador):
+    mensagem = {
+        "type": "coordinator_announce",
+        "coordinator": nome_coordenador,
+        "server": nome_servidor,
+        "timestamp": agora_corrigido(),
+        "contador": proximo_contador(),
+    }
+
+    socket_pub.send_multipart([
+        b"servers",
+        msgpack.packb(mensagem, use_bin_type=True),
+    ])
+
+    print(f"[PUB SERVERS] coordenador eleito: {nome_coordenador}", flush=True)
 
 
 def eleger_coordenador():
     global coordenador
 
-    print('[ELEICAO] Iniciando eleição...', flush=True)
+    print("[ELEICAO] Iniciando eleição...", flush=True)
 
     servidores = pedir_lista_servidores()
 
     if not servidores:
-        print('[ELEICAO] Não há servidores ativos para eleger.', flush=True)
+        print("[ELEICAO] Não há servidores ativos.", flush=True)
         return
 
-    # contata cada servidor diretamente para confirmar que está vivo
     servidores_vivos = []
+
     for servidor in servidores:
-        nome = servidor.get('name')
+        nome = servidor.get("name")
         porta = PORTA_SERVIDORES.get(nome)
+
         if not porta:
             continue
+
         sock = context.socket(zmq.REQ)
+        sock.setsockopt(zmq.RCVTIMEO, 1000)
+
         try:
-            sock.setsockopt(zmq.RCVTIMEO, 1000)
             sock.connect(porta)
-            sock.send_json({'type': 'election'})
+            sock.send_json({"type": "election"})
             resposta = sock.recv_json()
-            sock.close()
-            if resposta.get('status') == 'ok':
+
+            if resposta.get("status") == "ok":
                 servidores_vivos.append(servidor)
-                print(f'[ELEICAO] {nome} respondeu OK', flush=True)
+                print(f"[ELEICAO] {nome} respondeu OK", flush=True)
+
         except Exception:
+            print(f"[ELEICAO] {nome} não respondeu", flush=True)
+
+        finally:
             sock.close()
-            print(f'[ELEICAO] {nome} não respondeu', flush=True)
 
     if not servidores_vivos:
         servidores_vivos = servidores
 
-    servidor_eleito = min(servidores_vivos, key=lambda s: s.get('rank', 999999))
-    coordenador = servidor_eleito.get('name')
+    servidor_eleito = min(
+        servidores_vivos,
+        key=lambda s: s.get("rank", 999999)
+    )
 
-    salvar_coordenador(coordenador)
+    coordenador = servidor_eleito.get("name")
+
     publicar_coordenador(coordenador)
 
-    print(f'[ELEICAO] Coordenador escolhido: {coordenador}', flush=True)
-
-
-def sou_coordenador():
-    return coordenador == nome_servidor
+    print(f"[ELEICAO] Coordenador escolhido: {coordenador}", flush=True)
 
 
 def sincronizar_berkeley():
@@ -244,76 +274,183 @@ def sincronizar_berkeley():
         return
 
     if coordenador == nome_servidor:
-        print(f'[BERKELEY] Sou coordenador ({nome_servidor})', flush=True)
+        print(
+            f"[BERKELEY] Sou coordenador ({nome_servidor}). Hora={agora_corrigido()}",
+            flush=True,
+        )
         return
 
-    # pede hora diretamente ao coordenador
     porta = PORTA_SERVIDORES.get(coordenador)
     if not porta:
         return
 
-    try:
-        sock = context.socket(zmq.REQ)
-        sock.setsockopt(zmq.RCVTIMEO, 2000)
-        sock.connect(porta)
-        sock.send_json({'type': 'get_time'})
-        resposta = sock.recv_json()
-        sock.close()
+    sock = context.socket(zmq.REQ)
+    sock.setsockopt(zmq.RCVTIMEO, 2000)
 
-        if 'time' in resposta:
-            hora_correta = resposta['time']
+    try:
+        sock.connect(porta)
+        sock.send_json({"type": "get_time"})
+        resposta = sock.recv_json()
+
+        if "time" in resposta:
+            hora_correta = resposta["time"]
             offset_relogio = hora_correta - time.time()
-            print(f'[BERKELEY] Ajustando relógio. Offset={offset_relogio}', flush=True)
+            print(f"[BERKELEY] Offset atualizado: {offset_relogio}", flush=True)
 
     except Exception as e:
-        print(f'[ERRO BERKELEY] {e}', flush=True)
+        print(f"[ERRO BERKELEY] {e}", flush=True)
+
+    finally:
+        sock.close()
 
 
-def thread_servidor_direto():
-    """Responde requisicoes diretas de outros servidores (eleicao e berkeley)."""
-    while True:
-        try:
-            msg = socket_server.recv_json()
-            tipo = msg.get('type')
-
-            if tipo == 'election':
-                socket_server.send_json({'status': 'ok'})
-
-            elif tipo == 'get_time':
-                socket_server.send_json({'time': agora_corrigido()})
-
-            else:
-                socket_server.send_json({'status': 'error'})
-
-        except Exception as e:
-            print(f'[ERRO SERVER DIRETO] {e}', flush=True)
-
-
-def parte4_a_cada_15_mensagens():
+def verificar_eleicao_e_berkeley():
     global coordenador
-    enviar_heartbeat()
 
     if not coordenador_esta_vivo():
-        coordenador = ''
+        if coordenador:
+            print(f"[FALHA] Coordenador caiu: {coordenador}", flush=True)
+
+        coordenador = ""
         eleger_coordenador()
     else:
-        print(f'[OK] Coordenador ainda ativo: {coordenador}', flush=True)
+        print(f"[OK] Coordenador ainda ativo: {coordenador}", flush=True)
 
     sincronizar_berkeley()
 
 
-canais = ler_json(arquivo_canais, [])
-logins = ler_json(arquivo_logins, [])
+def thread_servidor_direto():
+    while True:
+        try:
+            msg = socket_server.recv_json()
+            tipo = msg.get("type")
 
-print('[SERVER PYTHON] Iniciado...', flush=True)
+            if tipo == "election":
+                socket_server.send_json({"status": "ok"})
 
+            elif tipo == "get_time":
+                socket_server.send_json({"time": agora_corrigido()})
+
+            else:
+                socket_server.send_json({"status": "error"})
+
+        except Exception as e:
+            print(f"[ERRO SERVER DIRETO] {e}", flush=True)
+
+
+def gerar_event_id():
+    return f"{nome_servidor}-{uuid.uuid4()}"
+
+
+def publicar_replicacao(operacao, dados):
+    evento = {
+        "type": "replication",
+        "event_id": gerar_event_id(),
+        "origin": nome_servidor,
+        "operation": operacao,
+        "timestamp": agora_corrigido(),
+        "contador": proximo_contador(),
+        "data": dados,
+    }
+
+    with lock_estado:
+        eventos_aplicados.add(evento["event_id"])
+        salvar_eventos_aplicados()
+
+    socket_pub.send_multipart([
+        b"replication",
+        msgpack.packb(evento, use_bin_type=True),
+    ])
+
+    salvar_jsonl(arquivo_replicados, evento)
+
+
+def aplicar_evento_replicado(evento):
+    event_id = evento.get("event_id")
+    origem = evento.get("origin")
+    operacao = evento.get("operation")
+    dados = evento.get("data", {})
+
+    if not event_id:
+        return
+
+    if origem == nome_servidor:
+        return
+
+    with lock_estado:
+        if event_id in eventos_aplicados:
+            return
+
+        eventos_aplicados.add(event_id)
+
+        if operacao == "login":
+            usuario = dados.get("user", "")
+            timestamp = dados.get("timestamp", agora_corrigido())
+
+            logins.append({
+                "user": usuario,
+                "timestamp": timestamp,
+            })
+            salvar_json(arquivo_logins, logins)
+
+        elif operacao == "create_channel":
+            canal = dados.get("channel", "").strip()
+
+            if canal and canal not in canais:
+                canais.append(canal)
+                salvar_json(arquivo_canais, canais)
+
+        elif operacao == "publish_message":
+            salvar_jsonl(arquivo_publicacoes, dados)
+
+        salvar_eventos_aplicados()
+
+    print(f"[REPLICACAO] Evento aplicado: {operacao} de {origem}", flush=True)
+
+
+def thread_replicacao():
+    while True:
+        try:
+            topico, payload = socket_sub_replication.recv_multipart()
+            evento = msgpack.unpackb(payload, raw=False)
+
+            contador_recebido = evento.get("contador", 0)
+            atualizar_contador_recebido(contador_recebido)
+
+            aplicar_evento_replicado(evento)
+
+        except Exception as e:
+            print(f"[ERRO REPLICACAO] {e}", flush=True)
+
+
+def resposta_simples(status, message):
+    return {
+        "status": status,
+        "message": message,
+        "timestamp": agora_corrigido(),
+        "contador": proximo_contador(),
+        "coordenador": coordenador,
+    }
+
+
+def resposta_lista_canais():
+    return {
+        "status": "ok",
+        "channels": canais,
+        "timestamp": agora_corrigido(),
+        "contador": proximo_contador(),
+        "coordenador": coordenador,
+    }
+
+
+print("[SERVER PYTHON] Iniciado...", flush=True)
+
+carregar_estado()
 registrar_no_servico_referencia()
 pedir_lista_servidores()
-socket_rep.setsockopt(zmq.RCVTIMEO, 1000)
 
-# inicia thread para atender outros servidores diretamente
-t = threading.Thread(target=thread_servidor_direto, daemon=True)
-t.start()
+threading.Thread(target=thread_servidor_direto, daemon=True).start()
+threading.Thread(target=thread_replicacao, daemon=True).start()
 
 while True:
     try:
@@ -321,123 +458,110 @@ while True:
     except zmq.Again:
         continue
 
-    mensagem = msgpack.unpackb(mensagem_bruta, raw=False)
+    try:
+        mensagem = msgpack.unpackb(mensagem_bruta, raw=False)
+    except Exception as e:
+        print(f"[ERRO] Mensagem inválida: {e}", flush=True)
+        continue
 
-    recarregar_canais()
-    recarregar_logins()
+    with lock_estado:
+        carregar_estado()
 
     contador_requisicoes += 1
 
-    tipo = mensagem.get('type')
-    usuario = mensagem.get('user', '')
-    contador_recebido = mensagem.get('contador', 0)
+    tipo = mensagem.get("type", "")
+    usuario = mensagem.get("user", "")
+    canal = mensagem.get("channel", "").strip()
+    texto = mensagem.get("message", "")
+    timestamp_msg = mensagem.get("timestamp", agora_corrigido())
+    contador_recebido = mensagem.get("contador", 0)
 
     atualizar_contador_recebido(contador_recebido)
-
-    print(f'[CLOCK] contador servidor={contador_server}', flush=True)
 
     timestamp_recebimento = agora_corrigido()
 
     salvar_jsonl(arquivo_requisicoes, {
-        'type': tipo,
-        'user': usuario,
-        'request': mensagem,
-        'received_timestamp': timestamp_recebimento
+        "type": tipo,
+        "user": usuario,
+        "request": mensagem,
+        "received_timestamp": timestamp_recebimento,
+        "contador": contador_server,
     })
 
-    if tipo == 'login':
-        novo_login = {
-            'user': usuario,
-            'timestamp': mensagem.get('timestamp', timestamp_recebimento),
-        }
-        logins.append(novo_login)
-        salvar_json(arquivo_logins, logins)
+    print(
+        f"[SERVER PYTHON] tipo={tipo} | user={usuario} | canal={canal} | "
+        f"contador={contador_server} | coordenador={coordenador}",
+        flush=True,
+    )
 
-        resposta = {
-            'status': 'ok',
-            'message': f'login realizado ({usuario})',
-            'timestamp': agora_corrigido()
-        }
+    if tipo == "login":
+        with lock_estado:
+            novo_login = {
+                "user": usuario,
+                "timestamp": timestamp_msg,
+            }
 
-    elif tipo == 'create_channel':
-        canal = mensagem.get('channel', '').strip()
+            logins.append(novo_login)
+            salvar_json(arquivo_logins, logins)
 
+        publicar_replicacao("login", novo_login)
+
+        resposta = resposta_simples("ok", f"login realizado ({usuario})")
+
+    elif tipo == "create_channel":
         if not canal:
-            resposta = {
-                'status': 'error',
-                'message': 'nome inválido',
-                'timestamp': agora_corrigido()
-            }
+            resposta = resposta_simples("error", "nome de canal inválido")
+
         elif canal in canais:
-            resposta = {
-                'status': 'error',
-                'message': 'já existe',
-                'timestamp': agora_corrigido()
-            }
+            resposta = resposta_simples("error", "canal já existe")
+
         else:
-            canais.append(canal)
-            salvar_json(arquivo_canais, canais)
+            with lock_estado:
+                canais.append(canal)
+                salvar_json(arquivo_canais, canais)
 
-            resposta = {
-                'status': 'ok',
-                'message': f"canal '{canal}' criado",
-                'timestamp': agora_corrigido()
-            }
+            publicar_replicacao("create_channel", {
+                "channel": canal,
+            })
 
-    elif tipo == 'list_channels':
-        resposta = {
-            'status': 'ok',
-            'channels': canais,
-            'timestamp': agora_corrigido()
-        }
+            resposta = resposta_simples("ok", f"canal '{canal}' criado")
 
-    elif tipo == 'publish_message':
-        canal = mensagem.get('channel', '').strip()
-        texto = mensagem.get('message', '')
+    elif tipo == "list_channels":
+        resposta = resposta_lista_canais()
 
+    elif tipo == "publish_message":
         if canal not in canais:
-            resposta = {
-                'status': 'error',
-                'message': 'canal inexistente',
-                'timestamp': agora_corrigido()
-            }
+            resposta = resposta_simples("error", "canal inexistente")
+
         else:
             contador_pub = proximo_contador()
 
             publicacao = {
-                'channel': canal,
-                'user': usuario,
-                'message': texto,
-                'request_timestamp': mensagem.get('timestamp', timestamp_recebimento),
-                'published_timestamp': agora_corrigido(),
-                'contador': contador_pub
+                "channel": canal,
+                "user": usuario,
+                "message": texto,
+                "request_timestamp": timestamp_msg,
+                "published_timestamp": agora_corrigido(),
+                "contador": contador_pub,
             }
 
             socket_pub.send_multipart([
-                canal.encode('utf-8'),
-                msgpack.packb(publicacao, use_bin_type=True)
+                canal.encode("utf-8"),
+                msgpack.packb(publicacao, use_bin_type=True),
             ])
 
             salvar_jsonl(arquivo_publicacoes, publicacao)
+            publicar_replicacao("publish_message", publicacao)
 
-            resposta = {
-                'status': 'ok',
-                'message': f"mensagem publicada em '{canal}'",
-                'timestamp': agora_corrigido()
-            }
+            resposta = resposta_simples("ok", f"mensagem publicada em '{canal}'")
 
     else:
-        resposta = {
-            'status': 'error',
-            'message': 'tipo inválido',
-            'timestamp': agora_corrigido()
-        }
+        resposta = resposta_simples("error", "tipo inválido")
 
-    resposta['contador'] = proximo_contador()
-    resposta['coordenador'] = coordenador
-
-    print('[SERVER] Resposta:', resposta, flush=True)
     socket_rep.send(msgpack.packb(resposta, use_bin_type=True))
 
-    if contador_requisicoes % INTERVALO_SINCRONIZACAO == 0:
-        parte4_a_cada_15_mensagens()
+    if contador_requisicoes % INTERVALO_HEARTBEAT == 0:
+        enviar_heartbeat()
+
+    if contador_requisicoes % INTERVALO_BERKELEY == 0:
+        verificar_eleicao_e_berkeley()

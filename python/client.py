@@ -1,171 +1,3 @@
-# import random
-# import threading
-# import time
-
-# import msgpack
-# import zmq
-
-# context = zmq.Context()
-
-# req_socket = context.socket(zmq.REQ)
-# req_socket.connect('tcp://broker:5555')
-
-# sub_socket = context.socket(zmq.SUB)
-# sub_socket.connect('tcp://proxy:5558')
-
-# user = f"bot_py_{random.randint(1000, 9999)}"
-# canais_inscritos = []
-
-# cont = 0
-
-
-# def agora():
-#     return time.time()
-
-
-# def atualizar_contador(cont_recebido, origem=""):
-#     global cont
-#     cont = max(cont, cont_recebido) + 1
-
-
-# def enviar_para_servidor(mensagem):
-#     global cont
-
-#     req_socket.send(msgpack.packb(mensagem, use_bin_type=True))
-#     resposta = msgpack.unpackb(req_socket.recv(), raw=False)
-
-#     atualizar_contador(resposta.get('contador', 0))
-#     return resposta
-
-
-# def fazer_login():
-#     global cont
-#     cont += 1
-
-#     resposta = enviar_para_servidor({
-#         'type': 'login',
-#         'user': user,
-#         'timestamp': agora(),
-#         'contador': cont
-#     })
-#     print('[LOGIN]', resposta, flush=True)
-
-
-# def listar_canais():
-#     global cont
-#     cont += 1
-
-#     resposta = enviar_para_servidor({
-#         'type': 'list_channels',
-#         'user': user,
-#         'timestamp': agora(),
-#         'contador': cont
-#     })
-
-#     if resposta.get('status') == 'ok':
-#         return resposta.get('channels', [])
-
-#     return []
-
-
-# def criar_canal():
-#     global cont
-#     cont += 1
-
-#     nome_canal = f"canal_{random.randint(1, 999)}"
-
-#     resposta = enviar_para_servidor({
-#         'type': 'create_channel',
-#         'user': user,
-#         'channel': nome_canal,
-#         'timestamp': agora(),
-#         'contador': cont
-#     })
-
-#     print('[CREATE CHANNEL]', resposta, flush=True)
-
-
-# def se_inscrever_em_um_canal(canais_disponiveis):
-#     canais_nao_inscritos = [
-#         c for c in canais_disponiveis if c not in canais_inscritos
-#     ]
-
-#     if not canais_nao_inscritos:
-#         return
-
-#     canal_escolhido = random.choice(canais_nao_inscritos)
-#     sub_socket.setsockopt(zmq.SUBSCRIBE, canal_escolhido.encode('utf-8'))
-#     canais_inscritos.append(canal_escolhido)
-
-#     print(f'[SUBSCRIBE] {user} inscrito em {canal_escolhido}', flush=True)
-
-
-# def publicar_mensagem(canal, numero):
-#     global cont
-#     cont += 1
-
-#     texto = f"mensagem {numero} do {user}"
-
-#     resposta = enviar_para_servidor({
-#         'type': 'publish_message',
-#         'user': user,
-#         'channel': canal,
-#         'message': texto,
-#         'timestamp': agora(),
-#         'contador': cont
-#     })
-
-#     print('[PUBLISH]', resposta, flush=True)
-
-
-# def receber_mensagens():
-#     global cont
-
-#     while True:
-#         topico, conteudo = sub_socket.recv_multipart()
-
-#         dados = msgpack.unpackb(conteudo, raw=False)
-
-#         atualizar_contador(dados.get('contador', 0))
-
-#         canal = topico.decode('utf-8')
-#         mensagem = dados.get('message')
-#         envio = dados.get('published_timestamp')
-#         recebimento = agora()
-
-#         print(
-#             f"[MENSAGEM RECEBIDA] canal={canal} | mensagem={mensagem} "
-#             f"| envio={envio} | recebimento={recebimento} | contador_local={cont}",
-#             flush=True
-#         )
-
-
-# threading.Thread(target=receber_mensagens, daemon=True).start()
-
-# print(f'[CLIENTE PYTHON] Bot iniciado: {user}', flush=True)
-
-# fazer_login()
-
-# while True:
-#     canais = listar_canais()
-
-#     if len(canais) < 5:
-#         criar_canal()
-#         canais = listar_canais()
-
-#     if len(canais_inscritos) < 3:
-#         se_inscrever_em_um_canal(canais)
-
-#     if not canais:
-#         time.sleep(1)
-#         continue
-
-#     canal_escolhido = random.choice(canais)
-
-#     for i in range(10):
-#         publicar_mensagem(canal_escolhido, i + 1)
-#         time.sleep(1)
-
 import random
 import threading
 import time
@@ -173,150 +5,175 @@ import time
 import msgpack
 import zmq
 
+
 context = zmq.Context()
 
-req_socket = context.socket(zmq.REQ)
-req_socket.connect('tcp://broker:5555')
+REQ_ADDR = "tcp://broker:5555"
+SUB_ADDR = "tcp://proxy:5558"
 
-sub_socket = context.socket(zmq.SUB)
-sub_socket.connect('tcp://proxy:5558')
+nome_bot = f"bot_python_{random.randint(1000, 9999)}"
 
-user = f"bot_py_{random.randint(1000, 9999)}"
-canais_inscritos = []
-
-cont = 0
+contador_local = 0
+canais_inscritos = set()
 
 
 def agora():
     return time.time()
 
 
-def atualizar_contador(cont_recebido, origem=""):
-    global cont
-    cont = max(cont, cont_recebido)
+def proximo_contador():
+    global contador_local
+    contador_local += 1
+    return contador_local
 
 
-def enviar_para_servidor(mensagem):
-    global cont
+def atualizar_contador_recebido(valor):
+    global contador_local
 
-    cont += 1
-    mensagem['contador'] = cont
+    try:
+        valor = int(valor)
+    except Exception:
+        valor = 0
 
-    req_socket.send(msgpack.packb(mensagem, use_bin_type=True))
-    resposta = msgpack.unpackb(req_socket.recv(), raw=False)
+    contador_local = max(contador_local, valor)
 
-    atualizar_contador(resposta.get('contador', 0))
+
+def enviar_requisicao(tipo, **dados):
+    socket = context.socket(zmq.REQ)
+    socket.connect(REQ_ADDR)
+
+    mensagem = {
+        "type": tipo,
+        "user": nome_bot,
+        "timestamp": agora(),
+        "contador": proximo_contador(),
+    }
+
+    mensagem.update(dados)
+
+    socket.send(msgpack.packb(mensagem, use_bin_type=True))
+
+    resposta_bruta = socket.recv()
+    resposta = msgpack.unpackb(resposta_bruta, raw=False)
+
+    atualizar_contador_recebido(resposta.get("contador", 0))
+
+    socket.close()
     return resposta
 
 
-def fazer_login():
-    resposta = enviar_para_servidor({
-        'type': 'login',
-        'user': user,
-        'timestamp': agora()
-    })
-    print('[LOGIN]', resposta, flush=True)
-
-
 def listar_canais():
-    resposta = enviar_para_servidor({
-        'type': 'list_channels',
-        'user': user,
-        'timestamp': agora()
-    })
+    resposta = enviar_requisicao("list_channels")
 
-    if resposta.get('status') == 'ok':
-        return resposta.get('channels', [])
+    if resposta.get("status") == "ok":
+        canais = resposta.get("channels", [])
+        if isinstance(canais, list):
+            return canais
 
     return []
 
 
 def criar_canal():
-    nome_canal = f"canal_{random.randint(1, 999)}"
+    nome_canal = f"canal_{random.randint(100, 999)}"
+    resposta = enviar_requisicao("create_channel", channel=nome_canal)
 
-    resposta = enviar_para_servidor({
-        'type': 'create_channel',
-        'user': user,
-        'channel': nome_canal,
-        'timestamp': agora()
-    })
-
-    print('[CREATE CHANNEL]', resposta, flush=True)
+    print(f"[CREATE CHANNEL] {nome_canal} -> {resposta}", flush=True)
+    return resposta
 
 
-def se_inscrever_em_um_canal(canais_disponiveis):
-    canais_nao_inscritos = [
-        c for c in canais_disponiveis if c not in canais_inscritos
-    ]
-
-    if not canais_nao_inscritos:
-        return
-
-    canal_escolhido = random.choice(canais_nao_inscritos)
-    sub_socket.setsockopt(zmq.SUBSCRIBE, canal_escolhido.encode('utf-8'))
-    canais_inscritos.append(canal_escolhido)
-
-    print(f'[SUBSCRIBE] {user} inscrito em {canal_escolhido}', flush=True)
+def fazer_login():
+    resposta = enviar_requisicao("login")
+    print(f"[LOGIN] {resposta}", flush=True)
 
 
-def publicar_mensagem(canal, numero):
-    texto = f"mensagem {numero} do {user}"
+def thread_receber_mensagens():
+    sub = context.socket(zmq.SUB)
+    sub.connect(SUB_ADDR)
 
-    resposta = enviar_para_servidor({
-        'type': 'publish_message',
-        'user': user,
-        'channel': canal,
-        'message': texto,
-        'timestamp': agora()
-    })
-
-    print('[PUBLISH]', resposta, flush=True)
-
-
-def receber_mensagens():
-    global cont
+    canais_assinados = set()
 
     while True:
-        topico, conteudo = sub_socket.recv_multipart()
+        for canal in list(canais_inscritos):
+            if canal not in canais_assinados:
+                sub.setsockopt_string(zmq.SUBSCRIBE, canal)
+                canais_assinados.add(canal)
 
-        dados = msgpack.unpackb(conteudo, raw=False)
+        try:
+            topico, mensagem_bruta = sub.recv_multipart()
+            recebimento = agora()
 
-        atualizar_contador(dados.get('contador', 0))
+            canal = topico.decode("utf-8")
+            mensagem = msgpack.unpackb(mensagem_bruta, raw=False)
 
-        canal = topico.decode('utf-8')
-        mensagem = dados.get('message')
-        envio = dados.get('published_timestamp')
-        recebimento = agora()
+            atualizar_contador_recebido(mensagem.get("contador", 0))
 
-        print(
-            f"[MENSAGEM RECEBIDA] canal={canal} | mensagem={mensagem} "
-            f"| envio={envio} | recebimento={recebimento} | contador_local={cont}",
-            flush=True
-        )
+            print(
+                f"[MENSAGEM RECEBIDA] canal={canal} | "
+                f"mensagem={mensagem.get('message')} | "
+                f"envio={mensagem.get('published_timestamp')} | "
+                f"recebimento={recebimento} | "
+                f"contador_local={contador_local}",
+                flush=True,
+            )
+
+        except Exception as e:
+            print(f"[ERRO SUB] {e}", flush=True)
 
 
-threading.Thread(target=receber_mensagens, daemon=True).start()
-
-print(f'[CLIENTE PYTHON] Bot iniciado: {user}', flush=True)
-
-fazer_login()
-
-while True:
+def garantir_canais_minimos():
     canais = listar_canais()
 
     if len(canais) < 5:
         criar_canal()
         canais = listar_canais()
 
-    if len(canais_inscritos) < 3:
-        se_inscrever_em_um_canal(canais)
+    return canais
 
+
+def garantir_inscricoes(canais):
+    canais_disponiveis = [c for c in canais if c not in canais_inscritos]
+
+    while len(canais_inscritos) < 3 and canais_disponiveis:
+        canal = random.choice(canais_disponiveis)
+        canais_inscritos.add(canal)
+        canais_disponiveis.remove(canal)
+
+        print(f"[SUBSCRIBE] {nome_bot} inscrito em {canal}", flush=True)
+
+
+def publicar_mensagens(canais):
     if not canais:
-        time.sleep(1)
-        continue
+        print("[CLIENT PYTHON] Nenhum canal disponível para publicar.", flush=True)
+        return
 
-    canal_escolhido = random.choice(canais_inscritos)
+    canal = random.choice(canais)
 
     for i in range(10):
-        publicar_mensagem(canal_escolhido, i + 1)
+        texto = f"mensagem {i + 1} do {nome_bot}"
+
+        resposta = enviar_requisicao(
+            "publish_message",
+            channel=canal,
+            message=texto,
+        )
+
+        print(
+            f"[PUBLISH] {texto} -> {canal} | resposta={resposta} | contador_local={contador_local}",
+            flush=True,
+        )
+
         time.sleep(1)
+
+
+print(f"[CLIENT PYTHON] Bot iniciado: {nome_bot}", flush=True)
+
+fazer_login()
+
+threading.Thread(target=thread_receber_mensagens, daemon=True).start()
+
+while True:
+    canais = garantir_canais_minimos()
+    garantir_inscricoes(canais)
+
+    canais = listar_canais()
+    publicar_mensagens(canais)
