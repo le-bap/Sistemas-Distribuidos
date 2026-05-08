@@ -256,17 +256,9 @@ Para resolver isso, implementamos uma replicação ativa usando Pub/Sub.
 
 ## Método escolhido
 
-O método escolhido foi a **replicação ativa por difusão de eventos**.
-
-Sempre que um servidor recebe uma operação que altera o estado do sistema, ele salva essa operação localmente e publica um evento de replicação para os outros servidores.
-
-As operações replicadas são:
-
-- login de usuário;
-- criação de canal;
-- publicação de mensagem.
-
-Dessa forma, quando um servidor recebe uma dessas operações, os demais servidores ativos também recebem uma cópia e salvam a mesma informação localmente.
+O método escolhido foi a replicação primário-backup.
+O servidor coordenador (primário) é o único que processa operações de escrita. Quando um backup recebe uma requisição de escrita, ele a encaminha para o primário via socket direto. Após processar, o primário replica o evento para todos os backups ativos via sockets REQ/REP dedicados nas portas 5580 (C), 5581 (Python) e 5582 (Java).
+Os backups que não respondem são marcados como inativos e removidos da lista de destinos de replicação. Quando voltam, são reativados na próxima consulta ao serviço de referência.
 
 ## Tópico de replicação
 
